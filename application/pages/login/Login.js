@@ -1,0 +1,111 @@
+import React from 'react';
+import {ScrollView, View, Text, TouchableOpacity, ImageBackground, Dimensions, TextInput} from 'react-native';
+import {styleLogin} from './Login-styles';
+import {style} from '../slides/SlideScreen-styles';
+import {LinearGradient} from 'expo';
+import {styleCadastro} from './loginComponents/cadastro/Cadastro-styles'
+import LoginForm from "./loginComponents/loginForm/LoginForm";
+import Passo1 from "./loginComponents/cadastro/passo1/Passo1";
+import Passo2 from "./loginComponents/cadastro/passo2/Passo2";
+
+
+export default class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        let {height, width} = Dimensions.get('window');
+        this.state = {
+            screenWidth: width,
+            screenHeight: height,
+            page: (this.props.navigation.state.params !== undefined ? this.props.navigation.state.params : 'Login' ),
+            params: '',
+
+        };
+
+    }
+
+    render() {
+        return (
+            <View>
+                <ImageBackground resizeMode={'cover'}
+                                 style={[{width: this.state.screenWidth}, {height: this.state.screenHeight}, styleLogin.container]}
+                                 source={require("../../assets/imgs/jpg/login/bg4.jpg")}
+                                 ref="image">
+
+                    <LinearGradient style={styleLogin.header}
+                                    colors={['#000', 'rgba(0, 0, 0, 0)']}
+                                    locations={[0.1, 0.9]}>
+                    </LinearGradient>
+
+                    <LinearGradient colors={['rgba(0, 0, 0, 0)', '#000',]}
+                                    locations={[0.1, 0.9]}
+                                    style={styleLogin.footer}>
+                    </LinearGradient>
+                </ImageBackground>
+                <View style={styleLogin.headerContainer}>
+                    <View style={styleLogin.setaContainer}>
+                        <TouchableOpacity onPress={() => {
+                            this.back()
+                        }}>
+                            <ImageBackground resizeMode={'contain'} style={styleLogin.imgSeta}
+                                             source={require('../../assets/imgs/png/icons/seta-left-white.png')}/>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <ImageBackground resizeMode={'contain'} style={styleLogin.imgLogo}
+                                         source={require('../../assets/imgs/png/logo/houpa-solid-white.png')}/>
+                    </View>
+
+                </View>
+
+                <View style={styleLogin.bodyContainer}>
+                    <View style={styleLogin.body}>
+                        {this.selectorPage(this.state.page)}
+                    </View>
+                </View>
+
+            </View>
+        )
+
+    }
+
+
+    getResponse(page, params = '') {
+        this.setState({page: page, params: params})
+    }
+
+    doLogin(page) {
+        this.props.navigation.navigate(page)
+    }
+
+
+    back() {
+        if (this.state.page === 'Login') {
+
+            this.props.navigation.navigate('SlideScreen')
+        } else if (this.state.page === 'Passo1') {
+            this.setState({page: 'Login'})
+        } else if (this.state.page === 'Passo2') {
+            this.setState({page: 'Passo1'})
+
+        }
+
+    }
+
+    selectorPage(page) {
+        switch (page) {
+            case 'Login':
+                return (<LoginForm  callbackLogin={this.doLogin.bind(this)} callback={this.getResponse.bind(this)}/>)
+                break;
+
+            case 'Passo1':
+                return (<Passo1 callback={this.getResponse.bind(this)}/>)
+                break;
+
+            case 'Passo2':
+                return (<Passo2  callback={this.getResponse.bind(this)} params={this.state.params}/>)
+                break;
+        }
+    }
+}
+
+
