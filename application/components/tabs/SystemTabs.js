@@ -43,7 +43,7 @@ export default class SystemTabs extends React.Component {
             {
                 slug: 'profile',
                 icon: this.platformName === 'ios' ? (this.state.selectedTab === 'profile' ? 'ios-person' : 'ios-person-outline') : 'md-person',
-                className: 'Testes',
+                className: 'Perfil',
                 selected: this.state.selectedTab === 'profile'
             }
         ];

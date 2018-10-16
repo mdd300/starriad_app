@@ -254,15 +254,15 @@ export default class ListVariantesProdutos extends React.Component {
                                     </View>
                                 </View>
 
-                                <View style={styles.containerIcon}>
-                                    <TouchableOpacity style={styles.touchIcon} onPress={() => this._deleteVariante(index)}>
+                                <View style={styles.containerIconLixeira}>
+                                    <TouchableOpacity style={styles.touchIconLixeira} onPress={() => this._deleteVariante(index)}>
                                         <Image resizeMode={'contain'} style={styles.icon}
                                                source={require('../../../../../../application/assets/imgs/png/icons/lixeira.png')}/>
                                     </TouchableOpacity>
                                 </View>
 
-                                <View style={styles.containerIcon}>
-                                    <TouchableOpacity style={styles.touchIcon} ref={this.setToutRef} onPress={() => this.handlePressTout(index)}>
+                                <View style={styles.containerIconSeta}>
+                                    <TouchableOpacity style={styles.touchIconSeta} ref={this.setToutRef} onPress={() => this.handlePressTout(index)}>
 
                                         <Animated.Image resizeMode={'contain'} style={[
                                             styles.icon,
@@ -270,7 +270,7 @@ export default class ListVariantesProdutos extends React.Component {
                                                 { transform: [{rotateZ: icon_rotate}] }
                                             : null
                                         ]}
-                                            source={require('../../../../../../application/assets/imgs/png/arrow-down.png')} />
+                                            source={require('../../../../../../application/assets/imgs/png/icons/seta-down.png')} />
 
                                     </TouchableOpacity>
                                 </View>

@@ -14,6 +14,7 @@ import DetalhePedido from './application/pages/carrinho/detalhePedido/DetalhePed
 import ProdutoProfile from "./application/pages/produto_profile/ProdutoProfile";
 import FeedCreatePost from "./application/pages/feed-create-post/FeedCreatePost";
 import Login from "./application/pages/login/Login";
+import Perfil from "./application/pages/perfil/Perfil";
 
 export default createStackNavigator({
         'Main': {
@@ -55,9 +56,12 @@ export default createStackNavigator({
         'Login': {
             screen: Login
         },
+        'Perfil': {
+            screen: Perfil
+        },
     },
     {
-        initialRouteName: 'Explorer',
+        initialRouteName: 'Perfil',
         navigationOptions: {
             header: null
         }
