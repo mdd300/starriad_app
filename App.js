@@ -57,7 +57,7 @@ export default createStackNavigator({
         },
     },
     {
-        initialRouteName: 'Explorer',
+        initialRouteName: 'FeedCreatePost',
         navigationOptions: {
             header: null
         }
