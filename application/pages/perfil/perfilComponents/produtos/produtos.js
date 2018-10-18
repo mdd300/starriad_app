@@ -1,17 +1,15 @@
 import React from "react";
 import {
-    ActivityIndicator,
     View,
-    TextInput,
     Text,
     ScrollView,
     ImageBackground,
     Image,
     TouchableOpacity,
     Animated,
-    Dimensions
+    Dimensions, Easing
 } from "react-native";
-import styles from "../../Perfil-style";
+import styles from "./produtos-styles";
 
 export default class Produto extends React.Component {
 
@@ -27,6 +25,7 @@ export default class Produto extends React.Component {
             animation_produto: new Animated.Value(0),
             animation_fotos_produto: new Animated.Value(0),
             deviceWidth: Dimensions.get('window').width,
+            teste: false,
         };
 
         // Verifica o tamanho da tela atual e guarda o valor na variavel deviceWidth
@@ -35,71 +34,179 @@ export default class Produto extends React.Component {
         });
     }
 
-    showOpcoesProdutos(indexProduto){
+    touchOpcoesProdutos(indexProduto){
 
-        if(this.state.infos_produtos){
+        if(this.state.indice_ativo === indexProduto){
+            console.log('IF');
 
-            Animated.timing( this.state.animation_produto, {
-                toValue: 0,
-                duration: 500
-            }).start(()=> {
-                this.setState({
-                    infos_produtos: false
+            if(this.state.perfil_marca[0].produtos[indexProduto].ativo === true){
+                Animated.timing( this.state.animation_produto, {
+                    toValue: 0,
+                    duration: 500
+                }).start(()=> {
+                    this.state.perfil_marca[0].produtos[this.state.indice_ativo].ativo = false;
                 });
-            });
-
+            }else{
+                this.state.perfil_marca[0].produtos[indexProduto].ativo = true;
+                Animated.timing( this.state.animation_produto, {
+                    toValue: 100,
+                    duration: 500
+                }).start();
+            }
         }else{
+            console.log('ELSE');
 
-            this.state.perfil_marca.map((perfil) => {
-
-                perfil.produtos.map((prod, indice) => {
-
-                    if(indexProduto === indice){
-                        this.setState({
-                            infos_produtos: true,
-                            indice_ativo: indexProduto
-                        });
-
-                        Animated.timing( this.state.animation_produto, {
-                            toValue: 100,
-                            duration: 500
-                        }).start();
-                    }
-                });
+            this.state.perfil_marca[0].produtos.map((prod, $index)=>{
+                if($index !== indexProduto){
+                    console.log('FILHO DA ÉGUA');
+                    Animated.timing( this.state.animation_produto, {
+                        toValue: 0,
+                        duration: 500
+                    }).start(()=> {
+                        prod.ativo = false;
+                    });
+                }
             });
+
+            this.state.perfil_marca[0].produtos[indexProduto].ativo = true;
+            Animated.timing( this.state.animation_produto, {
+                toValue: 100,
+                duration: 500
+            }).start();
+
+            this.state.indice_ativo = indexProduto;
+            this.setState({
+                indice_ativo: this.state.indice_ativo,
+                perfil_marca: this.state.perfil_marca
+            });
+
+            //
+            // this.state.perfil_marca[0].produtos[indexProduto].ativo = true;
+            // Animated.timing( this.state.animation_produto, {
+            //     toValue: 100,
+            //     duration: 500
+            // }).start();
         }
+
+        // this.state.perfil_marca.map((perfil) => {
+        //
+        //     if(perfil.produtos[indexProduto].ativo){
+        //
+        //         Animated.timing( this.state.animation_produto, {
+        //             toValue: 0,
+        //             duration: 500
+        //         }).start(()=> {
+        //             perfil.produtos[indexProduto].ativo = false;
+        //         });
+        //
+        //         this.setState({
+        //             perfil_marca: this.state.perfil_marca
+        //         });
+        //
+        //     }else{
+        //
+        //         perfil.produtos.map((prod) => {
+        //             prod.ativo = false;
+        //         });
+        //
+        //         perfil.produtos[indexProduto].ativo = true;
+        //         this.setState({
+        //             perfil_marca: this.state.perfil_marca
+        //         });
+        //
+        //         Animated.timing( this.state.animation_produto, {
+        //             toValue: 100,
+        //             duration: 500
+        //         }).start();
+        //     }
+        //
+        // });
+
+        // if(this.state.infos_produtos){
+        //
+        //     Animated.timing( this.state.animation_produto, {
+        //         toValue: 0,
+        //         duration: 500
+        //     }).start(()=> {
+        //         this.setState({
+        //             infos_produtos: false
+        //         });
+        //     });
+        //
+        // }else{
+        //
+        //     this.state.perfil_marca.map((perfil) => {
+        //         perfil.produtos.map((prod, indice) => {
+        //
+        //             if(indexProduto === indice){
+        //                 this.setState({
+        //                     infos_produtos: true,
+        //                     indice_ativo: indexProduto
+        //                 });
+        //
+        //                 Animated.timing( this.state.animation_produto, {
+        //                     toValue: 100,
+        //                     duration: 500
+        //                 }).start();
+        //             }
+        //         });
+        //     });
+        // }
     }
 
     showFotosProdutos(indexProduto){
-        this.state.perfil_marca.map((perfil) => {
 
-            perfil.produtos.map((prod, indice) => {
+        this.state.perfil_marca[0].produtos[indexProduto].fotos_ativa = true;
+        Animated.spring( this.state.animation_fotos_produto, {
+            toValue: 100,
+            tension: 10,
+        }).start();
 
-                if(indexProduto === indice){
-                    this.setState({
-                        fotos_produtos: true,
-                        foto_ativo: indexProduto
-                    });
-
-                    Animated.spring( this.state.animation_fotos_produto, {
-                        toValue: 100,
-                        velocity: 400,
-                    }).start();
-                }
-            });
+        this.state.foto_ativo = indexProduto;
+        this.setState({
+            foto_ativo: this.state.foto_ativo,
+            perfil_marca: this.state.perfil_marca
         });
+
+        // this.state.perfil_marca.map((perfil) => {
+        //     perfil.produtos.map((prod, indice) => {
+        //
+        //         if(indexProduto === indice){
+        //             this.setState({
+        //                 fotos_produtos: true,
+        //                 foto_ativo: indexProduto
+        //             });
+        //
+        //             Animated.spring( this.state.animation_fotos_produto, {
+        //                 toValue: 100,
+        //                 tension: 10,
+        //             }).start();
+        //         }
+        //     });
+        // });
     }
 
-    hideFotosProdutos(){
-
-        this.setState({
-            fotos_produtos: false,
-        });
+    hideFotosProdutos(indexProduto){
 
         Animated.spring( this.state.animation_fotos_produto, {
             toValue: 0,
-            velocity: 400,
-        }).start();
+            tension: 10,
+        }).start(()=> {
+            this.state.perfil_marca[0].produtos[indexProduto].fotos_ativa = false;
+        });
+
+        this.setState({
+            perfil_marca: this.state.perfil_marca
+        });
+
+        // Animated.spring( this.state.animation_fotos_produto, {
+        //     toValue: 0,
+        //     tension: 10,
+        // }).start(() => {
+        //     this.setState({
+        //         fotos_produtos: false,
+        //     });
+        // });
     }
 
     renderOverlayProduto(indexProduto){
@@ -110,40 +217,43 @@ export default class Produto extends React.Component {
         });
 
         return(
-
-            <Animated.View style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.8)', position: 'absolute', transform: [{ translateY: overlay_produto }]}} >
-
-                <TouchableOpacity style={{width: 200, padding: 10, borderWidth: 2, borderColor: '#FFF', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#FFF', fontSize: 20, fontWeight: 'bold'}}>
+            <Animated.View style={[styles.containerOverlay,{ transform: [{ translateY: overlay_produto }]}]} >
+                <TouchableOpacity style={styles.buttonOverlay}>
+                    <Text style={styles.textButtonOverlay}>
                         VER PRODUTO
                     </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => this.showFotosProdutos(indexProduto)}
-                    style={{width: 200, padding: 10, marginTop: 10, borderWidth: 2, borderColor: '#FFF', alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#FFF', fontSize: 20, fontWeight: 'bold'}}>
+                    style={[styles.buttonOverlay, {marginTop: 10}]}>
+                    <Text style={styles.textButtonOverlay}>
                         + FOTOS
                     </Text>
                 </TouchableOpacity>
-
             </Animated.View>
-
         );
     }
 
-    renderSlideProduto(){
+    nextFoto(){
+        let scroll = this.refs.scroll;
+        this.refs.scroll.scrollTo({x: this.state.deviceWidth * 1});
+    }
+
+    previousFoto(){
+        let scroll = this.refs.scroll;
+        this.refs.scroll.scrollTo({x: this.state.deviceWidth * -1});
+    }
+
+    renderSlideProduto(indexProduto){
         return(
-
-            <View style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff'}}>
-
-                <View style={{width: '100%', paddingRight: 20, position: 'absolute', top: 10, zIndex: 999999999, justifyContent: 'flex-start', alignItems: 'flex-end'}}>
-                    <TouchableOpacity onPress={() => this.hideFotosProdutos()}>
-                        <Text style={{fontSize: 50, color: '#d2d5dc'}}>X</Text>
+            <View style={styles.containerSliderProduto}>
+                <View style={styles.containerIconFechar}>
+                    <TouchableOpacity onPress={() => this.hideFotosProdutos(indexProduto)}>
+                        <Text style={styles.iconFechar}>X</Text>
                     </TouchableOpacity>
                 </View>
 
-                <ScrollView pagingEnabled={true} horizontal={true} showsHorizontalScrollIndicator={false} style={{flex: 1, width: '100%', flexDirection: 'row',}}>
-
+                <ScrollView pagingEnabled={true} horizontal={true} showsHorizontalScrollIndicator={false} ref="scroll" style={styles.scrollSlider}>
                     {this.state.perfil_marca.map((perfil) => (
                         perfil.produtos.map((prod, indexProd) => (
                             prod.images.map((img, index) => (
@@ -151,33 +261,27 @@ export default class Produto extends React.Component {
                                 this.state.foto_ativo === indexProd &&
 
                                 <View key={index}>
-
-                                    <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center', width: this.state.deviceWidth}}>
-                                        <ImageBackground source={{uri: img.image}}
-                                                         style={{width: '100%', height: '100%',}} />
+                                    <View style={[styles.containerImgProdutoSlider, {width: this.state.deviceWidth}]}>
+                                        <ImageBackground source={{uri: img.image}} style={styles.imgProdutoSlider} />
                                     </View>
-
                                 </View>
                             ))
                         ))
                     ))}
-
                 </ScrollView>
 
-                <View style={{width: '100%', paddingLeft: 20, position: 'absolute', zIndex: 999999999, justifyContent: 'center', alignItems: 'flex-start'}}>
-                    <TouchableOpacity style={{width: 30, height: 30}}>
-                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={{width: '100%', height: '100%'}} />
+                <View style={[styles.buttonLeftRight, styles.buttonLeft]}>
+                    <TouchableOpacity onPress={() => this.previousFoto()} style={styles.buttonsSlider}>
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={styles.iconSlider} />
                     </TouchableOpacity>
                 </View>
 
-                <View style={{width: '100%', paddingRight: 20, position: 'absolute', zIndex: 999999999, justifyContent: 'center', alignItems: 'flex-end'}}>
-                    <TouchableOpacity style={{width: 30, height: 30}}>
-                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={{width: '100%', height: '100%', transform: [{rotateY: '180deg'}]}} />
+                <View style={[styles.buttonLeftRight, styles.buttonRight]}>
+                    <TouchableOpacity onPress={() => this.nextFoto()} style={styles.buttonsSlider}>
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
                     </TouchableOpacity>
                 </View>
-
             </View>
-
         )
     }
 
@@ -190,205 +294,102 @@ export default class Produto extends React.Component {
 
         let fotos_produtos = this.state.animation_fotos_produto.interpolate({
             inputRange: [ 0, 100 ],
-            outputRange: [ '0deg', '360deg' ]
+            outputRange: [ '180deg', '0deg' ]
         });
 
         return this.state.perfil_marca.map((perfil) => {
-
             return perfil.produtos.map((prod, indexProduto) => {
 
                 return(
-                    <Animated.View key={indexProduto} style={[
-                        this.state.fotos_produtos && this.state.foto_ativo === indexProduto ? {width: '100%', height: 400, marginTop: 20, marginLeft: 5,
-                                marginRight: 5, alignItems: 'center', justifyContent: 'center',
-                                borderWidth: 1, borderColor: '#e6e6e6', borderRadius: 5, transform: [{rotateY: fotos_produtos}]} :
-                            {
-                                width: '100%', height: 400, marginTop: 20, marginLeft: 5,
-                                marginRight: 5, alignItems: 'center', justifyContent: 'center',
-                                borderWidth: 1, borderColor: '#e6e6e6', borderRadius: 5}]}>
+                    <Animated.View key={indexProduto} style={[styles.containerProduto,
+                        prod.fotos_ativa ? {transform: [{rotateY: fotos_produtos}]} : null]}>
 
-                        {
-                            this.state.fotos_produtos === true && this.state.foto_ativo === indexProduto &&
-
-                                this.renderSlideProduto()
+                        {prod.fotos_ativa &&
+                            this.renderSlideProduto(indexProduto)
                         }
 
-                        {
-                            this.state.fotos_produtos === false &&
-                            <TouchableOpacity activeOpacity={1}
-                                              onPress={() => this.showOpcoesProdutos(indexProduto)}
-                                              style={{
-                                                  width: '100%',
-                                                  height: '100%',
-                                                  alignItems: 'center',
-                                                  justifyContent: 'center',
-                                              }}>
+                        {!prod.fotos_ativa &&
+                            <TouchableOpacity activeOpacity={1} onPress={() => this.touchOpcoesProdutos(indexProduto)} style={styles.touchContainerImgProduto}>
 
-                                <View style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}>
-                                    <Image style={[
-                                        this.state.infos_produtos === true && this.state.indice_ativo === indexProduto ?
-                                            {width: '100%', height: '100%', top: 86} :
+                                <View style={styles.containerImgProduto}>
 
-                                            {width: '100%', height: '100%', top: 0}
+                                    <Image style={[styles.imgProduto,
+                                        prod.ativo && !prod.fotos_ativa ? {top: 86} : null]}
+                                           resizeMode={'contain'} source={{uri: prod.imgProduto}}/>
 
-                                    ]} resizeMode={'contain'} source={{uri: prod.imgProduto}}/>
-
-                                    {this.state.infos_produtos === true && this.state.indice_ativo === indexProduto &&
-                                    this.renderOverlayProduto(indexProduto)
+                                    { prod.ativo && !prod.fotos_ativa &&
+                                        // this.state.infos_produtos === true && this.state.indice_ativo === indexProduto && this.state.fotos_produtos === false &&
+                                        this.renderOverlayProduto(indexProduto)
                                     }
 
                                 </View>
 
-                                <Animated.View style={[
-                                    this.state.infos_produtos === true && this.state.indice_ativo === indexProduto ?
-                                        {
-                                            bottom: infos_produtos,
-                                            backgroundColor: '#FFF',
-                                            width: '100%',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            borderBottomEndRadius: 5,
-                                            borderBottomStartRadius: 5
-                                        } :
-                                        {
-                                            width: '100%',
-                                            flex: 1,
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            position: 'absolute',
-                                            bottom: -115,
-                                            backgroundColor: '#FFF'
-                                        }
-                                ]}>
+                                <Animated.View style={[prod.ativo && !prod.fotos_ativa ? {bottom: infos_produtos, backgroundColor: '#FFF',
+                                            width: '100%', borderBottomEndRadius: 5, borderBottomStartRadius: 5} : styles.infosProdutos]}>
 
-                                    <View style={{flexDirection: 'row'}}>
-
-                                        <View style={{
-                                            width: '60%',
-                                            alignItems: 'flex-start',
-                                            justifyContent: 'center',
-                                            paddingLeft: 20
-                                        }}>
-
+                                    <View style={styles.controleInfosProduto}>
+                                        <View style={styles.containerDescricaoCategoria}>
                                             <Text numberOfLines={1} ellipsizeMode="tail"
-                                                  style={{color: '#000', width: 200, marginTop: 10, fontSize: 18}}>
+                                                  style={styles.textDescricao}>
                                                 {prod.descricao}
                                             </Text>
 
-                                            <Text style={{color: '#b5b6bd', marginTop: 5, fontSize: 15}}>
+                                            <Text style={styles.textCategoria}>
                                                 {prod.categoria}
                                             </Text>
-
                                         </View>
 
-                                        <View style={{
-                                            width: '40%',
-                                            alignItems: 'flex-end',
-                                            justifyContent: 'center',
-                                            paddingRight: 20
-                                        }}>
-
-                                            <Text style={{color: '#000', fontWeight: 'bold', fontSize: 25}}>
+                                        <View style={styles.containerPreco}>
+                                            <Text style={styles.textPreco}>
                                                 {prod.preco}
                                             </Text>
-
                                         </View>
-
                                     </View>
 
 
-                                    <View style={{width: '100%', alignItems: 'flex-start', justifyContent: 'center'}}>
-
-                                        <View style={{
-                                            width: '100%',
-                                            alignItems: 'flex-start',
-                                            justifyContent: 'center',
-                                            paddingLeft: 20,
-                                            marginTop: 10
-                                        }}>
-
-                                            <Text style={{color: '#000', fontWeight: 'bold', fontSize: 16}}>
+                                    <View style={styles.containerGradesVariantes}>
+                                        <View style={styles.containerGrade}>
+                                            <Text style={styles.labelTitle}>
                                                 GRADES
                                             </Text>
 
-                                            <View style={{width: '100%', flexDirection: 'row'}}>
+                                            <View style={styles.controleInfos}>
                                                 {prod.variantes.map((variante) => (
                                                     variante.grades.map((grade, indexGrade) => (
-                                                        <Text key={indexGrade}
-                                                              style={{color: '#b5b6bd', fontSize: 15, marginRight: 5}}>
+                                                        <Text key={indexGrade} style={styles.textGrade}>
                                                             {grade.nome},
                                                         </Text>
                                                     ))
                                                 ))}
                                             </View>
-
                                         </View>
 
-                                        <View style={{
-                                            width: '100%',
-                                            alignItems: 'flex-start',
-                                            justifyContent: 'center',
-                                            paddingLeft: 20,
-                                            marginTop: 10,
-                                            marginBottom: 10
-                                        }}>
-
-                                            <Text style={{color: '#000', fontWeight: 'bold', fontSize: 16}}>
+                                        <View style={styles.containerVariantes}>
+                                            <Text style={styles.labelTitle}>
                                                 VARIANTES
                                             </Text>
 
-                                            <View style={{width: '100%', flexDirection: 'row'}}>
-
+                                            <View style={styles.controleInfos}>
                                                 {prod.variantes.map((variante, index) => (
-
-                                                    <TouchableOpacity key={index} style={{
-                                                        justifyContent: 'center',
-                                                        alignItems: 'center',
-                                                        width: 20,
-                                                        height: 20,
-                                                        borderRadius: 50,
-                                                        marginRight: 5,
-                                                        borderWidth: 1,
-                                                        borderColor: '#c2c2c2'
-                                                    }}>
-                                                        <Text style={{
-                                                            width: '95%',
-                                                            height: '95%',
-                                                            backgroundColor: variante.cor_valor,
-                                                            borderRadius: 50,
-                                                            borderWidth: 1,
-                                                            borderColor: '#c2c2c2'
-                                                        }}/>
+                                                    <TouchableOpacity key={index} style={styles.touchVariantes}>
+                                                        <Text style={[styles.varianteCor, {backgroundColor: variante.cor_valor}]}/>
                                                     </TouchableOpacity>
                                                 ))}
-
                                             </View>
-
                                         </View>
-
                                     </View>
-
                                 </Animated.View>
-
                             </TouchableOpacity>
                         }
                     </Animated.View>
                 )
-
             });
         });
     }
 
     render() {
         return (
-
             this.renderProduto()
-
         );
     }
 }

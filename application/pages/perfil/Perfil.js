@@ -46,13 +46,13 @@ export default class Perfil extends React.Component {
 
                             images: [
                                 {
-                                    image: 'https://camisariacolombov2.vteximg.com.br/arquivos/ids/332957-1000-1000/11325010002_2.jpg?v=635896815176130000'
+                                    image: 'https://img.olx.com.br/images/00/001826083008797.jpg'
                                 },
                                 {
-                                    image: 'https://camisariacolombov2.vteximg.com.br/arquivos/ids/321516-1000-1000/11340160001_1.jpg?v=635711880117530000'
+                                    image: 'https://http2.mlstatic.com/colete-tricot-kimono-longo-com-franjas-croch-moda-feminina-D_NQ_NP_502225-MLB25401876042_022017-F.jpg'
                                 },
                                 {
-                                    image: 'http://www.irisgoya.com.br/6265/blusa-baby-look-listrada-manga-curta-de-cirre.jpg'
+                                    image: 'https://http2.mlstatic.com/kit-3-calca-ribana-moletom-moda-feminina-cintura-alta-022-D_NQ_NP_824268-MLB25689958858_062017-F.jpg'
                                 }
                             ],
 
