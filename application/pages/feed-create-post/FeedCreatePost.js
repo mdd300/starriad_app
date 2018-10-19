@@ -2,6 +2,7 @@ import React from "react";
 import {View, ScrollView, Animated, Keyboard, Text, TouchableOpacity, Image, TextInput} from "react-native";
 import styles from "./feed-create-post-styles";
 import ImagePicker from "../../components/ImagePicker/ImagePicker";
+import SelectProdutos from "../../components/SelectProdutos/SelectProdutos";
 
 /* Escopo da classe da pagina de criação de post */
 export default class FeedCreatePost extends React.Component{
@@ -13,12 +14,19 @@ export default class FeedCreatePost extends React.Component{
         /* Propriedades do state */
         this.state = {
             scroll_content_height: 0,
+
             has_image: false,
+            post_image: '.',
 
             animation_progress_keyboard_closer: new Animated.Value( 0 ),
             animation_progress_keyboard: new Animated.Value( 0 ),
             keyboard_height: 0,
             keyboard_opened: false,
+
+
+
+            show_image_picker: false,
+
         };/* Fim das definições iniciais de state do componente */
 
     }/* Fim do constructor do componente */
@@ -103,32 +111,6 @@ export default class FeedCreatePost extends React.Component{
         this.setState({ scroll_content_height: height });
     }/* __setScrollContentHeight */
 
-
-    /** Função utilizada para renderizar a imagem, caso exista */
-    __render_image(){
-
-        /* Verifica se existe imagem definida */
-        if( this.state.has_image ){
-            return(
-                <View style={[ styles.create_post_page_image_content ]}>
-                    <View style={[ styles.create_post_page_image_viewport ]}>
-
-                        <Image resizeMode="cover" style={[ styles.create_post_page_image ]} source={{ uri: 'https://sm.ign.com/ign_br/screenshot/default/god-of-war_rvmx.jpg' }}/>
-
-                        <View style={[ styles.create_post_image_remover ]}>
-                            <TouchableOpacity style={[ styles.create_post_image_remover_touchable ]} onPress={() => { this.setState({ has_image: false }) }} >
-                                <Image style={[ styles.create_post_image_remover_ico ]} source={require('../../assets/imgs/png/icons/trash.png')} />
-                            </TouchableOpacity>
-                        </View>
-
-                    </View>
-                </View>
-            );
-        }
-
-    }/* __render_image */
-
-
     /* Função de fechamento do keyboard */
     __dismiss_keyboard(){
         Keyboard.dismiss();
@@ -163,14 +145,43 @@ export default class FeedCreatePost extends React.Component{
 
     }; /* fim da função __render_keyboard_closer */
 
-
-
+    /** Função utilizada para abrir o imagePicker */
     __take_picture = (() => {
+        this.setState({ show_image_picker: true });
+    });
 
-        this.setState({ has_image: true });
+    /** Função utilziada para definir a imagem no post */
+    __set_image = (( image )=>{
+
+        this.setState({ show_image_picker: false, has_image: true, post_image: image[0].node.image.uri });
 
     });
 
+
+
+    /** Função utilizada para renderizar a imagem, caso exista */
+    __render_image(){
+
+        /* Verifica se existe imagem definida */
+        if( this.state.has_image ){
+            return(
+                <View style={[ styles.create_post_page_image_content ]}>
+                    <View style={[ styles.create_post_page_image_viewport ]}>
+
+                        <Image resizeMode="cover" style={[ styles.create_post_page_image ]} source={{ uri: this.state.post_image }}/>
+
+                        <View style={[ styles.create_post_image_remover ]}>
+                            <TouchableOpacity style={[ styles.create_post_image_remover_touchable ]} onPress={() => { this.setState({ has_image: false }) }} >
+                                <Image style={[ styles.create_post_image_remover_ico ]} source={require('../../assets/imgs/png/icons/trash.png')} />
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+                </View>
+            );
+        }
+
+    }/* __render_image */
 
     /* Função utilizada para renderizar a pagina e seus componentes */
     render(){
@@ -192,7 +203,7 @@ export default class FeedCreatePost extends React.Component{
                 <View style={[ styles.create_post_header_action ]}>
                     <View style={[ styles.create_post_header_action_back ]}>
                         <TouchableOpacity style={[ styles.create_post_header_action_touchable ]}>
-                            <Image style={[ styles.create_post_header_action_ico ]} source={ require('../../assets/imgs/png/icons/seta-left-black.png') }/>
+                            <Image style={[ styles.create_post_header_action_ico ]} source={ require('../../assets/imgs/png/icons/caret-left-black.png') }/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -228,7 +239,7 @@ export default class FeedCreatePost extends React.Component{
                         <View style={[ styles.create_post_footer_action ]} >
                             <TouchableOpacity
                                 style={[ styles.create_post_footer_action_touchable ]}
-                                onPress={ this.__take_picture } >
+                                onPress={()=> { this.__take_picture() }} >
                                 <View style={[ styles.create_post_footer_action_icon ]}>
                                     <Image style={[ styles.create_post_footer_action_ico ]} source={ require("../../assets/imgs/png/icons/picture.png") }></Image>
                                 </View>
@@ -254,7 +265,16 @@ export default class FeedCreatePost extends React.Component{
 
             { this.__render_keyboard_closer() }
 
-            <ImagePicker />
+            <ImagePicker
+                show={ this.state.show_image_picker }
+                onSelect={( images )=>{ this.__set_image( images ); }}
+                onCancel={()=>{ this.setState({ show_image_picker: false }) }} />
+
+            <SelectProdutos
+                show={true}
+                onSelect={()=>{}}
+                onCancel={()=>{}} />
+
 
         </View>
         );

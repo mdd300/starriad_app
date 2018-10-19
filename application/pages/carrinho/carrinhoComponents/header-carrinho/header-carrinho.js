@@ -13,7 +13,7 @@ const headerCarrinho = props => {
                 <View style={styles.contentHeader}>
 
                     <TouchableOpacity style={styles.btnBack} onPress={onPressItem}>
-                        <Image resizeMode={'contain'} source={require('../../../../assets/imgs/png/icons/seta-left-black.png')}
+                        <Image resizeMode={'contain'} source={require('../../../../assets/imgs/png/icons/caret-left-black.png')}
                             style={styles.iconBack} />
                     </TouchableOpacity>
 

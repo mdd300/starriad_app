@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     image_picker_header_back_ico: {
-        width: 20,
-        height: 20,
+        width: 17,
+        height: 17,
         aspectRatio: 1,
     },
     view_image_picker_header_confirm: {

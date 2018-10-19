@@ -22,7 +22,7 @@ export default class ImagePicker extends React.Component{
 
         /* State inicial do componente */
         this.state = {
-            opened: true, /* State de se o modal está aberto ou nao */
+            opened: props.show, /* State de se o modal está aberto ou nao */
             loading_images: true,/* State de se o componente está carregando as imagens ou não */
 
             images_content_layout_width: 0,
@@ -32,7 +32,6 @@ export default class ImagePicker extends React.Component{
             selected_images: [], /* Array com todas as imagens selecionadas */
 
             multiple: false,
-
         };
 
     }/* Fim da função constructor do  */
@@ -122,7 +121,9 @@ export default class ImagePicker extends React.Component{
             );
         });
 
-        return render;
+        if( this.props.show ){
+            return render;
+        }
 
     })/* fim da função __render_images */
 
@@ -150,7 +151,24 @@ export default class ImagePicker extends React.Component{
         
                 
     });/* Fim do escopo da função utilizada para selecionar uma imagem */
-    
+
+    /**
+     * Função utilizada quando as fotos forem selecionadas e confirmadas
+     * @type {Function}
+     * @private
+     */
+    __on_select = (() => {
+        this.props.onSelect( this.state.selected_images );
+    });
+
+    /**
+     * Função utilizada quando a seleção for cancelada
+     * @type {Function}
+     * @private
+     */
+    __on_cancel = (() => {
+        this.props.onCancel();
+    });
 
     /** Função render do componente, que renderiza o ImagePicker */
     render(){
@@ -160,13 +178,15 @@ export default class ImagePicker extends React.Component{
                 onRequestClose={() => {}}
                 animationType="slide"
                 transparent={false}
-                visible={this.state.opened} >
+                visible={this.props.show} >
                 <View style={[ styles.viewport_modal_image_picker ]}>
 
                     { /* View completa do componente */ }
                     <View style={[ styles.viewport_modal_image_picker_component ]}>
 
-                        <ImagePickerHeader />
+                        <ImagePickerHeader
+                            onConfirm={()=>{ this.__on_select(); }}
+                            onCancel={()=>{ this.__on_cancel(); }} />
 
                         <ImagePickerPreview image={this.state.last_image} />
 
