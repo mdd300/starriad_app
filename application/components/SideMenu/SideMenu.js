@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import {style} from "./side-menu-styles"
+import Minha_Conta_Sub_Menu from "./Minha_Conta_Sub_Menu/MinhaContaSubMenu"
 
 class SideMenu extends React.Component {
 
@@ -19,6 +20,7 @@ class SideMenu extends React.Component {
         super(props);
 
         this.toCarrinho = this.toCarrinho.bind(this);
+
 
         /* retorna as dimensões do aparelho/device */
         let { height, width } = Dimensions.get('window');
@@ -132,6 +134,7 @@ class SideMenu extends React.Component {
     toCarrinho() {
         this.props.navigation.navigate('Carrinho');
     }
+
 
     /** Função para renderizar o componente */
     render() {
@@ -273,54 +276,6 @@ class SideMenu extends React.Component {
     }/* end of render funcion */
 
 }
-
-class Minha_Conta_Sub_Menu extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-    render() {
-        if (this.props.show) {
-            return (
-
-                <View style={style.sub_menu}>
-                    <View style={style.body_sub_menu}>
-                        <TouchableOpacity>
-                            <Text style={style.text_sub_menu}>MUDAR SENHA</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={style.body_sub_menu}>
-                        <TouchableOpacity>
-                            <Text style={style.text_sub_menu}>EDITAR PERFIL</Text>
-                        </TouchableOpacity>
-                        <Text style={style.number_sub_menu}>45</Text>
-                    </View>
-
-
-                    <View style={style.body_sub_menu}>
-                        <TouchableOpacity>
-                            <Text style={style.text_sub_menu}>GESTÃO DE FUNCIONARIOS</Text>
-                        </TouchableOpacity>
-
-                    </View>
-
-
-                    <View style={style.body_sub_menu}>
-                        <TouchableOpacity>
-                            <Text style={style.text_sub_menu}>CONVIDAR CLIENTES</Text>
-                        </TouchableOpacity>
-
-                    </View>
-                </View>
-
-            );
-        } else {
-            return (<View></View>)
-        }
-    }
-}
-
 
 class Meus_Pedidos_Sub_Menu extends React.Component {
     constructor(props) {
