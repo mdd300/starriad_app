@@ -9,10 +9,13 @@ const Capa = props => {
     return (
         <View style={styles.containerCapa}>
 
-            <View style={styles.containerFotoCapa}>
-                <ImageBackground source={{uri: 'https://cdn.awsli.com.br/600x450/141/141063/produto/13989665/1eb662ac0c.jpg'}} style={styles.imgCapa} />
+
+            {perfil.map((p, index) => (
+            <View key={index} style={styles.containerFotoCapa}>
+                <ImageBackground source={{uri: p.imgCapa[0].big}} style={styles.imgCapa} />
                 <View style={styles.overlayFotoCapa} />
             </View>
+             ))}
 
             <View style={styles.containerInfo}>
 
@@ -21,7 +24,7 @@ const Capa = props => {
                     <View key={index} style={styles.infoPerfil}>
 
                         <View style={styles.containerImgMarca}>
-                            <Image style={styles.imgMarca} resizeMode={'contain'} source={{uri: p.imgMarca}} />
+                            <Image style={styles.imgMarca} resizeMode={'contain'} source={{uri: p.imgPerfil[0].medium}} />
                         </View>
 
                         <View style={styles.containerLabel}>
@@ -32,7 +35,7 @@ const Capa = props => {
 
                         <View style={styles.containerNomeMarca}>
                             <Text style={styles.nomeMarca}>
-                                {p.nameMarca}
+                                {p.perfil_nome.toUpperCase()}
                             </Text>
                         </View>
                     </View>

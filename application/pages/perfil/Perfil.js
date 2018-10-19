@@ -5,6 +5,8 @@ import SystemTabs from "../../components/tabs/SystemTabs";
 import styles from "../perfil/Perfil-style";
 import Capa from './perfilComponents/capa/capa';
 import Produto from "./perfilComponents/produtos/produtos";
+import Filtro from "./perfilComponents/filtro/filtro";
+import SideMenu from "../../components/SideMenu/SideMenu";
 
 export default class Perfil extends React.Component {
 
@@ -17,13 +19,28 @@ export default class Perfil extends React.Component {
 
         this.state = {
             perfil: [],
+            album: [],
+            dados: [],
+            enderecos: [],
+            styles: [],
+            produtos: [],
+            categorias: [],
             loading: false,
             error: false,
             system_tabs: true,
             animation_filtro: new Animated.Value(0),
             animation_ordenar: new Animated.Value(0),
+            opened_filtro: false,
         };
     }
+
+    _openFiltro = (() => {
+        this.setState({ opened_filtro: true })
+    });
+
+    _closedFiltro = ((  ) => {
+        this.setState({ opened_filtro: false });
+    });
 
     componentDidMount(){
         this.setState({ loading: true });
@@ -31,98 +48,119 @@ export default class Perfil extends React.Component {
         setTimeout(() => {
             this.setState({
 
-                perfil: [{
-                    id: 1,
-                    nameMarca: 'UNIQUECHIC',
-                    imgMarca: 'https://scontent-lax3-2.cdninstagram.com/vp/7e62dc20ca11ca981854655007ef2553/5C2F2F5B/t51.2885-19/s150x150/20837257_149479915635315_6908195071569428480_a.jpg',
+                dados: [
+                    {user_id_fk: '1', user_type: '1', perfil_nome: 'Uniquechic',
 
-                    produtos: [
-                        {
-                            id: '1',
-                            imgProduto: 'https://assets.xtechcommerce.com/uploads/images/medium/63ac443d3dc902676a0d26d0428ad76b.png',
-                            descricao: 'Camiseta Basic',
-                            preco: 'R$ 150,00',
-                            categoria: 'Feminino',
+                        imgCapa: [{big: 'https://cdn.awsli.com.br/600x450/141/141063/produto/13989665/1eb662ac0c.jpg', medium: '', mini: ''}],
 
-                            images: [
-                                {
-                                    image: 'https://img.olx.com.br/images/00/001826083008797.jpg'
-                                },
-                                {
-                                    image: 'https://http2.mlstatic.com/colete-tricot-kimono-longo-com-franjas-croch-moda-feminina-D_NQ_NP_502225-MLB25401876042_022017-F.jpg'
-                                },
-                                {
-                                    image: 'https://http2.mlstatic.com/kit-3-calca-ribana-moletom-moda-feminina-cintura-alta-022-D_NQ_NP_824268-MLB25689958858_062017-F.jpg'
-                                }
-                            ],
+                        imgPerfil: [{big: '',
+                            medium: 'https://scontent-lax3-2.cdninstagram.com/vp/7e62dc20ca11ca981854655007ef2553/5C2F2F5B/t51.2885-19/s150x150/20837257_149479915635315_6908195071569428480_a.jpg',
+                            mini: ''}]
+                    }
+                ],
 
-                            variantes: [
-                                {
-                                    id: '1',
-                                    cor_valor: '#58ffcc',
-                                    image_url: '',
+                categorias: [
+                    {style_id: '1', style_name: 'Basico'},
+                    {style_id: '2', style_name: 'Blazers'},
+                    {style_id: '3', style_name: 'Blusas'},
+                    {style_id: '4', style_name: 'Body'},
+                    {style_id: '5', style_name: 'Calças'},
+                    {style_id: '6', style_name: 'Camisa'},
+                    {style_id: '7', style_name: 'Camisetas'},
+                    {style_id: '8', style_name: 'Casacos'},
+                    {style_id: '9', style_name: 'Casacos e Jaquetas'},
+                    {style_id: '10', style_name: 'Cintos'},
+                ],
 
-                                    grades: [
-                                        {
-                                            id: '1',
-                                            nome: 'P'
-                                        },
-                                        {
-                                            id: '2',
-                                            nome: 'M'
-                                        },
-                                        {
-                                            id: '3',
-                                            nome: 'G'
-                                        }
-                                    ],
-                                }
-                            ]
-                        },
-                        {
-                            id: '2',
-                            imgProduto: 'https://assets.xtechcommerce.com/uploads/images/medium/b6114f988b3e77641916bc8986df60ed.png',
-                            descricao: 'Calça Basic Alfaiate',
-                            preco: 'R$ 120,00',
-                            categoria: 'Feminino',
+                produtos: [
+                    {
+                        produto_id: '1',
+                        produto_descricao: 'Regata Alça Fivela Tartaruga',
+                        produto_preco_atacado: 'R$ 52,90',
+                        produto_texto: 'Regata Alça Fivela Tartaruga',
+                        style_name: 'Feminino',
 
-                            images: [
-                                {
-                                    image: 'https://camisariacolombov2.vteximg.com.br/arquivos/ids/332957-1000-1000/11325010002_2.jpg?v=635896815176130000'
-                                },
-                                {
-                                    image: 'https://camisariacolombov2.vteximg.com.br/arquivos/ids/321516-1000-1000/11340160001_1.jpg?v=635711880117530000'
-                                },
-                                {
-                                    image: 'http://www.irisgoya.com.br/6265/blusa-baby-look-listrada-manga-curta-de-cirre.jpg'
-                                }
-                            ],
+                        image_url: [
+                            {
+                                big: 'https://assets.xtechcommerce.com/uploads/images/medium/63ac443d3dc902676a0d26d0428ad76b.png',
+                                medium: '',
+                                mini: ''
+                            }
+                        ],
 
-                            variantes: [
-                                {
-                                    id: '1',
-                                    cor_valor: '#ff3c55',
-                                    image_url: '',
+                        images: ['https://img.olx.com.br/images/00/001826083008797.jpg',
+                                 'https://http2.mlstatic.com/colete-tricot-kimono-longo-com-franjas-croch-moda-feminina-D_NQ_NP_502225-MLB25401876042_022017-F.jpg',
+                                 'https://http2.mlstatic.com/kit-3-calca-ribana-moletom-moda-feminina-cintura-alta-022-D_NQ_NP_824268-MLB25689958858_062017-F.jpg'
+                        ],
 
-                                    grades: [
-                                        {
-                                            id: '1',
-                                            nome: 'P'
-                                        },
-                                        {
-                                            id: '2',
-                                            nome: 'M'
-                                        },
-                                        {
-                                            id: '3',
-                                            nome: 'G'
-                                        }
-                                    ],
-                                }
-                            ]
-                        }
-                    ]
-                }],
+                        cores: [
+                            {
+                                cor_valor: '#3a9dff',
+                                img_cor: '',
+                                cor_nome: 'Azul',
+                            },
+                            {
+                                cor_valor: '',
+                                img_cor: 'https://http2.mlstatic.com/kit-3-calca-ribana-moletom-moda-feminina-cintura-alta-022-D_NQ_NP_824268-MLB25689958858_062017-F.jpg',
+                                cor_nome: 'Estampada',
+                            }
+                        ],
+
+                        grades: [
+                            {
+                                tamanho_nome: 'P'
+                            },
+                            {
+                                tamanho_nome: 'M'
+                            },
+                            {
+                                tamanho_nome: 'G'
+                            }
+                        ],
+
+                        variantes: [
+                            {
+                                cor_id: '1',
+                                cor_nome: 'Azul',
+                                cor_valor: '',
+                                image_url: '',
+
+                                img_previa: [
+                                    {
+                                        big: 'https://assets.xtechcommerce.com/uploads/images/medium/63ac443d3dc902676a0d26d0428ad76b.png',
+                                        medium: '',
+                                        mini: ''
+                                    }
+                                ],
+
+                                imgs: [
+                                    {
+                                        image: 'https://img.olx.com.br/images/00/001826083008797.jpg'
+                                    },
+                                    {
+                                        image: 'https://http2.mlstatic.com/colete-tricot-kimono-longo-com-franjas-croch-moda-feminina-D_NQ_NP_502225-MLB25401876042_022017-F.jpg'
+                                    },
+                                    {
+                                        image: 'https://http2.mlstatic.com/kit-3-calca-ribana-moletom-moda-feminina-cintura-alta-022-D_NQ_NP_824268-MLB25689958858_062017-F.jpg'
+                                    }
+                                ],
+
+                                grades: [
+                                    {
+                                        tamanho_nome: 'P'
+                                    },
+                                    {
+                                        tamanho_nome: 'M'
+                                    },
+                                    {
+                                        tamanho_nome: 'G'
+                                    }
+                                ],
+                            }
+                        ]
+                    },
+                ],
+
                 loading: false,
             });
         }, 500);
@@ -177,8 +215,8 @@ export default class Perfil extends React.Component {
                 {this.renderRota()}
                 {this.renderInput()}
 
-                <Capa perfil={this.state.perfil} />
-                <Produto perfil={this.state.perfil} />
+                <Capa perfil={this.state.dados} />
+                <Produto produtos={this.state.produtos} />
 
             </View>
 
@@ -257,16 +295,16 @@ export default class Perfil extends React.Component {
                 borderBottomColor: '#c2c2c2',
                 alignItems: 'center', justifyContent: 'space-between', paddingTop: 5, paddingBottom: 5, paddingLeft: 10, paddingRight: 10, position: 'absolute', zIndex: 999999, flexDirection: 'row', width: '100%', height: 60, backgroundColor: '#fff'}}>
 
-                    { this.state.perfil.map((perfil, index) => (
+                    { this.state.dados.map((perfil, index) => (
 
                         <View key={index} style={{width: '49%', height: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
 
                             <View style={{height: '100%', width: 50, borderWidth: 1, borderColor: '#c2c2c2', borderRadius: 2}}>
-                                <Image style={{width: '100%', height: '100%'}} source={{uri: perfil.imgMarca}} />
+                                <Image style={{width: '100%', height: '100%'}} source={{uri: perfil.imgPerfil[0].medium}} />
                             </View>
 
                             <Text numberOfLines={1} ellipsizeMode="tail" style={{width: 100, marginLeft: 10, color: '#000', fontSize: 16, fontWeight: 'bold'}}>
-                                {perfil.nameMarca}
+                                {perfil.perfil_nome}
                             </Text>
 
                         </View>
@@ -277,7 +315,8 @@ export default class Perfil extends React.Component {
 
                 <View style={{width: '49%', height: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end'}}>
 
-                        <TouchableOpacity style={{height: '80%', width: 40, borderWidth: 1, borderColor: '#000', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
+                        <TouchableOpacity onPress={this._openFiltro}
+                            style={{height: '80%', width: 40, borderWidth: 1, borderColor: '#000', marginRight: 10, alignItems: 'center', justifyContent: 'center'}}>
 
                             <View style={{height: 20, width: 20}}>
                                 <Image resizeMode={'contain'} style={{width: '100%', height: '100%'}} source={ require('../../assets/imgs/png/icons/filtro.png')} />
@@ -358,6 +397,8 @@ export default class Perfil extends React.Component {
                 <ScrollView onScroll={this._onScroll}>
                     { this.renderPage() }
                 </ScrollView>
+
+                    <Filtro opened={ this.state.opened_filtro } onclose={ this._closedFiltro} categorias={this.state.categorias} produtos={this.state.produtos} />
 
                     <SystemTabs navigation={this.props.navigation} selectedTab='profile'/>
 
