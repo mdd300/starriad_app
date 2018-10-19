@@ -78,7 +78,7 @@ const ListVariantesProdutosStyles = StyleSheet.create({
         fontSize: 14,
     },
 
-    containerIcon: {
+    containerIconLixeira: {
         width: 40,
         height: '100%',
         alignItems: 'center',
@@ -86,9 +86,22 @@ const ListVariantesProdutosStyles = StyleSheet.create({
         marginLeft: 5,
     },
 
-    touchIcon: {
+    touchIconLixeira: {
         width: '100%',
         height: 20,
+    },
+
+    containerIconSeta: {
+        width: 25,
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 5,
+    },
+
+    touchIconSeta: {
+        width: '100%',
+        height: 25,
     },
 
     icon: {
