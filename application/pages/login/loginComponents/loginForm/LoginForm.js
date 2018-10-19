@@ -65,7 +65,7 @@ export default class LoginForm extends React.Component {
                         this.setState({hidePass:!this.state.hidePass})
                     }}>
                         <Image style={styleCadastro.iconInput} resizeMode={'cover'}
-                                         source={require('../../../../assets/imgs/png/icons/seta-left-white.png')}
+                                         source={require('../../../../assets/imgs/png/icons/caret-left-white.png')}
                                          ref="image"/>
                     </TouchableOpacity>
 
