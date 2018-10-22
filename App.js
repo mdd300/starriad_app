@@ -61,7 +61,7 @@ export default createStackNavigator({
         },
     },
     {
-        initialRouteName: 'Perfil',
+        initialRouteName: 'Notificacoes',
         navigationOptions: {
             header: null
         }
