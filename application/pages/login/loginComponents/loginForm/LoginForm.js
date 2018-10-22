@@ -61,16 +61,10 @@ export default class LoginForm extends React.Component {
                         placeholder="Senha"
                         placeholderTextColor="#a0a7ad"
                     />
-                    <TouchableOpacity style={styleCadastro.iconContainer} onPress={()=>{
-                        this.setState({hidePass:!this.state.hidePass})
-                    }}>
-                        <Image style={styleCadastro.iconInput} resizeMode={'cover'}
-                                         source={require('../../../../assets/imgs/png/icons/caret-left-white.png')}
-                                         ref="image"/>
-                    </TouchableOpacity>
 
 
                     <Text style={[styleCadastro.errorLabel]}>{this.state.error.password}</Text>
+
                 </View>
 
                 <TouchableOpacity>
@@ -81,9 +75,7 @@ export default class LoginForm extends React.Component {
 
 
                 <View style={{marginTop: 40}}>
-                    <TouchableOpacity onPress={() => {
-                        this.validateLogin()
-                    }}>
+                    <TouchableOpacity onPress={() => { this.validateLogin() }}>
                         <View style={[style.btnPadrao, style.btnEntrar]}>
                             <Text style={[style.textBtn, styleCadastro.text2]}>ENTRAR</Text>
                         </View>
@@ -104,6 +96,8 @@ export default class LoginForm extends React.Component {
     }
 
     validateLogin() {
+
+        this.props.navigation.navigate('Feed');
 
         let validate = true;
 

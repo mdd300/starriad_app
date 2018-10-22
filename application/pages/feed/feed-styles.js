@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     },
     post_comment_father_label: {
         position: 'relative',
-        maxWidth: 333,
+        maxWidth: 310,
         display: 'flex',
     },
     comment_markup: {

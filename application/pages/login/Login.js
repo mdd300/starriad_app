@@ -94,7 +94,7 @@ export default class Login extends React.Component {
     selectorPage(page) {
         switch (page) {
             case 'Login':
-                return (<LoginForm  callbackLogin={this.doLogin.bind(this)} callback={this.getResponse.bind(this)}/>)
+                return (<LoginForm navigation={this.props.navigation} callbackLogin={this.doLogin.bind(this)} callback={this.getResponse.bind(this)}/>)
                 break;
 
             case 'Passo1':
