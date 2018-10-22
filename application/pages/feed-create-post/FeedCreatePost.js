@@ -22,10 +22,11 @@ export default class FeedCreatePost extends React.Component{
             animation_progress_keyboard: new Animated.Value( 0 ),
             keyboard_height: 0,
             keyboard_opened: false,
-
-
-
+            
             show_image_picker: false,
+            show_products_picker: false,
+
+            post_text: '',
 
         };/* Fim das definições iniciais de state do componente */
 
@@ -33,6 +34,20 @@ export default class FeedCreatePost extends React.Component{
 
     /** Função trigger de quando o componente for montado pela primeira vez */
     componentDidMount () {
+
+        /* Retorna o parametro "selection" da navegação,  */
+        const selection = this.props.navigation.getParam('selection');
+        let text_post = this.props.navigation.getParam('text');
+        text_post = ( text_post !== undefined && text_post !== "undefined" ? text_post : '' )
+
+        if( selection === "image" ){
+            this.setState({ show_image_picker: true });
+        }else if( selection === "product" ){
+            this.setState({ show_products_picker: true });
+        }
+
+        this.setState({ post_text: text_post });
+
         /* Adiciona os listenners ao keyboard */
         Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
         Keyboard.addListener('keyboardWillHide', this._keyboardWillHide);
@@ -152,9 +167,7 @@ export default class FeedCreatePost extends React.Component{
 
     /** Função utilziada para definir a imagem no post */
     __set_image = (( image )=>{
-
         this.setState({ show_image_picker: false, has_image: true, post_image: image[0].node.image.uri });
-
     });
 
 
@@ -185,6 +198,7 @@ export default class FeedCreatePost extends React.Component{
 
     /* Função utilizada para renderizar a pagina e seus componentes */
     render(){
+
         const footer_actions_height = 100;
         /* Valores do padding bottom da view, pra quando o keyboard estiver aberto */
         const keyboard_height = this.state.animation_progress_keyboard.interpolate({
@@ -202,7 +216,7 @@ export default class FeedCreatePost extends React.Component{
 
                 <View style={[ styles.create_post_header_action ]}>
                     <View style={[ styles.create_post_header_action_back ]}>
-                        <TouchableOpacity style={[ styles.create_post_header_action_touchable ]}>
+                        <TouchableOpacity style={[ styles.create_post_header_action_touchable ]} onPress={()=>{ this.props.navigation.goBack() }} >
                             <Image style={[ styles.create_post_header_action_ico ]} source={ require('../../assets/imgs/png/icons/caret-left-black.png') }/>
                         </TouchableOpacity>
                     </View>
@@ -230,6 +244,7 @@ export default class FeedCreatePost extends React.Component{
                             <TextInput multiline={true}
                                        underlineColorAndroid="transparent"
                                        placeholder="Escreva um texto..."
+                                       value={ this.state.post_text }
                                        style={[ styles.create_post_input ]} />
                         </View>
 
@@ -249,7 +264,9 @@ export default class FeedCreatePost extends React.Component{
                             </TouchableOpacity>
                         </View>
                         <View style={[ styles.create_post_footer_action ]} >
-                            <TouchableOpacity style={[ styles.create_post_footer_action_touchable ]}>
+                            <TouchableOpacity
+                                style={[ styles.create_post_footer_action_touchable ]}
+                                onPress={()=> { this.setState({ show_products_picker: true }) }}  >
                                 <View style={[ styles.create_post_footer_action_icon ]}>
                                     <Image style={[ styles.create_post_footer_action_ico ]} source={ require("../../assets/imgs/png/icons/shirt.png") }></Image>
                                 </View>
@@ -271,9 +288,9 @@ export default class FeedCreatePost extends React.Component{
                 onCancel={()=>{ this.setState({ show_image_picker: false }) }} />
 
             <SelectProdutos
-                show={true}
-                onSelect={()=>{}}
-                onCancel={()=>{}} />
+                show={ this.state.show_products_picker }
+                onSelect={( products )=>{ this.setState({ show_products_picker: false }) }}
+                onCancel={()=>{ this.setState({ show_products_picker: false }) }} />
 
 
         </View>

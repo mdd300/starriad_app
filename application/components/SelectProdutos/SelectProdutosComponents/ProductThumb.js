@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Animated } from "react-native";
 import styles from "../select-produtos-styles";
 
 /** Escopo da classe de thumb do produto */
@@ -12,6 +12,9 @@ export default class ProductThumb extends React.Component{
         this.state = {
             thumb_size: 0,
             selected: this.props.selected,
+
+            animation_progress: new Animated.Value( 0 )
+
         };
 
     }/* Fim da função construtora do componente */
@@ -19,9 +22,23 @@ export default class ProductThumb extends React.Component{
 
     componentDidMount = (()=> {});
 
+    /* Função trigger executada toda vez que o componente for atualizado */
     componentWillUpdate = (( nextProps, nextState ) => {
-        console.log( nextState );
-    });
+
+        /* Verifica se o valor das proximas propriedades é diferente da atual  */
+        if( this.props.selected !== nextProps.selected ){
+            this.setState({ selected: nextProps.selected });
+
+            let to_value = ( nextProps.selected ? 100 : 0 ); /* Valor do value, caso a seleção do produto seja true ou false */
+
+            Animated.spring( this.state.animation_progress, {
+                toValue: to_value,
+                bounciness: 10
+            }).start();
+
+        }/* Fim da verificação de diferença nos valores das propriedades */
+
+    });/* Fim da função trigger do componentWilUpdate */
 
 
     __setThumbSize = (( layout ) => {
@@ -89,15 +106,16 @@ export default class ProductThumb extends React.Component{
     /** Função utilizada para renderizar a badge de checked */
     __render_checked = (() => {
 
-        if( this.props.selected ){
+        const style = {
+            transform: [{ scale: this.state.animation_progress.interpolate({ inputRange: [0, 100], outputRange: [0, 1] }) }]
+        };
 
-            return(
-                <View style={[ styles.product_thumb_selected_badge ]}>
-                    <Image style={[ styles.product_thumb_select_badge_ico ]} source={ require("../../../assets/imgs/png/icons/check-black.png") } />
-                </View>
-            )
+        return(
+            <Animated.View style={[ styles.product_thumb_selected_badge, style ]}>
+                <Image style={[ styles.product_thumb_select_badge_ico ]} source={ require("../../../assets/imgs/png/icons/check-black.png") } />
+            </Animated.View>
+        )
 
-        }
 
     });/* Fim da função que renderiza a badge de checked  */
 
