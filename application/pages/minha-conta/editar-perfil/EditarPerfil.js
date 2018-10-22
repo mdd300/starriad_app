@@ -67,7 +67,7 @@ export default class EditarPerfil extends React.Component{
                         this.props.navigation.goBack(null);
                     }} />
                 </View>
-                <View style={ style.body_edit_content }>
+                <View style={ style.body_edit_content_init }>
                     <TouchableOpacity style={style.body_edit} onPress={() => this.hideEdit(1)}>
                         <View style={style.body_control_icon}>
                             <Text style={style.body_edit_text}>PERFIL DA LOJA</Text>
@@ -177,9 +177,8 @@ export default class EditarPerfil extends React.Component{
                         }
 
                     </TouchableOpacity>
-
-
                 </View>
+                
                 <View style={ style.body_edit_content }>
                     <TouchableOpacity style={style.body_edit} onPress={() => this.hideEdit(7)}>
                         <View style={style.body_control_icon}>
@@ -198,7 +197,7 @@ export default class EditarPerfil extends React.Component{
 
 
                 </View>
-                <View style={ style.body_edit_content }>
+                <View style={ style.body_edit_content_end }>
                     <TouchableOpacity style={style.body_edit} onPress={() => this.hideEdit(8)}>
                         <View style={style.body_control_icon}>
                             <Text style={style.body_edit_text}>TELEFONE</Text>

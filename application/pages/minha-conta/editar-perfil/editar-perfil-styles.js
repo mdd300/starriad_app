@@ -12,11 +12,23 @@ const style = StyleSheet.create({
         borderBottomWidth: 1,
     },
 
-    body_edit_content: {
+    body_edit_content_init: {
         borderColor: '#a2a2a2',
         borderBottomWidth: 1,
         backgroundColor:'#fff',
         marginTop: 15
+    },
+
+    body_edit_content: {
+        borderColor: '#a2a2a2',
+        borderBottomWidth: 1,
+        backgroundColor:'#fff',
+    },
+    body_edit_content_end: {
+        borderColor: '#a2a2a2',
+        borderBottomWidth: 1,
+        backgroundColor:'#fff',
+        marginBottom: 25
     },
 
     body_edit: {

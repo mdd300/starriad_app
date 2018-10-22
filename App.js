@@ -65,7 +65,7 @@ export default createStackNavigator({
         },
     },
     {
-        initialRouteName: 'Perfil',
+        initialRouteName: 'EditarPerfil',
         navigationOptions: {
             header: null
         }

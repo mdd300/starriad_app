@@ -47,7 +47,7 @@ export default class Login extends React.Component {
                             this.back()
                         }}>
                             <ImageBackground resizeMode={'contain'} style={styleLogin.imgSeta}
-                                             source={require('../../assets/imgs/png/icons/seta-left-white.png')}/>
+                                             source={require('../../assets/imgs/png/icons/caret-left-white.png')}/>
                         </TouchableOpacity>
                     </View>
                     <View>
