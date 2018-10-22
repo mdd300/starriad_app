@@ -304,7 +304,7 @@ export default class Produto extends React.Component {
                         })
 
                         } style={styles.buttonsSlider}>
-                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/caret-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
                     </TouchableOpacity>
                 </View>
             </View>
