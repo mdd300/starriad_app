@@ -30,7 +30,7 @@
       <change beforePath="$PROJECT_DIR$/../ws_houpa/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ws_houpa/package.json" afterDir="false" />
 =======
       <change beforePath="$PROJECT_DIR$/application/pages/perfil/Perfil.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/pages/perfil/Perfil.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos-styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos-styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos.js" afterDir="false" />
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
@@ -72,12 +72,17 @@
     <session id="-309254153">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.8" value="2" />
+<<<<<<< HEAD
+          <entry key="project.open.time.9" value="3" />
+          <entry key="project.opened" value="6" />
+=======
           <entry key="project.open.time.9" value="2" />
           <entry key="project.opened" value="5" />
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -86,9 +91,13 @@
           <entry key="js" value="19" />
 =======
           <entry key="index" value="2" />
-          <entry key="js" value="101" />
+          <entry key="js" value="111" />
           <entry key="png" value="107" />
+<<<<<<< HEAD
+          <entry key="ts" value="1" />
+=======
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -97,22 +106,33 @@
           <entry key="JavaScript" value="19" />
 =======
           <entry key="Image" value="107" />
-          <entry key="JavaScript" value="101" />
+          <entry key="JavaScript" value="111" />
           <entry key="PLAIN_TEXT" value="2" />
+<<<<<<< HEAD
+          <entry key="TypeScript" value="1" />
+=======
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
 <<<<<<< HEAD
+          <entry key="js" value="15907" />
+=======
+<<<<<<< HEAD
           <entry key="js" value="18827" />
 =======
           <entry key="js" value="12664" />
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+<<<<<<< HEAD
+          <entry key="JavaScript" value="15907" />
+=======
 <<<<<<< HEAD
           <entry key="JavaScript" value="18827" />
         </counts>
@@ -138,6 +158,7 @@
               <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
 =======
           <entry key="JavaScript" value="12664" />
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
         </counts>
       </usages-collector>
     </session>
@@ -189,11 +210,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/application/pages/minha-conta/editar-perfil/EditarPerfil.js">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
             <state relative-caret-position="772">
               <caret line="209" column="49" selection-start-line="209" selection-start-column="49" selection-end-line="209" selection-end-column="49" />
+=======
+        <entry file="file://$PROJECT_DIR$/application/pages/perfil/Perfil.js">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="512">
+              <caret line="105" column="29" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="29" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
             <state relative-caret-position="179">
               <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
@@ -209,11 +238,21 @@
 <<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/application/pages/minha-conta/editar-perfil/logo/Logo.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="391">
               <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
 =======
+=======
+        <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/filtro/filtro.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="178" lean-forward="true" selection-start-line="178" selection-end-line="178" />
+=======
+<<<<<<< HEAD
+      <file pinned="false" current-in-tab="false">
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
         <entry file="file://$PROJECT_DIR$/application/components/SelectProdutos/SelectProdutosComponents/ProductThumb.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="352">
@@ -235,10 +274,32 @@
       </file>
       <file pinned="false" current-in-tab="false">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/application/pages/minha-conta/editar-perfil/editar-perfil-styles.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
               <caret line="65" column="17" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
+=======
+        <entry file="file://$PROJECT_DIR$/application/components/SideMenu/SideMenu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="113" column="7" lean-forward="true" selection-start-line="95" selection-start-column="4" selection-end-line="113" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/components/SideMenu/side-menu-styles.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="13" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/components/SystemHeader/SystemHeader.js">
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
 <<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/application/components/SelectProdutos/select-produtos-styles.js">
@@ -247,9 +308,10 @@
               <caret line="122" column="24" selection-start-line="122" selection-start-column="24" selection-end-line="122" selection-end-column="24" />
 =======
         <entry file="file://$PROJECT_DIR$/application/pages/explorer/explorerComponents/top-explorer/top-explorer.js">
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="568">
+              <caret line="97" column="90" lean-forward="true" selection-start-line="97" selection-start-column="90" selection-end-line="97" selection-end-column="90" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -269,8 +331,27 @@
               </folding>
 =======
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos-styles.js">
+        <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="387">
+              <caret line="403" column="57" lean-forward="true" selection-start-line="397" selection-start-column="56" selection-end-line="403" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/pages/explorer/explorerComponents/top-explorer/top-explorer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="741">
+              <caret line="144" column="5" lean-forward="true" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+=======
             <state relative-caret-position="291">
               <caret line="143" column="4" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
@@ -312,7 +393,6 @@
       <find>carrinho</find>
       <find>map</find>
       <find>animation_progress</find>
-      <find>teste</find>
       <find>renderOpcoesProdutos</find>
       <find>menu_position</find>
       <find>menu</find>
@@ -349,6 +429,13 @@
 =======
       <find>indice_ativo</find>
       <find>showOpcoesProdutos</find>
+      <find>teste</find>
+      <find>foto_ativo</find>
+      <find>showFotosProdutos</find>
+      <find>cor_va</find>
+      <find>perfil_marca</find>
+      <find>images</find>
+      <find>cor_valor</find>
     </findStrings>
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
@@ -382,15 +469,15 @@
         <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/list-produtos/list-produtos.js" />
         <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/list-perfil/list-perfil.js" />
         <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/list-item-perfil/list-item-perfil.js" />
-        <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa.js" />
-        <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa-styles.js" />
         <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/footer-ordenacao-perfil/footer-ordenacao-perfil-styles.js" />
         <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/footer-ordenacao-perfil/footer-ordenacao-perfil.js" />
         <option value="$PROJECT_DIR$/application/pages/perfil/Perfil-style.js" />
         <option value="$PROJECT_DIR$/application/pages/explorer/explorerComponents/top-explorer/top-explorer.js" />
         <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos-styles.js" />
-        <option value="$PROJECT_DIR$/application/pages/perfil/Perfil.js" />
+        <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa-styles.js" />
+        <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa.js" />
         <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos.js" />
+<<<<<<< HEAD
 <<<<<<< HEAD
         <option value="$PROJECT_DIR$/../ws_houpa/houpa.ini" />
         <option value="$PROJECT_DIR$/../index.php" />
@@ -407,6 +494,11 @@
         <option value="$PROJECT_DIR$/application/pages/minha-conta/editar-perfil/perfil-loja/PerfilLojaEdit.js" />
         <option value="$PROJECT_DIR$/application/pages/minha-conta/editar-perfil/logo/Logo.js" />
         <option value="$PROJECT_DIR$/application/pages/minha-conta/editar-perfil/EditarPerfil.js" />
+=======
+        <option value="$PROJECT_DIR$/application/components/SideMenu/SideMenu.js" />
+        <option value="$PROJECT_DIR$/application/pages/perfil/perfilComponents/filtro/filtro.js" />
+        <option value="$PROJECT_DIR$/application/pages/perfil/Perfil.js" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
@@ -491,7 +583,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -544,6 +635,7 @@
               <item name="houpa_react" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="SideMenu" type="462c0819:PsiDirectoryNode" />
               <item name="Minha_Conta_Sub_Menu" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -561,6 +653,9 @@
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="SystemHeader" type="462c0819:PsiDirectoryNode" />
               <item name="header-components" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="SystemHeader" type="462c0819:PsiDirectoryNode" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
             </path>
             <path>
               <item name="houpa_react" type="b2602c69:ProjectViewProjectNode" />
@@ -596,7 +691,11 @@
               <item name="pages" type="462c0819:PsiDirectoryNode" />
 <<<<<<< HEAD
               <item name="carrinho" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="carrinhoComponents" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="detalhePedido" type="462c0819:PsiDirectoryNode" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
               <item name="explorer" type="462c0819:PsiDirectoryNode" />
               <item name="explorerComponents" type="462c0819:PsiDirectoryNode" />
@@ -614,8 +713,12 @@
 =======
               <item name="pages" type="462c0819:PsiDirectoryNode" />
 <<<<<<< HEAD
+<<<<<<< HEAD
               <item name="carrinho" type="462c0819:PsiDirectoryNode" />
               <item name="passo1" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="perfil" type="462c0819:PsiDirectoryNode" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
               <item name="explorer" type="462c0819:PsiDirectoryNode" />
               <item name="explorerComponents" type="462c0819:PsiDirectoryNode" />
@@ -636,6 +739,9 @@
               <item name="login" type="462c0819:PsiDirectoryNode" />
 =======
               <item name="perfil" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+              <item name="perfilComponents" type="462c0819:PsiDirectoryNode" />
+=======
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
             </path>
@@ -651,6 +757,9 @@
 =======
               <item name="perfil" type="462c0819:PsiDirectoryNode" />
               <item name="perfilComponents" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+              <item name="capa" type="462c0819:PsiDirectoryNode" />
+=======
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
             </path>
@@ -683,6 +792,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -754,6 +864,10 @@
       <workItem from="1539950261458" duration="20607000" />
 =======
       <workItem from="1539773671613" duration="27314000" />
+<<<<<<< HEAD
+      <workItem from="1539860246197" duration="25832000" />
+      <workItem from="1539947405466" duration="30089000" />
+=======
       <workItem from="1539860246197" duration="25707000" />
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
@@ -762,7 +876,11 @@
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="102583000" />
+=======
+    <option name="totallyTimeSpent" value="134609000" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="75468000" />
@@ -854,12 +972,15 @@
   </component>
   <component name="editorHistoryManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/application/pages/perfil/Perfil.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1564">
           <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
         </state>
       </provider>
+=======
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/../awesomeProject/App.js">
@@ -957,8 +1078,14 @@
     <entry file="file://$PROJECT_DIR$/../ws_houpa/application/views/pages/chat/chat.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/../ws_houpa/houpa-src-sw.js">
       <provider selected="true" editor-type-id="text-editor" />
+=======
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
+    <entry file="file://$PROJECT_DIR$/application/assets/imgs/png/icons/kart.png">
+      <provider selected="true" editor-type-id="images" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
     </entry>
     <entry file="file://$PROJECT_DIR$/../ws_houpa/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1149,14 +1276,8 @@
           </folding>
 =======
     <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/footer-ordenacao-perfil/footer-ordenacao-perfil-styles.js" />
-    <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="145" selection-start-line="43" selection-start-column="75" selection-end-line="43" selection-end-column="145" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/footer-ordenacao-perfil/footer-ordenacao-perfil.js" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/application/components/SideMenu/SideMenu.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1180,6 +1301,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/pages/login/loginComponents/cadastro/Cadastro-styles.js">
+=======
+    <entry file="file://$PROJECT_DIR$/application/pages/produto_profile/produtoProfileComponents/slideProduto/SlideProduto.js">
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
         <state relative-caret-position="136">
@@ -1234,18 +1358,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa-styles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="91" column="27" lean-forward="true" selection-start-line="91" selection-start-column="27" selection-end-line="91" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/capa/capa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/pages/explorer/explorerComponents/body-explorer/body-explorer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/pages/carrinho/carrinhoComponents/detalhePedido/produtos/list-produtos/list-produtos.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
-          <caret line="31" column="35" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+          <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/pages/carrinho/detalhePedido/DetalhePedido.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="350">
+          <caret line="38" column="26" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
+=======
         <state relative-caret-position="391">
           <caret line="38" column="26" lean-forward="true" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
 >>>>>>> c135d7c2e9f75fcf7b37a3200297520494246eaa
+>>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -1267,13 +1419,14 @@
 =======
     <entry file="file://$PROJECT_DIR$/application/pages/carrinho/carrinhoComponents/detalhePedido/list-variantes-produtos/list-variantes-produtos.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+        <state relative-caret-position="298">
+          <caret line="230" column="62" selection-start-line="230" selection-start-column="62" selection-end-line="230" selection-end-column="62" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos-styles.js">
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.core.d.ts">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="291">
           <caret line="143" column="4" selection-start-line="143" selection-start-column="4" selection-end-line="143" selection-end-column="4" />
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
@@ -1296,17 +1449,60 @@
         <state relative-caret-position="179">
           <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
 >>>>>>> 9ca6d69a544796a78d6f3c5b6c26ca92d1c91bad
+=======
+        <state relative-caret-position="299">
+          <caret line="456" column="4" selection-start-line="456" selection-start-column="4" selection-end-line="456" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/components/SystemHeader/SystemHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="568">
+          <caret line="97" column="90" lean-forward="true" selection-start-line="97" selection-start-column="90" selection-end-line="97" selection-end-column="90" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/components/SideMenu/side-menu-styles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="403" column="57" lean-forward="true" selection-start-line="397" selection-start-column="56" selection-end-line="403" selection-end-column="57" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/application/pages/carrinho/passo1/Carrinho.js">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
         <state relative-caret-position="687">
           <caret line="295" selection-start-line="295" selection-end-line="296" />
+=======
+    <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/produtos/produtos-styles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="140" column="31" lean-forward="true" selection-start-line="136" selection-start-column="8" selection-end-line="140" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/pages/explorer/explorerComponents/top-explorer/top-explorer.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="741">
+          <caret line="144" column="5" lean-forward="true" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
         <state relative-caret-position="359">
           <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
@@ -1319,6 +1515,7 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/application/pages/carrinho/passo1/Carrinho-styles.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -1330,12 +1527,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+=======
+    <entry file="file://$PROJECT_DIR$/application/components/SideMenu/SideMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="113" column="7" lean-forward="true" selection-start-line="95" selection-start-column="4" selection-end-line="113" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/pages/perfil/perfilComponents/filtro/filtro.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="178" lean-forward="true" selection-start-line="178" selection-end-line="178" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/application/pages/minha-conta/editar-perfil/editar-perfil-styles.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -1357,6 +1568,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="772">
           <caret line="209" column="49" selection-start-line="209" selection-start-column="49" selection-end-line="209" selection-end-column="49" />
+=======
+    <entry file="file://$PROJECT_DIR$/application/pages/perfil/Perfil.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="105" column="29" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="29" />
+>>>>>>> ac872d6ab6d6ec3509d2afabdf3c5fba3e0f6228
 =======
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/application/pages/feed-create-post/FeedCreatePost.js">

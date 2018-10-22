@@ -178,7 +178,7 @@ export default class EditarPerfil extends React.Component{
 
                     </TouchableOpacity>
                 </View>
-                
+
                 <View style={ style.body_edit_content }>
                     <TouchableOpacity style={style.body_edit} onPress={() => this.hideEdit(7)}>
                         <View style={style.body_control_icon}>

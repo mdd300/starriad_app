@@ -7,7 +7,7 @@ import {
     Image,
     TouchableOpacity,
     Animated,
-    Dimensions, Easing
+    Dimensions,
 } from "react-native";
 import styles from "./produtos-styles";
 
@@ -17,7 +17,7 @@ export default class Produto extends React.Component {
         super(props);
 
         this.state = {
-            perfil_marca: props.perfil,
+            perfil_produto: props.produtos,
             infos_produtos: false,
             fotos_produtos: false,
             indice_ativo: '',
@@ -25,7 +25,7 @@ export default class Produto extends React.Component {
             animation_produto: new Animated.Value(0),
             animation_fotos_produto: new Animated.Value(0),
             deviceWidth: Dimensions.get('window').width,
-            teste: false,
+            teste: '',
         };
 
         // Verifica o tamanho da tela atual e guarda o valor na variavel deviceWidth
@@ -39,45 +39,45 @@ export default class Produto extends React.Component {
         if(this.state.indice_ativo === indexProduto){
             console.log('IF');
 
-            if(this.state.perfil_marca[0].produtos[indexProduto].ativo === true){
+            if(this.state.perfil_produto[indexProduto].ativo === true){
                 Animated.timing( this.state.animation_produto, {
                     toValue: 0,
-                    duration: 500
+                    duration: 300
                 }).start(()=> {
-                    this.state.perfil_marca[0].produtos[this.state.indice_ativo].ativo = false;
+                    this.state.perfil_produto[this.state.indice_ativo].ativo = false;
                 });
             }else{
-                this.state.perfil_marca[0].produtos[indexProduto].ativo = true;
+                this.state.perfil_produto[indexProduto].ativo = true;
                 Animated.timing( this.state.animation_produto, {
                     toValue: 100,
-                    duration: 500
+                    duration: 300
                 }).start();
             }
         }else{
             console.log('ELSE');
 
-            this.state.perfil_marca[0].produtos.map((prod, $index)=>{
+            this.state.perfil_produto.map((prod, $index)=>{
                 if($index !== indexProduto){
                     console.log('FILHO DA ÉGUA');
                     Animated.timing( this.state.animation_produto, {
                         toValue: 0,
-                        duration: 500
+                        duration: 300
                     }).start(()=> {
                         prod.ativo = false;
                     });
                 }
             });
 
-            this.state.perfil_marca[0].produtos[indexProduto].ativo = true;
+            this.state.perfil_produto[indexProduto].ativo = true;
             Animated.timing( this.state.animation_produto, {
                 toValue: 100,
-                duration: 500
+                duration: 300
             }).start();
 
             this.state.indice_ativo = indexProduto;
             this.setState({
                 indice_ativo: this.state.indice_ativo,
-                perfil_marca: this.state.perfil_marca
+                perfil_produto: this.state.perfil_produto
             });
 
             //
@@ -156,7 +156,7 @@ export default class Produto extends React.Component {
 
     showFotosProdutos(indexProduto){
 
-        this.state.perfil_marca[0].produtos[indexProduto].fotos_ativa = true;
+        this.state.perfil_produto[indexProduto].fotos_ativa = true;
         Animated.spring( this.state.animation_fotos_produto, {
             toValue: 100,
             tension: 10,
@@ -165,7 +165,7 @@ export default class Produto extends React.Component {
         this.state.foto_ativo = indexProduto;
         this.setState({
             foto_ativo: this.state.foto_ativo,
-            perfil_marca: this.state.perfil_marca
+            perfil_produto: this.state.perfil_produto
         });
 
         // this.state.perfil_marca.map((perfil) => {
@@ -192,11 +192,10 @@ export default class Produto extends React.Component {
             toValue: 0,
             tension: 10,
         }).start(()=> {
-            this.state.perfil_marca[0].produtos[indexProduto].fotos_ativa = false;
-        });
-
-        this.setState({
-            perfil_marca: this.state.perfil_marca
+            this.state.perfil_produto[indexProduto].fotos_ativa = false;
+            this.setState({
+                perfil_produto: this.state.perfil_produto
+            });
         });
 
         // Animated.spring( this.state.animation_fotos_produto, {
@@ -234,9 +233,15 @@ export default class Produto extends React.Component {
         );
     }
 
-    nextFoto(){
+    nextFoto(index, indiceImg){
+
         let scroll = this.refs.scroll;
-        this.refs.scroll.scrollTo({x: this.state.deviceWidth * 1});
+
+        console.log('Indice: ', indiceImg);
+        console.log('I: ', indiceImg);
+        console.log(this.state.deviceWidth * indiceImg);
+
+        this.refs.scroll.scrollTo({x: this.state.deviceWidth * indiceImg});
     }
 
     previousFoto(){
@@ -254,31 +259,54 @@ export default class Produto extends React.Component {
                 </View>
 
                 <ScrollView pagingEnabled={true} horizontal={true} showsHorizontalScrollIndicator={false} ref="scroll" style={styles.scrollSlider}>
-                    {this.state.perfil_marca.map((perfil) => (
-                        perfil.produtos.map((prod, indexProd) => (
-                            prod.images.map((img, index) => (
+                    {this.state.perfil_produto.map((prod, indexProd) => (
+                        prod.images.map((img, index) => {
 
-                                this.state.foto_ativo === indexProd &&
+                            if (this.state.foto_ativo === indexProd) {
 
-                                <View key={index}>
-                                    <View style={[styles.containerImgProdutoSlider, {width: this.state.deviceWidth}]}>
-                                        <ImageBackground source={{uri: img.image}} style={styles.imgProdutoSlider} />
+                                this.state.teste = index;
+
+                                console.log(this.state.teste);
+
+                                return(
+                                    <View key={index}>
+                                        <View style={[styles.containerImgProdutoSlider, {width: this.state.deviceWidth}]}>
+                                            <ImageBackground source={{uri: img}} style={styles.imgProdutoSlider}/>
+                                        </View>
                                     </View>
-                                </View>
-                            ))
-                        ))
+                                )
+                            }
+                        })
                     ))}
                 </ScrollView>
 
                 <View style={[styles.buttonLeftRight, styles.buttonLeft]}>
                     <TouchableOpacity onPress={() => this.previousFoto()} style={styles.buttonsSlider}>
-                        <Image resizeMode={'contain'} source={require ("./../../../../assets/imgs/png/left-arrow.png")} style={styles.iconSlider} />
+
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/caret-left-black.png")} style={styles.iconSlider} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={[styles.buttonLeftRight, styles.buttonRight]}>
-                    <TouchableOpacity onPress={() => this.nextFoto()} style={styles.buttonsSlider}>
-                        <Image resizeMode={'contain'} source={require ("./../../../../assets/imgs/png/left-arrow.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
+
+
+                    <TouchableOpacity onPress={() =>
+
+                        this.state.perfil_produto.map((prod, indice) => {
+                            if(indexProduto === indice){
+                                prod.images.map((img, index) => {
+
+                                    if(this.state.teste === index){
+
+                                        this.nextFoto(indexProduto, index)
+                                    }
+
+                                })
+                            }
+                        })
+
+                        } style={styles.buttonsSlider}>
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -289,7 +317,7 @@ export default class Produto extends React.Component {
 
         let infos_produtos = this.state.animation_produto.interpolate({
             inputRange: [ 0, 100 ],
-            outputRange: [ (29 * -1), 86.7 ]
+            outputRange: [ (29 * -1), 86.2 ]
         });
 
         let fotos_produtos = this.state.animation_fotos_produto.interpolate({
@@ -297,8 +325,7 @@ export default class Produto extends React.Component {
             outputRange: [ '180deg', '0deg' ]
         });
 
-        return this.state.perfil_marca.map((perfil) => {
-            return perfil.produtos.map((prod, indexProduto) => {
+        return this.state.perfil_produto.map((prod, indexProduto) => {
 
                 return(
                     <Animated.View key={indexProduto} style={[styles.containerProduto,
@@ -315,7 +342,7 @@ export default class Produto extends React.Component {
 
                                     <Image style={[styles.imgProduto,
                                         prod.ativo && !prod.fotos_ativa ? {top: 86} : null]}
-                                           resizeMode={'contain'} source={{uri: prod.imgProduto}}/>
+                                           resizeMode={'contain'} source={{uri: prod.image_url[0].big}}/>
 
                                     { prod.ativo && !prod.fotos_ativa &&
                                         // this.state.infos_produtos === true && this.state.indice_ativo === indexProduto && this.state.fotos_produtos === false &&
@@ -331,17 +358,17 @@ export default class Produto extends React.Component {
                                         <View style={styles.containerDescricaoCategoria}>
                                             <Text numberOfLines={1} ellipsizeMode="tail"
                                                   style={styles.textDescricao}>
-                                                {prod.descricao}
+                                                {prod.produto_descricao}
                                             </Text>
 
                                             <Text style={styles.textCategoria}>
-                                                {prod.categoria}
+                                                {prod.style_name}
                                             </Text>
                                         </View>
 
                                         <View style={styles.containerPreco}>
                                             <Text style={styles.textPreco}>
-                                                {prod.preco}
+                                                {prod.produto_preco_atacado}
                                             </Text>
                                         </View>
                                     </View>
@@ -354,13 +381,11 @@ export default class Produto extends React.Component {
                                             </Text>
 
                                             <View style={styles.controleInfos}>
-                                                {prod.variantes.map((variante) => (
-                                                    variante.grades.map((grade, indexGrade) => (
+                                                    {prod.grades.map((grade, indexGrade) => (
                                                         <Text key={indexGrade} style={styles.textGrade}>
-                                                            {grade.nome},
+                                                            {grade.tamanho_nome},
                                                         </Text>
-                                                    ))
-                                                ))}
+                                                    ))}
                                             </View>
                                         </View>
 
@@ -370,9 +395,17 @@ export default class Produto extends React.Component {
                                             </Text>
 
                                             <View style={styles.controleInfos}>
-                                                {prod.variantes.map((variante, index) => (
+                                                {prod.cores.map((cor, index) => (
                                                     <TouchableOpacity key={index} style={styles.touchVariantes}>
-                                                        <Text style={[styles.varianteCor, {backgroundColor: variante.cor_valor}]}/>
+
+                                                        {cor.cor_valor !== '' &&
+                                                            <Text style={[styles.varianteCor, {backgroundColor: cor.cor_valor}]}/>
+                                                        }
+
+                                                        {cor.img_cor !== '' &&
+                                                            <Image style={styles.varianteCor} source={{uri: cor.img_cor}}/>
+                                                        }
+
                                                     </TouchableOpacity>
                                                 ))}
                                             </View>
@@ -383,7 +416,6 @@ export default class Produto extends React.Component {
                         }
                     </Animated.View>
                 )
-            });
         });
     }
 

@@ -27,7 +27,7 @@ export default class Feed extends React.Component{
                     <SystemHeader />
                     <ScrollView style={[ styles.feed_view ]}>
 
-                        <CreatePost />
+                        <CreatePost navigation={ this.props.navigation }/>
                         <PostSimple />
 
                     </ScrollView>

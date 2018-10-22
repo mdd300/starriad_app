@@ -306,6 +306,7 @@ const styles = StyleSheet.create({
     },
     create_post_input: {
         padding: 10,
+        paddingVertical: 20,
         display: 'flex',
         height: 72,
         backgroundColor: '#f0f0f0',
