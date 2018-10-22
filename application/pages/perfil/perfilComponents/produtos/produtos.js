@@ -272,13 +272,13 @@ export default class Produto extends React.Component {
 
                 <View style={[styles.buttonLeftRight, styles.buttonLeft]}>
                     <TouchableOpacity onPress={() => this.previousFoto()} style={styles.buttonsSlider}>
-                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={styles.iconSlider} />
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/caret-left-black.png")} style={styles.iconSlider} />
                     </TouchableOpacity>
                 </View>
 
                 <View style={[styles.buttonLeftRight, styles.buttonRight]}>
                     <TouchableOpacity onPress={() => this.nextFoto()} style={styles.buttonsSlider}>
-                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/caret-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
                     </TouchableOpacity>
                 </View>
             </View>

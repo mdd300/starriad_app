@@ -49,7 +49,7 @@ export default class SelectProdutos extends React.Component{
     componenteDidMount(){}
 
 
-    __select_product = ( product )=> {
+    __select_product = (( product ) => {
        
         /* Primeiro, retorna o index do produto, no array de registro de produtos selecionados */
         let product_index = this.state.selected_products.indexOf( product );
@@ -66,8 +66,18 @@ export default class SelectProdutos extends React.Component{
 
         this.setState({ selected_products: selected_products });
         
-    };
-    
+    });
+
+
+    __confirm_selection = (()=> {
+        this.props.onSelect( this.state.selected_products );
+    });
+
+    __cancel_selection = (()=> {
+        this.props.onCancel();
+    });
+
+
     /* Função que renderiza o componente do modal */
     render(){
         const header_padding = (Platform.OS === "ios" ?24 : 0);
@@ -86,7 +96,9 @@ export default class SelectProdutos extends React.Component{
 
                         <View style={[ styles.select_products_header_back_content ]}>
                             <View style={[ styles.select_products_header_back_icon ]}>
-                                <TouchableOpacity style={[ styles.select_products_header_back_touchable ]}>
+                                <TouchableOpacity
+                                    onPress={() => { this.__cancel_selection(); }}
+                                    style={[ styles.select_products_header_back_touchable ]}>
                                     <Image style={[ styles.select_products_header_back_ico ]} source={require("../../assets/imgs/png/icons/caret-left-white.png")} />
                                 </TouchableOpacity>
                             </View>
@@ -97,7 +109,7 @@ export default class SelectProdutos extends React.Component{
                         </View>
 
                         <View style={[ styles.select_products_header_confirm_content ]}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>{ this.__confirm_selection() }}>
                                 <Text style={[ styles.select_products_header_confirm_label ]}> Confirmar </Text>
                             </TouchableOpacity>
                         </View>
@@ -122,23 +134,26 @@ export default class SelectProdutos extends React.Component{
 
 
     __render_products = (() => {
-        const render = this.state.products.map(function( product, index){
 
+        const render = this.state.products.map( (( product, index) => {
 
+            let selected = this.state.selected_products.indexOf( product );
+            selected = ( selected < 0 ? false : true );
 
             return(
                 <TouchableOpacity 
                     activeOpacity={ .7 } 
-                    onPress={ (()=>{ this.__select_product( product ); }) }
+                    onPress={()=>{ this.__select_product( product ); }}
                     style={[ styles.product_thumb_content_touchable ]} key={ index }>
 
                     <ProductThumb
-                        selected={false}
+                        selected={ selected }
                         product={ product } />
 
                 </TouchableOpacity>
             );
-        });
+        }));
+
         return render;
     });
 
