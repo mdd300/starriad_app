@@ -61,7 +61,11 @@ export default createStackNavigator({
         },
     },
     {
+<<<<<<< HEAD
         initialRouteName: 'Login',
+=======
+        initialRouteName: 'Perfil',
+>>>>>>> 11447380be83820d416127a9038b17273a61ad08
         navigationOptions: {
             header: null
         }
