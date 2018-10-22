@@ -11,10 +11,9 @@ import {
     Platform,
     Image,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    Slider,
 } from "react-native";
-import {style} from "../../../../components/SideMenu/side-menu-styles";
-import styles from "../produtos/produtos-styles";
 
 export default class Filtro extends React.Component {
 
@@ -142,7 +141,7 @@ export default class Filtro extends React.Component {
                         </Text>
                     </View>
 
-                    <View style={{width: '100%', paddingTop: 20, alignItems: 'flex-start', justifyContent: 'center'}}>
+                    <View style={{width: '100%', paddingTop: 20, alignItems: 'flex-start', justifyContent: 'center', marginBottom: 10}}>
                         <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 10}}>
                             CATEGORIAS
                         </Text>
@@ -164,42 +163,76 @@ export default class Filtro extends React.Component {
 
                     </View>
 
-                    <View style={{width: '100%', paddingTop: 20, alignItems: 'flex-start', justifyContent: 'center'}}>
+                    <View style={{width: '100%', paddingTop: 10, alignItems: 'flex-start', justifyContent: 'center'}}>
                         <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 10}}>
                             VARIANTES
                         </Text>
 
+                        <View style={{width: '100%', flexWrap: 'wrap', flexDirection: 'row', marginTop: 10, alignItems: 'stretch'}}>
 
-                            <View style={{width: '100%', flexDirection: 'row', marginTop: 10, borderWidth: 1, borderColor: 'red'}}>
+                            {this.props.produtos.map((prod) => (
 
-                                {this.props.produtos.map((prod) => (
-                                    prod.cores.map((cor, index) => (
+                                prod.cores.map((cor, index) => (
 
-                                <TouchableOpacity key={index} style={{width: '50%', borderWidth: 1, borderColor: 'red', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: 10}}>
+                            <TouchableOpacity key={index} style={{width: '50%', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start', marginBottom: 10}}>
 
-                                    {cor.cor_valor !== '' &&
-                                    <Text style={{width: 20, height: 20, borderRadius: 50, borderWidth: 1, borderColor: '#c2c2c2', marginRight: 5, marginTop: 2, backgroundColor: cor.cor_valor}}/>
-                                    }
+                                {cor.cor_valor !== '' &&
+                                <Text style={{width: 20, height: 20, borderRadius: 50, borderWidth: 1, borderColor: '#c2c2c2', marginRight: 5, marginTop: 2, backgroundColor: cor.cor_valor}}/>
+                                }
 
-                                    {cor.img_cor !== '' &&
-                                    <Image style={{width: 20, height: 20, borderRadius: 50, borderWidth: 1, borderColor: '#c2c2c2', marginRight: 5, marginTop: 2}} source={{uri: cor.img_cor}}/>
-                                    }
+                                {cor.img_cor !== '' &&
+                                <Image style={{width: 20, height: 20, borderRadius: 50, borderWidth: 1, borderColor: '#c2c2c2', marginRight: 5, marginTop: 2}} source={{uri: cor.img_cor}}/>
+                                }
 
-                                    <Text key={index} style={{fontSize: 16}}>
-                                        {cor.cor_nome}
+                                <Text style={{fontSize: 16}}>
+                                    {cor.cor_nome}
+                                </Text>
+
+                            </TouchableOpacity>
+
+                                ))
+                            ))}
+
+                        </View>
+
+                    </View>
+
+                    <View style={{width: '100%', paddingTop: 10, alignItems: 'flex-start', justifyContent: 'center', marginBottom: 10}}>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 10}}>
+                            GRADES
+                        </Text>
+
+                        {this.props.produtos.map((prod) => (
+
+                            prod.grades.map((grade, index) => (
+
+                                <View key={index} style={{width: '100%', flexDirection: 'row', marginTop: 10}}>
+
+                                    <TouchableOpacity style={{width: 20, height: 20, borderColor: '#d2d5dc', borderWidth: 1, marginRight: 40, marginTop: 2}}>
+
+                                    </TouchableOpacity>
+
+                                    <Text style={{fontSize: 16}}>
+                                        {grade.tamanho_nome}
                                     </Text>
+                                </View>
 
-                                </TouchableOpacity>
+                            ))
+                        ))
+                        }
 
-                                    ))
+                    </View>
 
-                                )) }
-                            </View>
+                    <View style={{width: '100%', paddingTop: 10, alignItems: 'flex-start', justifyContent: 'center'}}>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 10}}>
+                            FAIXA DE PREÇO
+                        </Text>
+
+                        <Slider style={{width: '100%'}} step={1} maximumValue={350} minimumValue={50} thumbTintColor={'#7417fb'} />
 
                     </View>
 
                 </ScrollView>
-
 
             </Animated.View>
         );
