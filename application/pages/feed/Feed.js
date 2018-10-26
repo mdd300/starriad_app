@@ -5,6 +5,7 @@ import SystemTabs from "../../components/tabs/SystemTabs";
 import PostSimple from "./feedComponents/PostSimple";
 import CreatePost from './feedComponents/CreatePost';
 import styles from "./feed-styles";
+import Template from "../../components/Template/Template";
 
 export default class Feed extends React.Component{
 
@@ -19,12 +20,11 @@ export default class Feed extends React.Component{
 
 
 
-    render(){
+    render_page(){
 
         return(
             <View style={{ flex: 1 }}>
                 <KeyboardAvoidingView behavior="padding"  style={{ flex: 1 }}>
-                    <SystemHeader />
                     <ScrollView style={[ styles.feed_view ]}>
 
                         <CreatePost navigation={ this.props.navigation }/>
@@ -32,10 +32,17 @@ export default class Feed extends React.Component{
 
                     </ScrollView>
                 </KeyboardAvoidingView >
-                <SystemTabs navigation={ this.props.navigation } selectedTab='feed' />
             </View>
         );
 
+    }
+
+    render(){
+        return(
+            <Template
+                navigation={ this.props.navigation }
+                render={ this.render_page() }/>
+        );
     }
 
 };
