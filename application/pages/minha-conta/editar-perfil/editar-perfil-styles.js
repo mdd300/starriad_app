@@ -82,10 +82,31 @@ const style = StyleSheet.create({
         flex:1,
         alignItems:'center'
     },
+    footerEnd: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100%',
+        height: 120,
+        backgroundColor: '#fff',
+        paddingTop: 5,
+        paddingBottom: 15,
+        flex:1,
+        alignItems:'center'
+    },
 
     containerBtnSalvar: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#7f1cef',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '80%',
+        marginTop: 5,
+    },
+    containerBtnCancelar: {
+        flex: 1,
+        backgroundColor: '#ef0d15',
         alignItems: 'center',
         justifyContent: 'center',
         width: '80%',
@@ -96,10 +117,83 @@ const style = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
     },
+    editStyle:{
+        position: "absolute",
+        flex: 1,
+        alignSelf: "center",
+        zIndex: 1111,
+        width: 200,
+        height: 50,
 
+    },
+    imageLogoSelected: {
+        width: 200,
+        height: 200
+    },
+    contentImage: {
+        flex: 1,
+        alignItems: 'center',
+        marginBottom: 20
+    },
+    btnEditar: {
+        backgroundColor: "#7f1cef",
+        alignSelf: "flex-end",
+        borderRadius: 100,
+        width: 30,
+        height: 30,
+        margin: 5,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    imgView: {
+        width: 15,
+        height: 15,
+        margin: 5,
+    },
 
-
-
+    containerAuto: {
+        backgroundColor: '#fff',
+        flex: 1,
+        paddingTop: 15,
+        flexDirection: 'row'
+    },
+    autocompleteContainer: {
+        marginLeft: 15,
+        marginRight: 5,
+        width: "60%"
+    },
+    itemText: {
+        fontSize: 20,
+        margin: 10,
+        color: "#a2a2a2"
+    },
+    descriptionContainer: {
+        // `backgroundColor` needs to be set otherwise the
+        // autocomplete input will disappear on text input.
+        backgroundColor: '#F5FCFF',
+        marginTop: 8
+    },
+    infoText: {
+        textAlign: 'center'
+    },
+    btnListCat:{
+        backgroundColor: "#7f1cef",
+        borderRadius: 100,
+        width:80,
+        height: 30,
+        marginBottom: 10,
+        marginLeft: 10
+    },
+    contentInsideOptions:{
+        width:"100%",
+        flex: 1,
+        flexDirection: 'row',
+        marginBottom: 15
+    },
+    imageLogoSelectedAlbum: {
+        width: 100,
+        height: 100
+    },
 });
 
 export default style;

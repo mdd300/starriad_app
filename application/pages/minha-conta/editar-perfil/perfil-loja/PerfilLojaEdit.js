@@ -1,5 +1,5 @@
 import React from "react";
-import {View, ScrollView, Text, KeyboardAvoidingView, Animated, TouchableOpacity, Image, TextInput} from "react-native";
+import {View} from "react-native";
 import style from "./perfil-loja-style"
 import { Hoshi } from 'react-native-textinput-effects';
 import { withNavigation } from 'react-navigation';
