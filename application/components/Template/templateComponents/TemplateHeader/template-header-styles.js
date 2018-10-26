@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         width: '100%',
         position: 'relative',
         display: 'flex',
-        zIndex: 9999,
+        overflow: 'visible'
     },
 
     template_header_content: {
