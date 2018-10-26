@@ -2,8 +2,16 @@ import {StyleSheet} from 'react-native';
 
 export const style = StyleSheet.create({
 
+    headerNotificationBar: {
+        width: '100%',
+        height: 24,
+        display: 'flex',
+        backgroundColor: 'rgba( 124, 24, 246, 0.8 )',
+        position: 'relative'
+    },
+
         container: {
-            marginTop: 24,
+            // marginTop: 24,
             flex: 1,
             width: '100%',
             position: 'absolute',

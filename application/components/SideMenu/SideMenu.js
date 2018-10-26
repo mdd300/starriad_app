@@ -8,9 +8,12 @@ import {
     ScrollView,
     Dimensions,
     Animated,
+    AsyncStorage, Alert,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import {style} from "./side-menu-styles"
+import firebase from 'firebase';
+import LoginService from "../../services/login/login-service";
 
 class SideMenu extends React.Component {
 
@@ -19,6 +22,7 @@ class SideMenu extends React.Component {
         super(props);
 
         this.toCarrinho = this.toCarrinho.bind(this);
+        this.signout = this.signout.bind(this);
 
         /* retorna as dimensões do aparelho/device */
         let { height, width } = Dimensions.get('window');
@@ -131,6 +135,10 @@ class SideMenu extends React.Component {
 
     toCarrinho() {
         this.props.navigation.navigate('Carrinho');
+    }
+
+    signout(){
+        this.props.navigation.navigate('Login');
     }
 
     /** Função para renderizar o componente */
@@ -259,7 +267,7 @@ class SideMenu extends React.Component {
                             }]
                         }
                     }>
-                        <TouchableOpacity style={style.footer}>
+                        <TouchableOpacity onPress={() => this._exit()} style={style.footer}>
                             <Image style={style.footer_image}
                                    source={require('../../assets/imgs/png/sign-out-white.png')}/>
                             <Text style={style.footer_text}>SAIR</Text>
@@ -272,6 +280,39 @@ class SideMenu extends React.Component {
 
     }/* end of render funcion */
 
+    _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
+        } else {
+            obj[key] = value;
+        }
+        return obj;
+    }
+
+    _exit = async () => {
+
+        const uid = await AsyncStorage.getItem('uid');
+
+        const messagingToken = await AsyncStorage.getItem('messagingToken');
+
+        firebase.firestore().collection('users').doc(uid).update(this._defineProperty({}, 'notificationTokens.' + messagingToken, firebase.firestore.FieldValue.delete()));
+        // firebase.messaging().deleteToken(messagingToken);
+        firebase.auth().signOut();
+        // AsyncStorage.clear();
+
+        LoginService.signout().then(() => {
+            this.signout();
+        }).catch((error) => {
+            Alert.alert(
+                'Erro',
+                'Algo inesperado ocorreu. Por favor, tente novamente mais tarde. ' + error,
+                [
+                    {text: 'OK'},
+                ],
+                {cancelable: false}
+            );
+        });
+    }
 }
 
 class Minha_Conta_Sub_Menu extends React.Component {
