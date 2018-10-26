@@ -5,6 +5,7 @@ import TopExplorer from './explorerComponents/top-explorer/top-explorer';
 import BodyExplorer from './explorerComponents/body-explorer/body-explorer';
 import SystemTabs from "../../components/tabs/SystemTabs";
 import SystemHeader from "../../components/SystemHeader/SystemHeader";
+import Template from "../../components/Template/Template";
 
 export default class Explorer extends React.Component {
 
@@ -65,20 +66,24 @@ export default class Explorer extends React.Component {
         );
     }
 
-    render() {
+    toProduto(page) {
+        this.props.navigation.navigate(page)
+    }
+
+    render_page() {
         return (
-
             <View style={{flex: 1}}>
-                <SystemHeader/>
-
                 {this.renderPage()}
-
-                <SystemTabs navigation={this.props.navigation} selectedTab='explorer' />
             </View>
         );
     }
 
-    toProduto(page) {
-        this.props.navigation.navigate(page)
+    render(){
+        return(
+            <Template
+                navigation={ this.props.navigation}
+                render={ this.render_page() }/>
+        );
     }
+
 }
