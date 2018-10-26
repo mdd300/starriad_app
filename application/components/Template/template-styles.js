@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     },
     system_template_view_viewport: {
         flex: 1,
-        position: 'relative'
+        position: 'relative',
     },
 
     system_template_view_footer_content: {
