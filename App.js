@@ -3,7 +3,6 @@ import {createStackNavigator} from 'react-navigation';
 /* Import das paginas */
 import TestesPage from "./application/pages/testes/TestesPage";
 import Explorer from "./application/pages/explorer/Explorer";
-import TesteHeaderPage from "./application/pages/testes_header/TesteHeaderPage";
 import Feed from "./application/pages/feed/Feed";
 import SlideScreen from "./application/pages/slides/SlideScreen";
 import Notificacoes from "./application/pages/notificacoes/Notificacoes";
@@ -25,9 +24,6 @@ export default createStackNavigator({
         },
         'ExplorerSearch': {
             screen: ExplorerSearch
-        },
-        'Testes': {
-            screen: TesteHeaderPage,
         },
         'Feed': {
             screen: Feed,
@@ -61,12 +57,6 @@ export default createStackNavigator({
         },
     },
     {
-<<<<<<< HEAD
-        initialRouteName: 'Login',
-=======
-        initialRouteName: 'Perfil',
->>>>>>> 11447380be83820d416127a9038b17273a61ad08
-        navigationOptions: {
-            header: null
-        }
+        initialRouteName: 'Main',
+        navigationOptions: { header: null }
     });

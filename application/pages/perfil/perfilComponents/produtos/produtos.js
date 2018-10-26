@@ -293,7 +293,7 @@ export default class Produto extends React.Component {
                     <TouchableOpacity onPress={() => this.nextFoto()} style={styles.buttonsSlider}>
                         <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/caret-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
                     </TouchableOpacity>
-                    
+
                 </View>
             </View>
         )
