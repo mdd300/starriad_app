@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/houpa_react.iml" filepath="$PROJECT_DIR$/.idea/houpa_react.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ws_houpa/.idea/ws_houpa.iml" filepath="$PROJECT_DIR$/../ws_houpa/.idea/ws_houpa.iml" />
     </modules>
   </component>
 </project>

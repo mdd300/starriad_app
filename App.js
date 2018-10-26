@@ -18,6 +18,7 @@ import ProdutoProfile from "./application/pages/produto_profile/ProdutoProfile";
 import FeedCreatePost from "./application/pages/feed-create-post/FeedCreatePost";
 import Login from "./application/pages/login/Login";
 import Perfil from "./application/pages/perfil/Perfil";
+import EditarPerfil from "./application/pages/minha-conta/editar-perfil/EditarPerfil";
 
 firebase.initializeApp(firebaseEnvironments.development);
 firebase.firestore().settings({ timestampsInSnapshots: true });
@@ -61,6 +62,9 @@ export default createStackNavigator({
         },
         'Perfil': {
             screen: Perfil
+        },
+        'EditarPerfil': {
+            screen: EditarPerfil,
         },
     },
     {
