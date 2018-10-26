@@ -1,5 +1,14 @@
 import React from 'react';
-import {ScrollView, View, Text, TouchableOpacity, ImageBackground, Dimensions, TextInput} from 'react-native';
+import {
+    ScrollView,
+    View,
+    Text,
+    TouchableOpacity,
+    ImageBackground,
+    Dimensions,
+    TextInput,
+    KeyboardAvoidingView
+} from 'react-native';
 import {styleLogin} from './Login-styles';
 import {style} from '../slides/SlideScreen-styles';
 import {LinearGradient} from 'expo';
@@ -7,6 +16,8 @@ import {styleCadastro} from './loginComponents/cadastro/Cadastro-styles'
 import LoginForm from "./loginComponents/loginForm/LoginForm";
 import Passo1 from "./loginComponents/cadastro/passo1/Passo1";
 import Passo2 from "./loginComponents/cadastro/passo2/Passo2";
+import RecuperarSenha from "./loginComponents/recuperarSenha/RecuperarSenha";
+import styles from "../carrinho/detalhePedido/Detalhe-pedido-styles";
 
 
 export default class Login extends React.Component {
@@ -26,6 +37,8 @@ export default class Login extends React.Component {
     render() {
         return (
             <View>
+                <View style={[styleLogin.headerNotificationBar]}/>
+
                 <ImageBackground resizeMode={'cover'}
                                  style={[{width: this.state.screenWidth}, {height: this.state.screenHeight}, styleLogin.container]}
                                  source={require("../../assets/imgs/jpg/login/bg4.jpg")}
@@ -41,6 +54,10 @@ export default class Login extends React.Component {
                                     style={styleLogin.footer}>
                     </LinearGradient>
                 </ImageBackground>
+
+                <KeyboardAvoidingView behavior="padding">
+                    <ScrollView>
+
                 <View style={styleLogin.headerContainer}>
                     <View style={styleLogin.setaContainer}>
                         <TouchableOpacity onPress={() => {
@@ -57,11 +74,16 @@ export default class Login extends React.Component {
 
                 </View>
 
-                <View style={styleLogin.bodyContainer}>
-                    <View style={styleLogin.body}>
-                        {this.selectorPage(this.state.page)}
+
+
+                    <View style={styleLogin.bodyContainer}>
+                        <View style={styleLogin.body}>
+                            {this.selectorPage(this.state.page)}
+                        </View>
                     </View>
-                </View>
+
+                </ScrollView>
+                    </KeyboardAvoidingView>
 
             </View>
         )
@@ -86,7 +108,8 @@ export default class Login extends React.Component {
             this.setState({page: 'Login'})
         } else if (this.state.page === 'Passo2') {
             this.setState({page: 'Passo1'})
-
+        }else if (this.state.page === 'RecuperarSenha') {
+            this.setState({page: 'Login'})
         }
 
     }
@@ -94,15 +117,19 @@ export default class Login extends React.Component {
     selectorPage(page) {
         switch (page) {
             case 'Login':
-                return (<LoginForm navigation={this.props.navigation} callbackLogin={this.doLogin.bind(this)} callback={this.getResponse.bind(this)}/>)
+                return (<LoginForm navigation={this.props.navigation} callbackLogin={this.doLogin.bind(this)} callback={this.getResponse.bind(this)}/>);
                 break;
 
             case 'Passo1':
-                return (<Passo1 callback={this.getResponse.bind(this)}/>)
+                return (<Passo1 callback={this.getResponse.bind(this)}/>);
                 break;
 
             case 'Passo2':
-                return (<Passo2  callback={this.getResponse.bind(this)} params={this.state.params}/>)
+                return (<Passo2 callback={this.getResponse.bind(this)} callbackLogin={this.doLogin.bind(this)} params={this.state.params}/>);
+                break;
+
+            case 'RecuperarSenha':
+                return (<RecuperarSenha callback={this.getResponse.bind(this)} callbackLogin={this.doLogin.bind(this)} params={this.state.params} />);
                 break;
         }
     }

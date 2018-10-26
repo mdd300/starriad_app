@@ -26,7 +26,7 @@ export const styleCadastro = StyleSheet.create({
 
 
     btnEspaco: {
-        marginTop: 15
+        marginTop: 15,
     },
 
     errorLabel: {
@@ -59,8 +59,12 @@ export const styleCadastro = StyleSheet.create({
 
     iconBtn: {
         marginLeft: 5,
+        marginTop: 3,
         width: 15,
-        height: 15
+        height: 15,
+        transform: [{
+            rotateY: '180deg'
+        }]
     },
 
     labelSenha: {
@@ -83,6 +87,36 @@ export const styleCadastro = StyleSheet.create({
         width: 35,
         height: 35,
         left:235
+    },
 
-    }
+    containerDadosCnpj: {
+        width: '100%',
+        marginTop: 15,
+    },
+
+    labelMsg: {
+        width: '100%',
+        marginBottom: 10
+    },
+
+    textMsg: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#fff',
+    },
+
+    containerDadosEmpresa: {
+        width: '100%',
+        backgroundColor: 'rgb(235, 235, 228)',
+        height: 45,
+        borderRadius: 1,
+        padding: 10,
+        marginTop: 10,
+        justifyContent: 'center'
+    },
+
+    textDadosEmpresa: {
+        fontSize: 18,
+        color: '#696969'
+    },
 });

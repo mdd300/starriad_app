@@ -1,5 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation';
+import firebase from "firebase";
+import '@firebase/firestore';
+// import '@firebase/messaging';
+import firebaseEnvironments from './application/configs/firebase/environment';
 /* Import das paginas */
 import TestesPage from "./application/pages/testes/TestesPage";
 import Explorer from "./application/pages/explorer/Explorer";
@@ -16,6 +20,9 @@ import FeedCreatePost from "./application/pages/feed-create-post/FeedCreatePost"
 import Login from "./application/pages/login/Login";
 import Perfil from "./application/pages/perfil/Perfil";
 import EditarPerfil from "./application/pages/minha-conta/editar-perfil/EditarPerfil";
+
+firebase.initializeApp(firebaseEnvironments.development);
+firebase.firestore().settings({ timestampsInSnapshots: true });
 
 export default createStackNavigator({
         'Main': {
@@ -65,7 +72,6 @@ export default createStackNavigator({
         },
     },
     {
-
         initialRouteName: 'Login',
         navigationOptions: {
             header: null

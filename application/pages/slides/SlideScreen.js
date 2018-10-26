@@ -13,6 +13,7 @@ import {
 import {LinearGradient} from 'expo';
 
 import {style} from "./SlideScreen-styles"
+import {styleLogin} from "../login/Login-styles";
 
 
 export default class SlideScreen extends React.Component {
@@ -60,6 +61,7 @@ export default class SlideScreen extends React.Component {
 
         return (
             <View style={style.container}>
+                <View style={[style.headerNotificationBar]}/>
                 <ScrollView onScroll={(event) => {
                     this.detectedScroll(event.nativeEvent.contentOffset.x)
                 }}
