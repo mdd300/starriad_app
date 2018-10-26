@@ -11,7 +11,7 @@ export const style = StyleSheet.create({
         left: 0,
         top: 0,
         display: 'flex',
-        zIndex: 99,
+        zIndex: 9999999999,
     },
     wraper_menu: {
         padding: 15,

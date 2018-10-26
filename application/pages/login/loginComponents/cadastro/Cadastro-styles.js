@@ -31,7 +31,7 @@ export const styleCadastro = StyleSheet.create({
 
     errorLabel: {
         fontSize: 12,
-        marginLeft: 12,
+        marginLeft: 2,
         color: '#ffa800',
     },
 

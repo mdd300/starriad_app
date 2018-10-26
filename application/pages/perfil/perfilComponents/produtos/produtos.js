@@ -18,14 +18,14 @@ export default class Produto extends React.Component {
 
         this.state = {
             perfil_produto: props.produtos,
-            infos_produtos: false,
-            fotos_produtos: false,
+            // infos_produtos: false,
+            // fotos_produtos: false,
             indice_ativo: '',
             foto_ativo: '',
             animation_produto: new Animated.Value(0),
             animation_fotos_produto: new Animated.Value(0),
             deviceWidth: Dimensions.get('window').width,
-            teste: '',
+            indice_img: 0,
         };
 
         // Verifica o tamanho da tela atual e guarda o valor na variavel deviceWidth
@@ -224,7 +224,7 @@ export default class Produto extends React.Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => this.showFotosProdutos(indexProduto)}
-                    style={[styles.buttonOverlay, {marginTop: 10}]}>
+                                  style={[styles.buttonOverlay, {marginTop: 10}]}>
                     <Text style={styles.textButtonOverlay}>
                         + FOTOS
                     </Text>
@@ -233,20 +233,26 @@ export default class Produto extends React.Component {
         );
     }
 
-    nextFoto(index, indiceImg){
+    nextFoto(){
+        let imgLenght;
 
-        let scroll = this.refs.scroll;
+        this.state.perfil_produto.map((prod) => {
+            imgLenght = prod.images.length
+        });
 
-        console.log('Indice: ', indiceImg);
-        console.log('I: ', indiceImg);
-        console.log(this.state.deviceWidth * indiceImg);
-
-        this.refs.scroll.scrollTo({x: this.state.deviceWidth * indiceImg});
+        if(this.state.indice_img <= imgLenght){
+            this.state.indice_img = this.state.indice_img + 1;
+            let scroll = this.refs.scroll;
+            this.refs.scroll.scrollTo({x: this.state.deviceWidth * this.state.indice_img});
+        }
     }
 
     previousFoto(){
-        let scroll = this.refs.scroll;
-        this.refs.scroll.scrollTo({x: this.state.deviceWidth * -1});
+        if(this.state.indice_img > 0){
+            this.state.indice_img = this.state.indice_img - 1;
+            let scroll = this.refs.scroll;
+            this.refs.scroll.scrollTo({x: this.state.deviceWidth * this.state.indice_img});
+        }
     }
 
     renderSlideProduto(indexProduto){
@@ -264,10 +270,6 @@ export default class Produto extends React.Component {
 
                             if (this.state.foto_ativo === indexProd) {
 
-                                this.state.teste = index;
-
-                                console.log(this.state.teste);
-
                                 return(
                                     <View key={index}>
                                         <View style={[styles.containerImgProdutoSlider, {width: this.state.deviceWidth}]}>
@@ -284,30 +286,17 @@ export default class Produto extends React.Component {
                     <TouchableOpacity onPress={() => this.previousFoto()} style={styles.buttonsSlider}>
 
                         <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/caret-left-black.png")} style={styles.iconSlider} />
+
                     </TouchableOpacity>
                 </View>
 
                 <View style={[styles.buttonLeftRight, styles.buttonRight]}>
 
 
-                    <TouchableOpacity onPress={() =>
-
-                        this.state.perfil_produto.map((prod, indice) => {
-                            if(indexProduto === indice){
-                                prod.images.map((img, index) => {
-
-                                    if(this.state.teste === index){
-
-                                        this.nextFoto(indexProduto, index)
-                                    }
-
-                                })
-                            }
-                        })
-
-                        } style={styles.buttonsSlider}>
-                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/seta-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
+                    <TouchableOpacity onPress={() => this.nextFoto()} style={styles.buttonsSlider}>
+                        <Image resizeMode={'contain'} source={require ("../../../../assets/imgs/png/icons/caret-left-black.png")} style={[styles.iconSlider, { transform: [{rotateY: '180deg'}]}]} />
                     </TouchableOpacity>
+                    
                 </View>
             </View>
         )
@@ -327,95 +316,95 @@ export default class Produto extends React.Component {
 
         return this.state.perfil_produto.map((prod, indexProduto) => {
 
-                return(
-                    <Animated.View key={indexProduto} style={[styles.containerProduto,
-                        prod.fotos_ativa ? {transform: [{rotateY: fotos_produtos}]} : null]}>
+            return(
+                <Animated.View key={indexProduto} style={[styles.containerProduto,
+                    prod.fotos_ativa ? {transform: [{rotateY: fotos_produtos}]} : null]}>
 
-                        {prod.fotos_ativa &&
-                            this.renderSlideProduto(indexProduto)
-                        }
+                    {prod.fotos_ativa &&
+                    this.renderSlideProduto(indexProduto)
+                    }
 
-                        {!prod.fotos_ativa &&
-                            <TouchableOpacity activeOpacity={1} onPress={() => this.touchOpcoesProdutos(indexProduto)} style={styles.touchContainerImgProduto}>
+                    {!prod.fotos_ativa &&
+                    <TouchableOpacity activeOpacity={1} onPress={() => this.touchOpcoesProdutos(indexProduto)} style={styles.touchContainerImgProduto}>
 
-                                <View style={styles.containerImgProduto}>
+                        <View style={styles.containerImgProduto}>
 
-                                    <Image style={[styles.imgProduto,
-                                        prod.ativo && !prod.fotos_ativa ? {top: 86} : null]}
-                                           resizeMode={'contain'} source={{uri: prod.image_url[0].big}}/>
+                            <Image style={[styles.imgProduto,
+                                prod.ativo && !prod.fotos_ativa ? {top: 86} : null]}
+                                   resizeMode={'contain'} source={{uri: prod.image_url[0].big}}/>
 
-                                    { prod.ativo && !prod.fotos_ativa &&
-                                        // this.state.infos_produtos === true && this.state.indice_ativo === indexProduto && this.state.fotos_produtos === false &&
-                                        this.renderOverlayProduto(indexProduto)
-                                    }
+                            { prod.ativo && !prod.fotos_ativa &&
+                            // this.state.infos_produtos === true && this.state.indice_ativo === indexProduto && this.state.fotos_produtos === false &&
+                            this.renderOverlayProduto(indexProduto)
+                            }
 
+                        </View>
+
+                        <Animated.View style={[prod.ativo && !prod.fotos_ativa ? {bottom: infos_produtos, backgroundColor: '#FFF',
+                            width: '100%', borderBottomEndRadius: 5, borderBottomStartRadius: 5} : styles.infosProdutos]}>
+
+                            <View style={styles.controleInfosProduto}>
+                                <View style={styles.containerDescricaoCategoria}>
+                                    <Text numberOfLines={1} ellipsizeMode="tail"
+                                          style={styles.textDescricao}>
+                                        {prod.produto_descricao}
+                                    </Text>
+
+                                    <Text style={styles.textCategoria}>
+                                        {prod.style_name}
+                                    </Text>
                                 </View>
 
-                                <Animated.View style={[prod.ativo && !prod.fotos_ativa ? {bottom: infos_produtos, backgroundColor: '#FFF',
-                                            width: '100%', borderBottomEndRadius: 5, borderBottomStartRadius: 5} : styles.infosProdutos]}>
+                                <View style={styles.containerPreco}>
+                                    <Text style={styles.textPreco}>
+                                        {prod.produto_preco_atacado}
+                                    </Text>
+                                </View>
+                            </View>
 
-                                    <View style={styles.controleInfosProduto}>
-                                        <View style={styles.containerDescricaoCategoria}>
-                                            <Text numberOfLines={1} ellipsizeMode="tail"
-                                                  style={styles.textDescricao}>
-                                                {prod.produto_descricao}
-                                            </Text>
 
-                                            <Text style={styles.textCategoria}>
-                                                {prod.style_name}
-                                            </Text>
-                                        </View>
+                            <View style={styles.containerGradesVariantes}>
+                                <View style={styles.containerGrade}>
+                                    <Text style={styles.labelTitle}>
+                                        GRADES
+                                    </Text>
 
-                                        <View style={styles.containerPreco}>
-                                            <Text style={styles.textPreco}>
-                                                {prod.produto_preco_atacado}
+                                    <View style={styles.controleInfos}>
+                                        {prod.grades.map((grade, indexGrade) => (
+                                            <Text key={indexGrade} style={styles.textGrade}>
+                                                {grade.tamanho_nome},
                                             </Text>
-                                        </View>
+                                        ))}
                                     </View>
+                                </View>
 
+                                <View style={styles.containerVariantes}>
+                                    <Text style={styles.labelTitle}>
+                                        VARIANTES
+                                    </Text>
 
-                                    <View style={styles.containerGradesVariantes}>
-                                        <View style={styles.containerGrade}>
-                                            <Text style={styles.labelTitle}>
-                                                GRADES
-                                            </Text>
+                                    <View style={styles.controleInfos}>
+                                        {prod.cores.map((cor, index) => (
+                                            <TouchableOpacity key={index} style={styles.touchVariantes}>
 
-                                            <View style={styles.controleInfos}>
-                                                    {prod.grades.map((grade, indexGrade) => (
-                                                        <Text key={indexGrade} style={styles.textGrade}>
-                                                            {grade.tamanho_nome},
-                                                        </Text>
-                                                    ))}
-                                            </View>
-                                        </View>
+                                                {cor.cor_valor !== '' &&
+                                                <Text style={[styles.varianteCor, {backgroundColor: cor.cor_valor}]}/>
+                                                }
 
-                                        <View style={styles.containerVariantes}>
-                                            <Text style={styles.labelTitle}>
-                                                VARIANTES
-                                            </Text>
+                                                {cor.img_cor !== '' &&
+                                                <Image style={styles.varianteCor} source={{uri: cor.img_cor}}/>
+                                                }
 
-                                            <View style={styles.controleInfos}>
-                                                {prod.cores.map((cor, index) => (
-                                                    <TouchableOpacity key={index} style={styles.touchVariantes}>
-
-                                                        {cor.cor_valor !== '' &&
-                                                            <Text style={[styles.varianteCor, {backgroundColor: cor.cor_valor}]}/>
-                                                        }
-
-                                                        {cor.img_cor !== '' &&
-                                                            <Image style={styles.varianteCor} source={{uri: cor.img_cor}}/>
-                                                        }
-
-                                                    </TouchableOpacity>
-                                                ))}
-                                            </View>
-                                        </View>
+                                            </TouchableOpacity>
+                                        ))}
                                     </View>
-                                </Animated.View>
-                            </TouchableOpacity>
-                        }
-                    </Animated.View>
-                )
+                                </View>
+                            </View>
+                        </Animated.View>
+                    </TouchableOpacity>
+                    }
+                </Animated.View>
+            )
         });
     }
 

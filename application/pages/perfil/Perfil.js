@@ -1,5 +1,5 @@
 import React from "react";
-import {ActivityIndicator, View, TextInput, Text, ScrollView, Animated, UIManager, LayoutAnimation, Platform, Image, TouchableOpacity} from "react-native";
+import {ActivityIndicator, View, TextInput, Text, ScrollView, Animated, UIManager, LayoutAnimation, Platform, Image, TouchableOpacity, Modal} from "react-native";
 import SystemHeader from "../../components/SystemHeader/SystemHeader";
 import SystemTabs from "../../components/tabs/SystemTabs";
 import styles from "../perfil/Perfil-style";
@@ -25,6 +25,7 @@ export default class Perfil extends React.Component {
             styles: [],
             produtos: [],
             categorias: [],
+            precos: [],
             loading: false,
             error: false,
             system_tabs: true,
@@ -80,6 +81,8 @@ export default class Perfil extends React.Component {
                         produto_texto: 'Regata Alça Fivela Tartaruga',
                         style_name: 'Feminino',
 
+                        precos: {min: 'R$ 50,00', max: 'R$ 350,00'},
+
                         image_url: [
                             {
                                 big: 'https://assets.xtechcommerce.com/uploads/images/medium/63ac443d3dc902676a0d26d0428ad76b.png',
@@ -103,6 +106,16 @@ export default class Perfil extends React.Component {
                                 cor_valor: '',
                                 img_cor: 'https://http2.mlstatic.com/kit-3-calca-ribana-moletom-moda-feminina-cintura-alta-022-D_NQ_NP_824268-MLB25689958858_062017-F.jpg',
                                 cor_nome: 'Estampada',
+                            },
+                            {
+                                cor_valor: '#31ff74',
+                                img_cor: '',
+                                cor_nome: 'Verde',
+                            },
+                            {
+                                cor_valor: '#ff3140',
+                                img_cor: '',
+                                cor_nome: 'Vermelho',
                             }
                         ],
 
@@ -396,6 +409,7 @@ export default class Perfil extends React.Component {
 
                 <ScrollView onScroll={this._onScroll}>
                     { this.renderPage() }
+
                 </ScrollView>
 
                     <Filtro opened={ this.state.opened_filtro } onclose={ this._closedFiltro} categorias={this.state.categorias} produtos={this.state.produtos} />
