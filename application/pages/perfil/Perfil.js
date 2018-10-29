@@ -1,12 +1,10 @@
 import React from "react";
 import {ActivityIndicator, View, TextInput, Text, ScrollView, Animated, UIManager, LayoutAnimation, Platform, Image, TouchableOpacity, Modal} from "react-native";
-import SystemHeader from "../../components/SystemHeader/SystemHeader";
-import SystemTabs from "../../components/tabs/SystemTabs";
 import styles from "../perfil/Perfil-style";
 import Capa from './perfilComponents/capa/capa';
 import Produto from "./perfilComponents/produtos/produtos";
 import Filtro from "./perfilComponents/filtro/filtro";
-import SideMenu from "../../components/SideMenu/SideMenu";
+import Template from "../../components/Template/Template";
 
 export default class Perfil extends React.Component {
 
@@ -399,27 +397,30 @@ export default class Perfil extends React.Component {
         )
     }
 
-    render() {
+    render_page() {
         return (
             <View style={styles.containerPerfil}>
 
-                <SystemHeader />
-
                 {this.renderOrdenar()}
-
                 <ScrollView onScroll={this._onScroll}>
                     { this.renderPage() }
 
                 </ScrollView>
 
                     <Filtro opened={ this.state.opened_filtro } onclose={ this._closedFiltro} categorias={this.state.categorias} produtos={this.state.produtos} />
-
-                    <SystemTabs navigation={this.props.navigation} selectedTab='profile'/>
-
                 {/*{!this.state.system_tabs &&*/}
                 {this.renderFiltro()}
                 {/*}*/}
             </View>
         );
     }
+
+    render(){
+        return(
+            <Template
+                render={ this.render_page() }
+                navigation={ this.props.navigation } />
+        );
+    }
+
 }
