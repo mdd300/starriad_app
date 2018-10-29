@@ -6,73 +6,134 @@ const ListItemNewNotificacoes = props => {
 
     const { notificacao } = props;
 
-    return (
+    if(notificacao.date == 'Novas'){
 
-        <View>
-            {notificacao.novas.map(novas => (
+        return (
+            <View>
+                <View style={styles.labelAnteriores}>
+                    <Text style={styles.textAnteriores}>
+                        {notificacao.date}
+                    </Text>
+                </View>
 
-                <View key={novas.id} style={[
-                    styles.line,
-                    novas.status == 0 ? styles.corFundoNotificacao: null
+                {notificacao.atv.map((atividade, index) => (
+
+                    <View key={index} style={[
+                        styles.line,
+                        atividade.notificacao_ready == 1 ? styles.corFundoNotificacaoLida : styles.corFundoNotificacaoNova
                     ]}>
 
-                    { novas.status == 1 &&
+                        { atividade.notificacao_ready == 0 &&
                         <View style={styles.statusNova} />
-                    }
-                    { novas.status == 0 &&
+                        }
+
+                        { atividade.notificacao_ready == 1 &&
                         <View style={styles.statusLida} />
-                    }
+                        }
 
-                    <TouchableOpacity activeOpacity={0.8} style={styles.containerImagem}>
-                        <Image style={styles.imgPerfil} source={{ uri: novas.imgProfile }} />
-                    </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.8} style={styles.containerImagem}>
+                            <Image style={styles.imgPerfil} source={{ uri: atividade.img_url_big.medium }} />
+                        </TouchableOpacity>
 
-                    <Text style={styles.lineText}>
+                        <Text style={styles.lineText}>
 
-                        <Text style={{fontWeight: 'bold', paddingRight: 5}}>
-                            {novas.nameProfile}
+                            <Text style={{fontWeight: 'bold', paddingRight: 5}}>
+                                {atividade.perfil_nome}
+                            </Text>
+
+                            <Text> {
+                                atividade.notificacao_nome
+                            }</Text>
                         </Text>
 
-                        <Text> {
-                            novas.descricao
-                        }</Text>
-                    </Text>
+                        { atividade.notificacao_tipo == 10 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                CONECTAR
+                            </Text>
+                        </TouchableOpacity>
+                        }
 
-                    { novas.tipo == 1 &&
-                    <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
-                        <Text style={styles.labelBtnConexoes}>
-                            CONECTAR
-                        </Text>
-                    </TouchableOpacity>
-                    }
+                        { atividade.notificacao_tipo == 3 || atividade.notificacao_tipo == 2 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                DESCONECTAR
+                            </Text>
+                        </TouchableOpacity>
+                        }
 
-                    { novas.tipo == 2 &&
-                    <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
-                        <Text style={styles.labelBtnConexoes}>
-                            VER PERFIL
-                        </Text>
-                    </TouchableOpacity>
-                    }
+                        { atividade.notificacao_tipo == 11 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                CANCELAR
+                            </Text>
+                        </TouchableOpacity>
+                        }
 
-                    { novas.tipo == 3 &&
-                    <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
-                        <Text style={styles.labelBtnConexoes}>
-                            VER PRODUTO
-                        </Text>
-                    </TouchableOpacity>
-                    }
+                        { atividade.notificacao_tipo == 3 &&
+                        <View style={{flexDirection: 'row', width: 90, height: '60%'}}>
+                            <TouchableOpacity activeOpacity={0.6} style={[styles.btnConexoes, {flex: 1, maxWidth: 50, height: '100%'}]}>
+                                <Text style={styles.labelBtnConexoes}>
+                                    SIM
+                                </Text>
+                            </TouchableOpacity>
 
-                    { novas.tipo == 4 &&
-                    <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
-                        <Text style={styles.labelBtnConexoes}>
-                            VER PEDIDO
-                        </Text>
-                    </TouchableOpacity>
-                    }
-                </View>
-            ))}
-        </View>
-    );
+                            <TouchableOpacity activeOpacity={0.6} style={[styles.btnConexoes, {flex: 1, maxWidth: 50, height: '100%'}]}>
+                                <Text style={styles.labelBtnConexoes}>
+                                    NÃO
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                        }
+
+                        { atividade.notificacao_tipo == 8 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                CONECTADOS
+                            </Text>
+                        </TouchableOpacity>
+                        }
+
+                        { atividade.notificacao_tipo == 5 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                VER PERFIL
+                            </Text>
+                        </TouchableOpacity>
+                        }
+
+                        { atividade.notificacao_tipo == 7 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                VER PRODUTO
+                            </Text>
+                        </TouchableOpacity>
+                        }
+
+                        { atividade.notificacao_tipo == 4 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                VER PEDIDO
+                            </Text>
+                        </TouchableOpacity>
+                        }
+
+                        { atividade.notificacao_tipo == 1 || atividade.notificacao_tipo == 12 &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes}>
+                            <Text style={styles.labelBtnConexoes}>
+                                VER POST
+                            </Text>
+                        </TouchableOpacity>
+                        }
+                    </View>
+                ))}
+            </View>
+        );
+    }else{
+        return(
+            <View />
+        );
+    }
 };
 
 export default ListItemNewNotificacoes;

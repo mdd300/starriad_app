@@ -319,6 +319,7 @@ export default class Passo2 extends React.Component {
                                 firebase.auth().signInWithEmailAndPassword(body.user_login, body.user_pass).then((user) => {
                                     AsyncStorage.setItem('@houpa:userlogged', JSON.stringify(response_login.data_user));
                                     AsyncStorage.setItem('uid', user.user.uid);
+                                    AsyncStorage.setItem('restkey', response.data.restkey);
                                 });
 
                                 this.props.callbackLogin('Explorer');

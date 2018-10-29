@@ -15,6 +15,8 @@ import styles from "./template-header-styles";
 import firebase from "firebase";
 import LoginService from "../../../../services/login/login-service";
 import {withNavigation} from "react-navigation";
+import NotificacoesService from "../../../../services/notificacoes/notificacoes-service";
+import HeaderBadge from "../../../SystemHeader/header-components/badge";
 
 
 NativeModules.UIManager.setLayoutAnimationEnabledExperimental && NativeModules.UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -37,8 +39,134 @@ class TemplateHeader extends React.Component {
             menu_brands: false,
             menu_categories: false,
             menu_region: false,
-        };
 
+            notificacoesAtivas: 0,
+            paramsFire: {dados: '', uid: '', notificacao: ''},
+            uid_user: null,
+            notificacoes: '',
+            user: null,
+            badgeNovas: 0,
+            userLoggedGlobal: [],
+            params: {dados: 'OK'}
+        };
+    };
+
+    componentDidMount(){
+        this.getUidUser();
+        this.loadDadosUser(this.state.paramsFire);
+    }
+
+    getUidUser = async () =>{
+        this.state.uid_user =  await AsyncStorage.getItem('uid');
+        this.setState({
+            uid_user: this.state.uid_user
+        });
+    };
+
+    // pega o UID do usu. setado no storage e retorna os campos(empresa_id_fk,name,name_profile,notificationsTokens,online) do Firestore.
+    loadDadosUser = async (paramsFire) => {
+
+        const user_logged = await AsyncStorage.getItem('@houpa:userlogged');
+
+        if (user_logged !== undefined && user_logged != null && user_logged !== '' && user_logged) {
+
+            paramsFire.uid = this.state.uid_user;
+
+            this.setState({
+                paramsFire: this.state.paramsFire
+            });
+
+            NotificacoesService.getDadosUser(paramsFire).then((res) => {
+
+                this.state.user = res.data();
+                this.setState({
+                    user: this.state.user
+                });
+
+                this.getActivitiesFirestore(this.state.user);
+            }, (error) => {
+
+                Alert.alert(
+                    'Dados não encontrados!',
+                    'Ops! Parece que os dados do usuário não foram encontrados! ' + error,
+                    [
+                        {text: 'OK'},
+                    ],
+                    {cancelable: false}
+                );
+            });
+        }
+    };
+
+    getActivitiesFirestore = async (user) =>{
+        const user_logged = await AsyncStorage.getItem('@houpa:userlogged');
+
+        this.state.paramsFire.dados = user;
+        this.setState({
+            paramsFire: this.state.paramsFire
+        });
+
+        NotificacoesService.getAtividadesFirestore(this.state.paramsFire, user_logged).onSnapshot((doc) => {
+
+            if (doc.exists) {
+                this.state.notificacoesAtivas = doc.data();
+                this.state.notificacoesAtivas = this.state.notificacoesAtivas.unreaded_notify;
+                this.setState({
+                    notificacoesAtivas: this.state.notificacoesAtivas
+                });
+            } else {
+                Alert.alert(
+                    'Atividades não encontradas!',
+                    'Ops! Pareceu que ocorreu um erro. Verifique sua conexão!',
+                    [
+                        {text: 'OK'},
+                    ],
+                    {cancelable: false}
+                );
+            }
+        });
+    };
+
+    // função que le a notificação clicada e seta no sql
+    readActiviteSql = async (idNotificacao) => {
+
+        const restkey = await AsyncStorage.getItem('restkey');
+
+        this.state.params.dados = idNotificacao;
+        this.setState({
+            params: this.state.params
+        });
+        NotificacoesService.lerAtividadesSql(this.state.params, restkey).then((res) => {
+        }, (error) => {
+
+            Alert.alert(
+                'Atividade não lida',
+                'Ops! Pareceu que ocorreu um erro verifique sua conexão ' + error,
+                [
+                    {text: 'OK'},
+                ],
+                {cancelable: false}
+            );
+        });
+    };
+
+    // função que le as notificações e seta no firestore
+    readNotificFirestore() {
+        let user_id = this.state.user;
+
+        console.log('HOUPA!: ', user_id);
+
+        if (user_id == '' || user_id == undefined) {
+        } else {
+            NotificacoesService.lerAtividadesFirestore(user_id.empresa_id_fk);
+        }
+    };
+
+    // função que passa a notificação clicada e passa pra função de ler no sql
+    actionTo(notificacao){
+        if (!notificacao == '') {
+            this.readActiviteSql(notificacao.notificacao_id);
+        }
     };
 
     componentWillUpdate = (()=>{
@@ -178,9 +306,13 @@ class TemplateHeader extends React.Component {
                     </View>
 
                     <View style={[ styles.template_header_action ]}>
-                        <TouchableOpacity  onPress={() => this.props.navigation.navigate('Notificacoes')}
+                        <TouchableOpacity  onPress={() => {
+                            this.props.navigation.navigate('Notificacoes');
+                            this.readNotificFirestore();
+                        }}
                             style={[ styles.template_header_action_touchable ]} >
                             <Image style={[ styles.template_header_action_icon ]} source={ require("../../../../assets/imgs/png/icons/notification.png") }></Image>
+                            <HeaderBadge badgeValue={this.state.notificacoesAtivas} />
                         </TouchableOpacity>
                     </View>
 

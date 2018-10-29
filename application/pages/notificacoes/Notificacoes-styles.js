@@ -40,11 +40,17 @@ const stylesNotificacoes = StyleSheet.create({
         backgroundColor: '#c2c2c2',
     },
 
-    corFundoNotificacao: {
+    corFundoNotificacaoLida: {
         backgroundColor: '#fff',
     },
 
+    corFundoNotificacaoNova: {
+        backgroundColor: '#ebebeb',
+    },
+
     containerImagem: {
+        borderColor: '#f2f2f2',
+        borderWidth: 1,
         width: 50,
         height: 50,
         marginLeft: 10,
