@@ -5,11 +5,16 @@ const NotificacoesService = {
 
     getAtividades(data, restkey){
 
-        console.log('HOHOHOHOHOH: ', restkey);
+       // return fetch(API_URL_HOUPA + 'notificacoes/get_atividades', data, {
+       //      method: 'POST',
+       //      headers: {
+       //          'X-API-KEY': restkey,
+       //      },
+       //  });
 
         return axios.post(API_URL_HOUPA + 'notificacoes/get_atividades', data, {
             headers: {
-                'X-API-KEY': restkey
+                'X-API-KEY': restkey,
             }
         });
     },

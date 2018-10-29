@@ -139,7 +139,6 @@ class SideMenu extends React.Component {
         this.props.navigation.navigate('Carrinho');
     }
 
-
     signout(){
         this.props.navigation.navigate('Login');
     }

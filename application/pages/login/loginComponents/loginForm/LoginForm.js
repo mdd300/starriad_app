@@ -189,10 +189,6 @@ export default class LoginForm extends React.Component {
                         AsyncStorage.setItem('uid', user.user.uid);
                         AsyncStorage.setItem('restkey', response.data.restkey);
 
-                        console.log('HEHE', user);
-
-                        console.log('RES: ', response.data);
-
                     }).catch(error => {
 
                         this.setState({
@@ -215,6 +211,8 @@ export default class LoginForm extends React.Component {
                     });
                 }
                 else if(response.data.type_error !== 'conta_desativada') {
+
+                    console.log(response);
 
                     Alert.alert(
                         'Erro',
