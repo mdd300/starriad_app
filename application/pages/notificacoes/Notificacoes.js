@@ -16,6 +16,7 @@ import ListNotificacoes from './notificacoesComponents/list-notificacoes/list-no
 import axios from "axios";
 import {API_URL_HOUPA} from "../../configs/api/current";
 import NotificacoesService from "../../services/notificacoes/notificacoes-service";
+import Template from "../../components/Template/Template";
 
 
 export default class Notificacoes extends React.Component {
@@ -268,16 +269,21 @@ export default class Notificacoes extends React.Component {
         );
     }
 
-    render() {
+    render_page() {
         return (
 
             <View style={styles.containerNotificacoes}>
-                <SystemHeader/>
-
                 { this.renderPage() }
-
-                <SystemTabs navigation={this.props.navigation} selectedTab='notifications'/>
             </View>
         );
     }
+
+    render(){
+        return(
+            <Template
+                navigation={ this.props.navigation }
+                render={ this.render_page() }/>
+        );
+    }
+
 }

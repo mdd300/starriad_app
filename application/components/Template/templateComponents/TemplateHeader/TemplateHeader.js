@@ -9,15 +9,18 @@ import {
     Dimensions,
     TextInput,
     NativeModules,
-    LayoutAnimation
+    LayoutAnimation, AsyncStorage, Alert
 } from "react-native";
 import styles from "./template-header-styles";
+import firebase from "firebase";
+import LoginService from "../../../../services/login/login-service";
+import {withNavigation} from "react-navigation";
 
 
 NativeModules.UIManager.setLayoutAnimationEnabledExperimental && NativeModules.UIManager.setLayoutAnimationEnabledExperimental(true);
 
 /* Inicio do escopo do componente do template header */
-export default class TemplateHeader extends React.Component {
+class TemplateHeader extends React.Component {
 
     /* Função construtora do componente */
     constructor( props ){
@@ -175,7 +178,7 @@ export default class TemplateHeader extends React.Component {
                     </View>
 
                     <View style={[ styles.template_header_action ]}>
-                        <TouchableOpacity 
+                        <TouchableOpacity  onPress={() => this.props.navigation.navigate('Notificacoes')}
                             style={[ styles.template_header_action_touchable ]} >
                             <Image style={[ styles.template_header_action_icon ]} source={ require("../../../../assets/imgs/png/icons/notification.png") }></Image>
                         </TouchableOpacity>
@@ -274,7 +277,7 @@ export default class TemplateHeader extends React.Component {
                             </View>
 
                             <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
+                                <TouchableOpacity onPress={() => this._exit()} style={[ styles.template_header_settings_menu_settings_touchable ]}>
                                     <Text style={[ styles.template_header_settings_menu_setting_text ]}>
                                         Sair
                                     </Text>
@@ -537,5 +540,41 @@ export default class TemplateHeader extends React.Component {
 
     }); /* Fim da função utilizada para renderizar os registros das regiões de filtro */
 
+    _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
+        } else {
+            obj[key] = value;
+        }
+        return obj;
+    }
+
+
+    _exit = async () => {
+
+        const uid = await AsyncStorage.getItem('uid');
+
+        const messagingToken = await AsyncStorage.getItem('messagingToken');
+
+        firebase.firestore().collection('users').doc(uid).update(this._defineProperty({}, 'notificationTokens.' + messagingToken, firebase.firestore.FieldValue.delete()));
+        // firebase.messaging().deleteToken(messagingToken);
+        firebase.auth().signOut();
+        // AsyncStorage.clear();
+
+        LoginService.signout().then(() => {
+            this.props.navigation.navigate('Login');
+        }).catch((error) => {
+            Alert.alert(
+                'Erro',
+                'Algo inesperado ocorreu. Por favor, tente novamente mais tarde. ' + error,
+                [
+                    {text: 'OK'},
+                ],
+                {cancelable: false}
+            );
+        });
+    }
 
 }/* Fim do escopo da classe do componente TemplateHeader */
+
+export default withNavigation(TemplateHeader);
