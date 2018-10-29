@@ -108,7 +108,7 @@ export default class Template extends React.Component{
                 </Animated.View>
 
                 <Animated.View style={[ styles.system_template_view_footer_content, animation_class ]}>
-                    <TemplateFooter />
+                    <TemplateFooter navigation={ this.props.navigation } />
                 </Animated.View>
 
             </View>
