@@ -12,7 +12,13 @@ export default class TemplateFooter extends React.Component{
 
     }/* Fim do escopo da função constructor do componente */
 
-    
+
+    __navigate_feed     = (()=>{   this.props.navigation.navigate('Feed');   });
+    __navigate_explorer = (()=>{   this.props.navigation.navigate('Explorer');   });
+    __navigate_cart     = (()=>{   this.props.navigation.navigate('Carrinho');   });
+    __navigate_chat     = (()=>{   this.props.navigation.navigate('Explorer');   });
+    __navigate_perfil   = (()=>{   this.props.navigation.navigate('Perfil');   });
+
     
     /* Função utilizada para renderizar o componente de footer */
     render = (()=>{
@@ -22,19 +28,25 @@ export default class TemplateFooter extends React.Component{
                 <View style={[ styles.template_footer_content ]}>
 
                     <View style={[ styles.template_footer_action ]}>
-                        <TouchableOpacity style={[ styles.template_footer_action_touchable ]}>
+                        <TouchableOpacity
+                            onPress={() => { this.__navigate_feed() }}
+                            style={[ styles.template_footer_action_touchable ]}>
                             <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/feed.png") }/>
                         </TouchableOpacity>
                     </View>
 
                     <View style={[ styles.template_footer_action ]}>
-                        <TouchableOpacity style={[ styles.template_footer_action_touchable ]}>
+                        <TouchableOpacity
+                            onPress={() => { this.__navigate_explorer() }}
+                            style={[ styles.template_footer_action_touchable ]}>
                             <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/explorer.png") }/>
                         </TouchableOpacity>
                     </View>
 
                     <View style={[ styles.template_footer_action ]}>
-                        <TouchableOpacity style={[ styles.template_footer_action_touchable ]}>
+                        <TouchableOpacity
+                            onPress={() => { this.__navigate_cart() }}
+                            style={[ styles.template_footer_action_touchable ]}>
                             <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/cart.png") }/>
                         </TouchableOpacity>
                     </View>
@@ -46,7 +58,9 @@ export default class TemplateFooter extends React.Component{
                     </View>
 
                     <View style={[ styles.template_footer_action ]}>
-                        <TouchableOpacity style={[ styles.template_footer_action_touchable ]}>
+                        <TouchableOpacity
+                            onPress={() => { this.__navigate_perfil() }}
+                            style={[ styles.template_footer_action_touchable ]}>
                             <View style={[ styles.template_footer_action_profile ]}>
                                 <Image style={[ styles.template_footer_action_profile_image ]} source={{ uri: 'https://i.ebayimg.com/images/g/LJYAAOSwjXRXbI-N/s-l300.jpg' }}/>
                             </View>
