@@ -63,7 +63,7 @@ class TemplateHeader extends React.Component {
         });
     };
 
-    // pega o UID do usu. setado no storage e retorna os campos(empresa_id_fk,name,name_profile,notificationsTokens,online) do Firestore.
+    // Pega o UID do usuario, seta no storage e retorna os campos( empresa_id_fk, name, name_profile, notificationsTokens, online ) do Firestore.
     loadDadosUser = async (paramsFire) => {
 
         const user_logged = await AsyncStorage.getItem('@houpa:userlogged');
@@ -127,45 +127,14 @@ class TemplateHeader extends React.Component {
         });
     };
 
-    // função que le a notificação clicada e seta no sql
-    readActiviteSql = async (idNotificacao) => {
-
-        const restkey = await AsyncStorage.getItem('restkey');
-
-        this.state.params.dados = idNotificacao;
-        this.setState({
-            params: this.state.params
-        });
-        NotificacoesService.lerAtividadesSql(this.state.params, restkey).then((res) => {
-        }, (error) => {
-
-            Alert.alert(
-                'Atividade não lida',
-                'Ops! Pareceu que ocorreu um erro verifique sua conexão ' + error,
-                [
-                    {text: 'OK'},
-                ],
-                {cancelable: false}
-            );
-        });
-    };
-
     // função que le as notificações e seta no firestore
     readNotificFirestore() {
-        let user_id = this.state.user;
 
-        console.log('HOUPA!: ', user_id);
+        let user_id = this.state.paramsFire;
 
         if (user_id == '' || user_id == undefined) {
         } else {
-            NotificacoesService.lerAtividadesFirestore(user_id.empresa_id_fk);
-        }
-    };
-
-    // função que passa a notificação clicada e passa pra função de ler no sql
-    actionTo(notificacao){
-        if (!notificacao == '') {
-            this.readActiviteSql(notificacao.notificacao_id);
+            NotificacoesService.lerAtividadesFirestore(user_id.dados.empresa_id_fk);
         }
     };
 
