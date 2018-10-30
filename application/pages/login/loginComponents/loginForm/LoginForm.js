@@ -130,8 +130,6 @@ export default class LoginForm extends React.Component {
 
             LoginService.signin(this.state.user).then((response) => {
 
-                console.log(response.data);
-
                 // Verifica o tipo de erro para colocar os avisos
                 if (response.data.type_error === "email") {
                     this.state.error.user_login = 'Usuário ou e-mail não encontrado';
@@ -211,8 +209,6 @@ export default class LoginForm extends React.Component {
                     });
                 }
                 else if(response.data.type_error !== 'conta_desativada') {
-
-                    console.log(response);
 
                     Alert.alert(
                         'Erro',

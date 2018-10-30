@@ -177,7 +177,7 @@ export default class EditarPerfil extends React.Component{
             this.setState({autoList: []});
         }
     })
-    __add_end = ((end)=>{
+    __add_end = (( end ) => {
 
             this.state.Enderecos.push(end);
             this.state.EnderecosDig =  {
@@ -212,12 +212,13 @@ export default class EditarPerfil extends React.Component{
     })
 
     __start_edit = ((id)=>{
-        this.state.EnderecosDig = end;
+        this.state.EnderecosDig = this.state.Enderecos[id];
         this.setState({EnderecosDig: this.state.EnderecosDig})
         this.setState({modalVisibleEndEdit: {
                 visible: true,
                 id: id
             }})
+        this.setState({modalVisibleEnd: true});
     })
 
     __delete_categoria = ((id)=>{
@@ -632,41 +633,48 @@ export default class EditarPerfil extends React.Component{
                                            label={'CEP'}
                                            borderColor={'transparent'}
                                            onChangeText={(text) => {this.state.EnderecosDig.cep = text}}
+                                           value={this.state.EnderecosDig.cep}
                                     />
                                     <Hoshi style={style.contentPerfilLoja}
                                            label={'Rua'}
                                            borderColor={'transparent'}
                                            onChangeText={(text) => {this.state.EnderecosDig.rua = text}}
+                                           value={this.state.EnderecosDig.rua}
 
                                     />
                                     <Hoshi style={style.contentPerfilLoja}
                                              label={'Número'}
                                              borderColor={'transparent'}
                                            onChangeText={(text) => {this.state.EnderecosDig.numnero = text}}
+                                           value={this.state.EnderecosDig.numnero}
 
                                     />
                                     <Hoshi style={style.contentPerfilLoja}
                                            label={'Complemento'}
                                            borderColor={'transparent'}
                                            onChangeText={(text) => {this.state.EnderecosDig.complemento = text}}
+                                           value={this.state.EnderecosDig.complemento}
 
                                     />
                                     <Hoshi style={style.contentPerfilLoja}
                                            label={'Bairro'}
                                            borderColor={'transparent'}
                                            onChangeText={(text) => {this.state.EnderecosDig.bairro = text}}
+                                           value={this.state.EnderecosDig.bairro}
 
                                     />
                                     <Hoshi style={style.contentPerfilLoja}
                                          label={'Cidade'}
                                          borderColor={'transparent'}
                                            onChangeText={(text) => {this.state.EnderecosDig.cidade = text}}
+                                           value={this.state.EnderecosDig.cidade}
 
                                     />
                                     <Hoshi style={style.contentPerfilLoja}
                                          label={'Estado'}
                                          borderColor={'transparent'}
                                            onChangeText={(text) => {this.state.EnderecosDig.estado = text}}
+                                           value={this.state.EnderecosDig.estado}
 
                                     />
 
@@ -683,12 +691,13 @@ export default class EditarPerfil extends React.Component{
 
                                     <TouchableOpacity activeOpacity={0.6} style={style.containerBtnSalvar} onPress={()=> {
                                         if(this.state.modalVisibleEndEdit.visible === false){
-                                            this.setState({modalVisibleEnd: false});
                                             this.__add_end(this.state.EnderecosDig);
+
                                         }else{
-                                            this.setState({modalVisibleEnd: false});
                                             this.__add_end_edit(this.state.EnderecosDig);
                                         }
+                                        this.setState({modalVisibleEnd: false});
+
                                     }}>
                                         <Text style={style.textBtnSalvar}>
                                             CONCLUIR
@@ -712,7 +721,7 @@ export default class EditarPerfil extends React.Component{
                                         <Text>{end.bairro}, {end.cep}</Text>
                                         <Text>{end.cidade} {end.estado} </Text>
                                     </View>
-                                    <TouchableOpacity onPress={this.__start_edit(i)}>
+                                    <TouchableOpacity onPress={()=> {this.__start_edit(i)}}>
                                         <Image style={style.imgView}
                                                source={require('../../../assets/imgs/png/icons/pencil-black.png')}/>
                                     </TouchableOpacity>
@@ -758,6 +767,17 @@ export default class EditarPerfil extends React.Component{
                         }
 
                     </TouchableOpacity>
+
+                    {this.state.TelefoneCont &&
+
+                    <Hoshi style={style.contentPerfilLoja}
+                           label={'Telefone para contato'}
+                           borderColor={'transparent'}
+                           onChangeText={(text) => {}}
+
+                    />
+
+                    }
                 </View>
             </View>
 

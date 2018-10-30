@@ -37,202 +37,51 @@ export default class Notificacoes extends React.Component {
         this.setState({ loading: true });
         setTimeout(() => {
 
-            // this.loadActivities();
+            this.loadActivities();
 
-            this.setState({
-                // notificacoes: [{
-                //     key: '1',
-                //
-                //     novas: [
-                //      {
-                //         id: 1,
-                //         tipo: 1,
-                //         status: 1,
-                //         nameProfile: 'Miia',
-                //         imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //         descricao: 'enviou uma solicitação de conexão',
-                //     },
-                //     {
-                //         id: 2,
-                //         tipo: 2,
-                //         status: 0,
-                //         nameProfile: 'Miia',
-                //         imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //         descricao: 'Confira nossa nova coleção',
-                //     },
-                //     {
-                //         id: 3,
-                //         tipo: 3,
-                //         status: 1,
-                //         nameProfile: 'Miia',
-                //         imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //         descricao: 'Lançamento Saia Linda',
-                //     }],
-                //
-                //      passadas: [
-                //       {
-                //         id: 1,
-                //         tipo: 3,
-                //         status: 0,
-                //         nameProfile: 'Miia',
-                //         imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //         descricao: 'Lançamento Vestido Lindo',
-                //         conexaoStatus: 0,
-                //        },
-                //        {
-                //         id: 2,
-                //         tipo: 4,
-                //         status: 0,
-                //         nameProfile: 'Miia',
-                //         imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //         descricao: 'Seu pedido está separado',
-                //        },{
-                //              id: 3,
-                //              tipo: 3,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Lançamento Vestido Lindo',
-                //              conexaoStatus: 0,
-                //          },
-                //          {
-                //              id: 4,
-                //              tipo: 4,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Seu pedido está separado',
-                //          },{
-                //              id: 5,
-                //              tipo: 3,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Lançamento Vestido Lindo',
-                //              conexaoStatus: 0,
-                //          },
-                //          {
-                //              id: 6,
-                //              tipo: 4,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Seu pedido está separado',
-                //          },{
-                //              id: 7,
-                //              tipo: 3,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Lançamento Vestido Lindo',
-                //              conexaoStatus: 0,
-                //          },
-                //          {
-                //              id: 8,
-                //              tipo: 4,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Seu pedido está separado',
-                //          },{
-                //              id: 9,
-                //              tipo: 3,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Lançamento Vestido Lindo',
-                //              conexaoStatus: 0,
-                //          },
-                //          {
-                //              id: 10,
-                //              tipo: 4,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Seu pedido está separado',
-                //          },{
-                //              id: 11,
-                //              tipo: 3,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Lançamento Vestido Lindo',
-                //              conexaoStatus: 0,
-                //          },
-                //          {
-                //              id: 12,
-                //              tipo: 4,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Seu pedido está separado',
-                //          },{
-                //              id: 13,
-                //              tipo: 3,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Lançamento Vestido Lindo',
-                //              conexaoStatus: 0,
-                //          },
-                //          {
-                //              id: 14,
-                //              tipo: 4,
-                //              status: 0,
-                //              nameProfile: 'Miia',
-                //              imgProfile: 'https://static.wixstatic.com/media/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.jpg/v1/fill/w_235,h_235,al_c,q_80,usm_0.66_1.00_0.01/858f04_422bc44d1da74bbfae06457614096fc8~mv2_d_1240_1240_s_2.webp',
-                //              descricao: 'Seu pedido está separado',
-                //          },]
-                //     },
-                //
-                // ],
-                loading: false,
-            });
-
-        }, 500);
+        }, 1500);
     }
 
     loadActivities = async () =>  {
 
         const restkey = await AsyncStorage.getItem('restkey');
-
         let params = {dados: 'OK'};
 
         NotificacoesService.getAtividades(params, restkey).then((res) => {
 
-            console.log(res);
-
-            // if (!res.data.atividades.length == 0) {
-            //     this.state.notificacoes = res.data.atividades;
-            //     this.state.badgeNovas = res.data.badge;
-            //     this.setState({
-            //         notificacoes: this.state.notificacoes,
-            //         badgeNovas: this.state.badgeNovas
-            //     });
-            //
-            //     console.log(this.state.notificacoes);
-            // }else{
-            //     console.log('AQUI');
-            // }
+            if (!res.data.atividades.length == 0) {
+                this.state.notificacoes = res.data.atividades;
+                this.state.badgeNovas = res.data.badge;
+                this.setState({
+                    notificacoes: this.state.notificacoes,
+                    badgeNovas: this.state.badgeNovas,
+                    loading: false,
+                });
+            }else{
+                console.log('AQUI');
+            }
         }, (error) => {
+
+            this.setState({
+                loading: false,
+            });
 
             Alert.alert(
                 'Atividades não encontradas',
-                'Ops! Parece que ocorreu um erro. Verifique sua conexão.',
+                'Ops! Parece que ocorreu um erro. Verifique sua conexão. ' + error,
                 [
                     {text: 'OK'},
                 ],
                 {cancelable: false}
             );
         });
-
-    }
+    };
 
     // Faz o refresh da pagina
     _onRefresh = () => {
         this.setState({refreshing: true});
         setTimeout(() => {
-            this.componentDidMount();
+            this.loadActivities();
             this.setState({refreshing: false});
         }, 500);
     };
@@ -257,13 +106,7 @@ export default class Notificacoes extends React.Component {
                     />
                 }>
 
-                <TouchableOpacity onPress={() => this.loadActivities()}>
-                    <Text>
-                        AQUI
-                    </Text>
-                </TouchableOpacity>
-
-                {/*<ListNotificacoes notificacoes={this.state.notificacoes} />*/}
+                <ListNotificacoes notificacoes={this.state.notificacoes} />
 
             </ScrollView>
         );

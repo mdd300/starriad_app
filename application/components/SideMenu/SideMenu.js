@@ -300,7 +300,7 @@ class SideMenu extends React.Component {
         firebase.firestore().collection('users').doc(uid).update(this._defineProperty({}, 'notificationTokens.' + messagingToken, firebase.firestore.FieldValue.delete()));
         // firebase.messaging().deleteToken(messagingToken);
         firebase.auth().signOut();
-        // AsyncStorage.clear();
+        AsyncStorage.clear();
 
         LoginService.signout().then(() => {
             this.signout();

@@ -3,14 +3,8 @@
  */
 export const api_list = {
     development: {
-        localhost: 'http://localhost/ws_houpa/ws',
-        devserver: 'http://192.168.0.251/fashon/qrgo/',
-        ec2: 'http://dev.ws.houpa.com.br/ws/'
+        localhost: 'http://192.168.15.30/ws_houpa/ws/',
+        ec2: 'http://dev.ws.houpa.com.br/ws/',
+        production: 'http://ws.houpa.com.br/'
     },
-    testing: {
-        ec2: 'http://dev.qrgo.com.br/qrgo/'
-    },
-    production: {
-        ec2: 'https://www.qrgo.com.br/qrgo/'
-    }
 };
