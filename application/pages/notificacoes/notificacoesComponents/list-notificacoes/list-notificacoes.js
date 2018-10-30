@@ -23,4 +23,5 @@ const ListNotificacoes = props => {
     );
 };
 
+
 export default ListNotificacoes;
