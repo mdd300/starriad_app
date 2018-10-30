@@ -3,6 +3,7 @@ import { View, ScrollView, Animated } from "react-native";
 import styles from "./template-styles";
 import TemplateHeader from "./templateComponents/TemplateHeader/TemplateHeader";
 import TemplateFooter from "./templateComponents/TemplateFooter/TemplateFooter";
+import { Font } from "expo";
 
 export default class Template extends React.Component{
 
@@ -20,12 +21,28 @@ export default class Template extends React.Component{
 
             menu_opened: false,
             settings_opened: false,
+
+            loadElements: false,
         };
 
     }/* Fim da função construtora do componente */
     
     /* Função trigger de quando o componente for montado */
-    componentDidMount = (()=>{})
+    async componentDidMount() {
+
+        await Font.loadAsync({
+            'open-sans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
+            'open-sans-light': require('../../assets/fonts/OpenSans-Light.ttf'),
+            'open-sans-regular': require('../../assets/fonts/OpenSans-Regular.ttf'),
+
+            'montserrat-black': require('../../assets/fonts/Montserrat-Black.ttf'),
+            'montserrat-light': require('../../assets/fonts/Montserrat-Light.ttf'),
+            'montserrat-medium': require('../../assets/fonts/Montserrat-Medium.ttf'),
+            'montserrat-regular': require('../../assets/fonts/Montserrat-Regular.ttf'),
+        });
+
+        this.setState({ loadElements: true });
+    }
 
 
     /** Função utilizada para animar o content de acordo com o status de abertura do menu de settings */
@@ -96,23 +113,27 @@ export default class Template extends React.Component{
 
         let animation_class = ( this.state.menu_opened ? animation_menu : animation_settings );
 
-        return(
-            <View style={[ styles.system_template_view ]}>
+        if( this.state.loadElements ){
+            return(
+                <View style={[ styles.system_template_view ]}>
 
-                <TemplateHeader
-                    onSettings={ (( state )=>{ this.__switch_settings_menu( state ) }) }
-                    onMenu={ (( state )=>{ this.__switch_menu( state ) }) }/>
+                    <TemplateHeader
+                        onSettings={ (( state )=>{ this.__switch_settings_menu( state ) }) }
+                        onMenu={ (( state )=>{ this.__switch_menu( state ) }) }/>
 
-                <Animated.View style={[ styles.system_template_view_viewport, animation_class ]}>
-                    { this.__render_content() }
-                </Animated.View>
+                    <Animated.View style={[ styles.system_template_view_viewport, animation_class ]}>
+                        { this.__render_content() }
+                    </Animated.View>
 
-                <Animated.View style={[ styles.system_template_view_footer_content, animation_class ]}>
-                    <TemplateFooter navigation={ this.props.navigation } />
-                </Animated.View>
+                    <Animated.View style={[ styles.system_template_view_footer_content, animation_class ]}>
+                        <TemplateFooter navigation={ this.props.navigation } />
+                    </Animated.View>
 
-            </View>
-        );
+                </View>
+            );
+        }else{
+            return null;
+        }
 
     });/* Fim do escopo da função render do componente */
 
