@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     template_header_settings_head_title: {
         fontWeight: 'bold',
         fontSize: 15,
+        fontFamily: 'montserrat-medium'
     },
     template_header_settings_menu: {
         width:' 100%',
@@ -133,6 +134,7 @@ const styles = StyleSheet.create({
     template_header_settings_menu_setting_text: {
         fontSize: 15,
         color: '#636563',
+        fontFamily: 'montserrat-regular'
     },
 
     template_header_menu: {
@@ -225,7 +227,8 @@ const styles = StyleSheet.create({
     },
     template_header_submenu_option_label: {
         fontSize: 15,
-        color: '#636563'
+        color: '#636563',
+        fontFamily: 'montserrat-regular'
     },
 
 
@@ -240,6 +243,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#636563',
         flex: 1,
+        fontFamily: 'montserrat-regular'
     },
     template_header_menu_option_icon: {
         width: 18,
