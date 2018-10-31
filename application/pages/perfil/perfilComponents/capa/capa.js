@@ -44,23 +44,23 @@ const Capa = props => {
                 <View style={styles.menuLateralIcons}>
 
                     <TouchableOpacity activeOpacity={0.6} style={styles.containerIcons}>
-                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/imagem-white.png') } />
+                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/imagem.png') } />
                     </TouchableOpacity>
 
                     <TouchableOpacity activeOpacity={0.6} style={styles.containerIcons}>
-                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/chat-white.png') } />
+                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/chat-fill.png') } />
                     </TouchableOpacity>
 
                     <TouchableOpacity activeOpacity={0.6} style={styles.containerIcons}>
-                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/share-white.png') } />
+                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/share.png') } />
                     </TouchableOpacity>
 
                     <TouchableOpacity activeOpacity={0.6} style={styles.containerIcons}>
-                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/localizacao-white.png') } />
+                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/localizacao.png') } />
                     </TouchableOpacity>
 
                     <TouchableOpacity activeOpacity={0.6} style={styles.containerIcons}>
-                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/telefone-white.png') } />
+                        <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/telefone.png') } />
                     </TouchableOpacity>
 
                 </View>

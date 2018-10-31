@@ -149,6 +149,7 @@ const style = StyleSheet.create({
         width: 15,
         height: 15,
         margin: 5,
+        tintColor: '#fff'
     },
 
     containerAuto: {

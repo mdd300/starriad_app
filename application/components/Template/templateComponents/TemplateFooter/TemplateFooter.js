@@ -53,7 +53,7 @@ export default class TemplateFooter extends React.Component{
 
                     <View style={[ styles.template_footer_action ]}>
                         <TouchableOpacity style={[ styles.template_footer_action_touchable ]}>
-                            <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/chat-stroke.png") }/>
+                            <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/chat.png") }/>
                         </TouchableOpacity>
                     </View>
 

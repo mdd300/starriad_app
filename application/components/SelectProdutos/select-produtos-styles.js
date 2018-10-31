@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
         width: 17,
         height: 17,
         aspectRatio: 1,
-        marginLeft: 5
+        marginLeft: 5,
+        tintColor: '#fff'
     },
 
 

@@ -36,7 +36,7 @@ export default class ImageThumb extends React.Component{
             return (
                 <View style={[ styles.selected_thumb_image ]}>
                     <View style={[ styles.selected_thumb_image_badge]} >
-                        <Image style={{ width: 8, height: 8 }} source={ require("../../../assets/imgs/png/icons/check-white.png") }/>
+                        <Image style={{ width: 8, height: 8, tintColor: '#fff' }} source={ require("../../../assets/imgs/png/icons/check.png") }/>
                     </View>
                 </View>
             );

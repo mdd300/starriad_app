@@ -34,6 +34,7 @@ export const style = StyleSheet.create({
         height: 35,
         aspectRatio: 1,
         marginBottom: 8,
+        tintColor: '#fff'
     },
 
     header_menu_left_status: {
@@ -129,7 +130,8 @@ export const style = StyleSheet.create({
         width: 22,
         height: 22,
         aspectRatio: 1,
-        marginLeft: 15
+        marginLeft: 15,
+        tintColor: '#fff'
     },
     body_menu_text: {
         color: '#fff',

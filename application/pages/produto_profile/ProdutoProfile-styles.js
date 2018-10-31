@@ -78,6 +78,7 @@ export const style = StyleSheet.create({
     imageBtn: {
         width: 16,
         height: 16,
+        tintColor: '#fff'
     },
 
 });

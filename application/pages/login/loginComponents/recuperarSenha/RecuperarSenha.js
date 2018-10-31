@@ -3,14 +3,9 @@ import {
     View,
     Text,
     TouchableOpacity,
-    Dimensions,
     TextInput,
-    ImageBackground,
-    Image,
     Alert,
     ActivityIndicator,
-    AsyncStorage,
-    Animated
 } from 'react-native';
 import {styleCadastro} from '../cadastro/Cadastro-styles'
 import {style} from '../../../slides/SlideScreen-styles';

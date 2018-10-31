@@ -112,7 +112,7 @@ export default class ProductThumb extends React.Component{
 
         return(
             <Animated.View style={[ styles.product_thumb_selected_badge, style ]}>
-                <Image style={[ styles.product_thumb_select_badge_ico ]} source={ require("../../../assets/imgs/png/icons/check-black.png") } />
+                <Image style={[ styles.product_thumb_select_badge_ico ]} source={ require("../../../assets/imgs/png/icons/check.png") } />
             </Animated.View>
         )
 

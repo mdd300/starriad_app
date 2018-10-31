@@ -257,7 +257,7 @@ export default class ListVariantesProdutos extends React.Component {
                                 <View style={styles.containerIconLixeira}>
                                     <TouchableOpacity style={styles.touchIconLixeira} onPress={() => this._deleteVariante(index)}>
                                         <Image resizeMode={'contain'} style={styles.icon}
-                                               source={require('../../../../../../application/assets/imgs/png/icons/lixeira.png')}/>
+                                               source={require('../../../../../../application/assets/imgs/png/icons/trash.png')}/>
                                     </TouchableOpacity>
                                 </View>
 
@@ -270,7 +270,7 @@ export default class ListVariantesProdutos extends React.Component {
                                                 { transform: [{rotateZ: icon_rotate}] }
                                             : null
                                         ]}
-                                            source={require('../../../../../../application/assets/imgs/png/icons/seta-down.png')} />
+                                            source={require('../../../../../../application/assets/imgs/png/icons/caret-down.png')} />
 
                                     </TouchableOpacity>
                                 </View>

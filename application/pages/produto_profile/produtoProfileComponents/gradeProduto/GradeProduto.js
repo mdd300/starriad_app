@@ -41,7 +41,7 @@ export default class GradeProduto extends React.Component {
                             <Animated.Image
                                 style={[style.iconContainer, ( this.state.indexActived === index ? {transform: [{rotateZ: icon_rotate}]} : null)
                                 ]} resizeMode={'contain'}
-                                source={require('../../../../assets/imgs/png/icons/seta-down.png')}/>
+                                source={require('../../../../assets/imgs/png/icons/caret-down.png')}/>
 
                         </View>
                     </TouchableOpacity>

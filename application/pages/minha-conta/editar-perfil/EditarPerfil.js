@@ -414,8 +414,8 @@ export default class EditarPerfil extends React.Component{
                                                             {item.title}
                                                         </Text>
                                                         {(this.state.selectedCat.findIndex(x => x.id == item.id) >= 0) &&
-                                                            <Image style={{width: 20, height: 20, marginRight: 15, position:"absolute", right: 0, marginTop: 15 }}
-                                                                   source={require('../../../assets/imgs/png/icons/check-roxo.png')}/>
+                                                            <Image style={{width: 20, tintColor: '#7f1cef', height: 20, marginRight: 15, position:"absolute", right: 0, marginTop: 15 }}
+                                                                   source={require('../../../assets/imgs/png/icons/check.png')}/>
                                                         }
                                                     </TouchableOpacity>
                                                 </View>
@@ -584,7 +584,7 @@ export default class EditarPerfil extends React.Component{
                             <TouchableOpacity style={{marginBottom: 15,marginTop:15, flex: 1, alignContent: "center", justifyContent: "center", width:"100%"}} onPress={ ()=> {this.setState({imagePickerAlbum: true});} }>
                                 <ImageBackground
                                     style={{width: 70, height: 70, alignSelf: "center"}}
-                                    source={require('../../../assets/imgs/png/icons/plus.png')}
+                                    source={require('../../../assets/imgs/png/icons/add-round.png')}
                                     onPress={ ()=> {
 
                                         this.setState({imagePickerAlbum: true});
@@ -722,8 +722,8 @@ export default class EditarPerfil extends React.Component{
                                         <Text>{end.cidade} {end.estado} </Text>
                                     </View>
                                     <TouchableOpacity onPress={()=> {this.__start_edit(i)}}>
-                                        <Image style={style.imgView}
-                                               source={require('../../../assets/imgs/png/icons/pencil-black.png')}/>
+                                        <Image style={[ style.imgView, { tintColor: '#000' }]}
+                                               source={require('../../../assets/imgs/png/icons/pencil.png')}/>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={()=>{this.__delete_end(i)}}>
                                         <Text style={{fontSize: 20}}>X</Text>
@@ -738,7 +738,7 @@ export default class EditarPerfil extends React.Component{
                         <TouchableOpacity style={{marginBottom: 15,marginTop:15, flex: 1, alignContent: "center", justifyContent: "center", width:"100%"}} onPress={ ()=> { this.setState({modalVisibleEnd: true}) }}>
                             <ImageBackground
                                 style={{width: 70, height: 70, alignSelf: "center"}}
-                                source={require('../../../assets/imgs/png/icons/plus.png')}
+                                source={require('../../../assets/imgs/png/icons/add-round.png')}
                                 onPress={ ()=> {
 
                                     this.setState({imagePickerAlbum: true});

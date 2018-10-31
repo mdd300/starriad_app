@@ -2,11 +2,10 @@ import React from 'react';
 import {
     ScrollView,
     View,
-    Text,
     TouchableOpacity,
+    Image,
     ImageBackground,
     Dimensions,
-    TextInput,
     KeyboardAvoidingView
 } from 'react-native';
 import {styleLogin} from './Login-styles';
@@ -63,12 +62,12 @@ export default class Login extends React.Component {
                         <TouchableOpacity onPress={() => {
                             this.back()
                         }}>
-                            <ImageBackground resizeMode={'contain'} style={styleLogin.imgSeta}
-                                             source={require('../../assets/imgs/png/icons/caret-left-white.png')}/>
+                            <Image resizeMode={'contain'} style={styleLogin.imgSeta}
+                                             source={require('../../assets/imgs/png/icons/caret-left.png')}/>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <ImageBackground resizeMode={'contain'} style={styleLogin.imgLogo}
+                        <Image resizeMode={'contain'} style={styleLogin.imgLogo}
                                          source={require('../../assets/imgs/png/logo/houpa-solid-white.png')}/>
                     </View>
 

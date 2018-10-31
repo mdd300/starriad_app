@@ -23,7 +23,7 @@ export default class PostFooter extends React.Component {
                 <View style={[ styles.post_footer_actions ]}>
                     <View style={[ styles.post_footer_action ]}>
                         <TouchableOpacity style={[ styles.post_footer_action_touchable ]}>
-                            <Image style={[ styles.post_footer_action_icon ]} source={ require('../../../../assets/imgs/png/icons/heart.png') }/>
+                            <Image style={[ styles.post_footer_action_icon ]} source={ require('../../../../assets/imgs/png/icons/favorite.png') }/>
                         </TouchableOpacity>
                     </View>
 

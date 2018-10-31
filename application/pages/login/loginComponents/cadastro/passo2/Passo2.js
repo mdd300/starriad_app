@@ -5,8 +5,6 @@ import {
     TouchableOpacity,
     Dimensions,
     TextInput,
-    ImageBackground,
-    Animated,
     Alert,
     AsyncStorage, ActivityIndicator
 } from 'react-native';

@@ -39,6 +39,7 @@ export const styleLogin = StyleSheet.create({
         imgSeta: {
             width: 22,
             height: 22,
+            tintColor: '#fff'
         },
 
         setaContainer: {right: 100, top: 2},

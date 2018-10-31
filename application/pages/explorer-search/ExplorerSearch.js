@@ -32,7 +32,7 @@ export default class ExplorerSearch extends React.Component{
                         </View>
                         <View style={[ styles.explorer_search_action_content ]}>
                             <TouchableOpacity style={[ styles.explorer_search_action_touchable ]} activeOpacity={0.6}>
-                                <Image style={[ styles.explorer_search_action_icon ]} source={ require("../../assets/imgs/png/icons/search-white.png") }/>
+                                <Image style={[ styles.explorer_search_action_icon ]} source={ require("../../assets/imgs/png/icons/search.png") }/>
                             </TouchableOpacity>
                         </View>
                     </View>

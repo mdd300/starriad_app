@@ -62,6 +62,7 @@ export const styleCadastro = StyleSheet.create({
         marginTop: 3,
         width: 15,
         height: 15,
+        tintColor: '#fff',
         transform: [{
             rotateY: '180deg'
         }]
