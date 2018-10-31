@@ -4,7 +4,7 @@ import {ENVIRONMENT_CURRENT} from "../environments/current";
 /**
  * A api indicada
  */
-export const API_CURRENT = "ec2";
+export const API_CURRENT = "localhost";
 
 /**
  * A url da api indicada, baseada no ambiente atual
