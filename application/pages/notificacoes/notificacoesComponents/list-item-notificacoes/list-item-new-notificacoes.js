@@ -206,7 +206,11 @@ class ListItemNewNotificacoes extends React.Component {
                             }
 
                             <TouchableOpacity activeOpacity={0.8} style={styles.containerImagem}>
-                                <Image style={styles.imgPerfil} source={{ uri: atividade.img_url_big.medium }} />
+                                {
+                                    atividade.img_url_big.medium !== '' ?
+                                        <Image style={styles.imgPerfil} source={{uri: atividade.img_url_big.medium}}/> :
+                                        <Image style={styles.imgPerfil} source={{uri: 'https://client.whatz.me/img/default-user.png'}}/>
+                                }
                             </TouchableOpacity>
 
                             <Text style={styles.lineText}>
@@ -301,6 +305,14 @@ class ListItemNewNotificacoes extends React.Component {
                             { atividade.notificacao_tipo == 1
                             // || atividade.notificacao_tipo == 12
                             &&
+                            <TouchableOpacity onPress={() => this.actionTo(atividade)} activeOpacity={0.6} style={styles.btnConexoes}>
+                                <Text style={styles.labelBtnConexoes}>
+                                    VER POST
+                                </Text>
+                            </TouchableOpacity>
+                            }
+
+                            { atividade.notificacao_tipo == 12 &&
                             <TouchableOpacity onPress={() => this.actionTo(atividade)} activeOpacity={0.6} style={styles.btnConexoes}>
                                 <Text style={styles.labelBtnConexoes}>
                                     VER POST

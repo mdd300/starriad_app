@@ -4,6 +4,8 @@ import { withNavigation } from 'react-navigation';
 import styles from '../../Notificacoes-styles';
 import NotificacoesService from "../../../../services/notificacoes/notificacoes-service";
 import ConexoesService from "../../../../services/conexoes/conexoes-service";
+import AlertConexoes from "../../../../components/alertConexoes/alertConexoes";
+import SideMenu from "../../../../components/SideMenu/SideMenu";
 
 class ListItemLastNotificacoes extends React.Component {
 
@@ -11,9 +13,18 @@ class ListItemLastNotificacoes extends React.Component {
         super(props);
 
         this.state = {
-            params: {dados: 'OK'}
+            params: {dados: 'OK'},
+            opened_alert: false,
         };
     }
+
+    _openAlert = (() => {
+        this.setState({ opened_alert: true })
+    });
+
+    _closedAlert = ((  ) => {
+        this.setState({ opened_alert: false });
+    });
 
     componentDidMount() {
 
@@ -161,15 +172,19 @@ class ListItemLastNotificacoes extends React.Component {
             empresa.notificacao_ready = 1;
         }
 
-        Alert.alert(
-            'Excluir Conexão',
-            'Tem certeza que deseja excluir essa conexão?',
-            [
-                {text: 'NÃO', onPress: () => null},
-                {text: 'SIM', onPress: () => null},
-            ],
-            {cancelable: false}
-        );
+        this.setState({
+            opened_alert: true
+        })
+
+        // Alert.alert(
+        //     'Excluir Conexão',
+        //     'Tem certeza que deseja excluir essa conexão?',
+        //     [
+        //         {text: 'NÃO', onPress: () => null},
+        //         {text: 'SIM', onPress: () => null},
+        //     ],
+        //     {cancelable: false}
+        // );
     };
 
     toPerfil(){
@@ -203,7 +218,11 @@ class ListItemLastNotificacoes extends React.Component {
                             }
 
                             <TouchableOpacity activeOpacity={0.8} style={styles.containerImagem}>
-                                <Image style={styles.imgPerfil} source={{uri: atividade.img_url_big.medium}}/>
+                                {
+                                    atividade.img_url_big.medium !== '' ?
+                                    <Image style={styles.imgPerfil} source={{uri: atividade.img_url_big.medium}}/> :
+                                        <Image style={styles.imgPerfil} source={{uri: 'https://client.whatz.me/img/default-user.png'}}/>
+                                }
                             </TouchableOpacity>
 
                             <Text style={styles.lineText}>
@@ -305,8 +324,18 @@ class ListItemLastNotificacoes extends React.Component {
                             </TouchableOpacity>
                             }
 
+                            { atividade.notificacao_tipo == 12 &&
+                            <TouchableOpacity onPress={() => this.actionTo(atividade)} activeOpacity={0.6} style={styles.btnConexoes}>
+                                <Text style={styles.labelBtnConexoes}>
+                                    VER POST
+                                </Text>
+                            </TouchableOpacity>
+                            }
+
                         </View>
                     ))}
+
+                    <AlertConexoes opened={ this.state.opened_alert } onclose={ this._closedAlert } />
                 </View>
             );
         } else {
