@@ -22,9 +22,6 @@ const NotificacoesService = {
     },
 
     lerAtividadesFirestore(data) {
-
-        console.log('ESTAMOS AQUI: ', data);
-
         return firebase.firestore().collection('empresas').doc(data.toString()).set({ unreaded_notify: 0 }, { merge: true });
     },
 

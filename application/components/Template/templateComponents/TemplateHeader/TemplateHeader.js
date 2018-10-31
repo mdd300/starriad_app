@@ -49,27 +49,28 @@ class TemplateHeader extends React.Component {
             userLoggedGlobal: [],
             params: {dados: 'OK'}
         };
-
-        this.getUidUser();
-        this.loadDadosUser(this.state.paramsFire);
     };
 
-    // componentDidMount(){
-    //     this.getUidUser();
-    //     this.loadDadosUser(this.state.paramsFire);
-    // }
+    componentDidMount(){
+        console.log('AQUI');
+        this.getUidUser();
+        this.loadDadosUser(this.state.paramsFire);
+    }
 
-    getUidUser = async () =>{
+    getUidUser = async () => {
         this.state.uid_user =  await AsyncStorage.getItem('uid');
         this.setState({
             uid_user: this.state.uid_user
         });
+        console.log('UID USER: ', this.state.uid_user);
     };
 
     // Pega o UID do usuario, seta no storage e retorna os campos( empresa_id_fk, name, name_profile, notificationsTokens, online ) do Firestore.
     loadDadosUser = async (paramsFire) => {
 
         const user_logged = await AsyncStorage.getItem('@houpa:userlogged');
+
+        console.log('user_logged: ', user_logged);
 
         if (user_logged !== undefined && user_logged != null && user_logged !== '' && user_logged) {
 
@@ -78,6 +79,8 @@ class TemplateHeader extends React.Component {
             this.setState({
                 paramsFire: this.state.paramsFire
             });
+
+            console.log('LOAD DADOS USER: ', paramsFire);
 
             NotificacoesService.getDadosUser(paramsFire).then((res) => {
 
@@ -98,6 +101,8 @@ class TemplateHeader extends React.Component {
                     {cancelable: false}
                 );
             });
+        }else{
+            console.log('ELSE');
         }
     };
 
