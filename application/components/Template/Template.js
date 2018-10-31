@@ -4,6 +4,7 @@ import styles from "./template-styles";
 import TemplateHeader from "./templateComponents/TemplateHeader/TemplateHeader";
 import TemplateFooter from "./templateComponents/TemplateFooter/TemplateFooter";
 import { Font } from "expo";
+import Loader from "../Loader/Loader";
 
 export default class Template extends React.Component{
 
@@ -42,6 +43,7 @@ export default class Template extends React.Component{
         });
 
         this.setState({ loadElements: true });
+
     }
 
 
@@ -132,11 +134,18 @@ export default class Template extends React.Component{
                 </View>
             );
         }else{
-            return null;
+            return(
+                <Loader />
+            );
         }
 
     });/* Fim do escopo da função render do componente */
 
+
+    /** Função utilizada para renderizar a view de Loading do template */
+    __render_loading = (()=>{
+
+    });
 
     /** Função utilizada para renderizar o content da pagina de acordo com as props */
     __render_content = (() => {
