@@ -109,7 +109,8 @@ const CapaStyles = StyleSheet.create({
 
     icons: {
         width: '100%',
-        height: '100%'
+        height: '100%',
+        tintColor: '#fff'
     },
 
 });

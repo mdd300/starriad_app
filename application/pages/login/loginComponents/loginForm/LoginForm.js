@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Dimensions, TextInput, ImageBackground, Image, Alert, ActivityIndicator, AsyncStorage} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, Alert, ActivityIndicator, AsyncStorage} from 'react-native';
 import {styleCadastro} from '../cadastro/Cadastro-styles'
 import {style} from '../../../slides/SlideScreen-styles';
 import firebase from 'firebase';

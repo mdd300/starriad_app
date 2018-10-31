@@ -99,7 +99,7 @@ export default class SelectProdutos extends React.Component{
                                 <TouchableOpacity
                                     onPress={() => { this.__cancel_selection(); }}
                                     style={[ styles.select_products_header_back_touchable ]}>
-                                    <Image style={[ styles.select_products_header_back_ico ]} source={require("../../assets/imgs/png/icons/caret-left-white.png")} />
+                                    <Image style={[ styles.select_products_header_back_ico ]} source={require("../../assets/imgs/png/icons/caret-left.png")} />
                                 </TouchableOpacity>
                             </View>
                         </View>

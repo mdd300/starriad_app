@@ -76,7 +76,7 @@ class SystemHeader extends React.Component {
 
                         <TouchableOpacity style={[ styles.headerTouchableOpacity ]}>
                             <View style={[styles.headerActionContent]}>
-                                <Image source={require('../../assets/imgs/png/icons/chat.png')}
+                                <Image source={require('../../assets/imgs/png/icons/chat-2.png')}
                                        style={[{aspectRatio: 1, width: 25, height: 25}]}/>
                                 <HeaderBadge badgeValue="8"/>
                             </View>

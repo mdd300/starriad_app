@@ -164,7 +164,7 @@ class SideMenu extends React.Component {
                         ]}>
                             <TouchableOpacity onPress={this.toCarrinho}>
                                 <ImageBackground style={style.header_menu_left_image}
-                                                 source={require('../../assets/imgs/png/icons/bag-white.png')}>
+                                                 source={require('../../assets/imgs/png/icons/bag.png')}>
                                     <View style={style.header_menu_left_status}>
                                         <Text style={style.text_status}>8</Text>
                                     </View>
@@ -198,7 +198,7 @@ class SideMenu extends React.Component {
                         ]}>
                             <TouchableOpacity  onPress={ this._closeMenu }>
                                 <Image style={[ style.header_menu_left_image ]}
-                                       source={require('../../assets/imgs/png/icons/left-arrow-white.png')}/>
+                                       source={require('../../assets/imgs/png/icons/left-arrow.png')}/>
                             </TouchableOpacity>
                             <Text style={style.text_right}>Voltar</Text>
                         </Animated.View>
@@ -223,7 +223,7 @@ class SideMenu extends React.Component {
                             <TouchableOpacity style={style.body_menu} onPress={() => this.hideSubmenu(1)}>
                                 <View style={style.body_control_icon}>
                                     <Image style={style.body_menu_icon}
-                                           source={require('../../assets/imgs/png/icons/profile-white.png')}/>
+                                           source={require('../../assets/imgs/png/icons/profile.png')}/>
                                     <Text style={style.body_menu_text}>MINHA CONTA</Text>
                                 </View>
                                 <Image style={style.body_menu_down}
@@ -237,7 +237,7 @@ class SideMenu extends React.Component {
                             <TouchableOpacity style={style.body_menu}>
                                 <View style={style.body_control_icon}>
                                     <Image style={style.body_menu_icon}
-                                           source={require('../../assets/imgs/png/icons/configs-white.png')}/>
+                                           source={require('../../assets/imgs/png/icons/configs.png')}/>
                                     <Text style={style.body_menu_text}>CONFIGURAÇÕES</Text>
                                 </View>
                             </TouchableOpacity>
@@ -248,7 +248,7 @@ class SideMenu extends React.Component {
                             <TouchableOpacity style={style.body_menu} onPress={() => this.hideSubmenu(3)}>
                                 <View style={style.body_control_icon}>
                                     <Image style={style.body_menu_icon}
-                                           source={require('../../assets/imgs/png/icons/shop-white.png')}/>
+                                           source={require('../../assets/imgs/png/icons/shop.png')}/>
                                     <Text style={style.body_menu_text}>MEUS PEDIDOS</Text>
                                 </View>
                                 <Image style={style.body_menu_down}

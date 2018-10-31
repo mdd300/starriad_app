@@ -16,7 +16,7 @@ export default class HeaderProduto extends React.Component {
                     this.props.callBack();
                 }}>
                     <Image style={style.back} resizeMode={'contain'}
-                           source={require('../../../../assets/imgs/png/icons/caret-left-black.png')}/>
+                           source={require('../../../../assets/imgs/png/icons/caret-left.png')}/>
                 </TouchableOpacity>
 
                 <View style={{width: 130}}>

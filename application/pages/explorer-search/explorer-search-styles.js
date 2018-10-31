@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
     explorer_search_action_icon: {
         width: 22,
         height: 22,
-        aspectRatio: 1
+        aspectRatio: 1,
+        tintColor: '#fff'
     },
     /* End of header ( searcher ) styles */
 

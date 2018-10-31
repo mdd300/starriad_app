@@ -439,7 +439,7 @@ class TemplateHeader extends React.Component {
                                         <View style={[ styles.template_header_menu_option_icon ]}>
                                             <Image
                                                 style={[ styles.template_header_menu_option_ico, { transform: [{ rotate: (this.state.menu_brands ? '90deg' : '0deg' ) }] } ]}
-                                                source={ require('../../../../assets/imgs/png/icons/caret-right-black.png') }/>
+                                                source={ require('../../../../assets/imgs/png/icons/caret-right.png') }/>
                                         </View>
                                     </TouchableOpacity>
                                 </View>
@@ -465,7 +465,7 @@ class TemplateHeader extends React.Component {
                                         <View style={[ styles.template_header_menu_option_icon ]}>
                                             <Image
                                                 style={[ styles.template_header_menu_option_ico, { transform: [{ rotate: (this.state.menu_categories ? '90deg' : '0deg' ) }] } ]}
-                                                source={ require('../../../../assets/imgs/png/icons/caret-right-black.png') }/>
+                                                source={ require('../../../../assets/imgs/png/icons/caret-right.png') }/>
                                         </View>
                                     </TouchableOpacity>
                                 </View>
@@ -490,7 +490,7 @@ class TemplateHeader extends React.Component {
                                         <View style={[ styles.template_header_menu_option_icon ]}>
                                             <Image
                                                 style={[ styles.template_header_menu_option_ico, { transform: [{ rotate: (this.state.menu_region ? '90deg' : '0deg' ) }] } ]}
-                                                source={ require('../../../../assets/imgs/png/icons/caret-right-black.png') }/>
+                                                source={ require('../../../../assets/imgs/png/icons/caret-right.png') }/>
                                         </View>
                                     </TouchableOpacity>
                                 </View>

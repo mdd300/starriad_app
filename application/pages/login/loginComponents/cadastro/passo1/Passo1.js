@@ -5,9 +5,8 @@ import {
     TouchableOpacity,
     Dimensions,
     TextInput,
-    ImageBackground,
+    Image,
     Alert,
-    ScrollView,
     Animated,
     ActivityIndicator
 } from 'react-native';
@@ -151,8 +150,8 @@ export default class Passo1 extends React.Component {
                         { !this.state.load.cnpj &&
                             <View style={[style.btnPadrao, style.btnEntrar]}>
                                 <Text style={[style.textBtn, styleCadastro.text2]}>Buscar</Text>
-                                <ImageBackground resizeMode={'contain'} style={styleCadastro.iconBtn}
-                                    source={require('../../../../../assets/imgs/png/icons/caret-left-white.png')}/>
+                                <Image resizeMode={'contain'} style={styleCadastro.iconBtn}
+                                    source={require('../../../../../assets/imgs/png/icons/caret-left.png')}/>
                             </View>
                         }
 
@@ -273,8 +272,8 @@ export default class Passo1 extends React.Component {
                         }}>
                             <View style={[style.btnPadrao, style.btnEntrar]}>
                                 <Text style={[style.textBtn, styleCadastro.text2]}>Avançar</Text>
-                                <ImageBackground resizeMode={'contain'} style={styleCadastro.iconBtn}
-                                                 source={require('../../../../../assets/imgs/png/icons/caret-left-white.png')}/>
+                                <Image resizeMode={'contain'} style={styleCadastro.iconBtn}
+                                                 source={require('../../../../../assets/imgs/png/icons/caret-left.png')}/>
                             </View>
                         </TouchableOpacity>
                     </View>

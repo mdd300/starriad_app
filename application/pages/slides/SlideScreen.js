@@ -79,8 +79,6 @@ export default class SlideScreen extends React.Component {
                         <LinearGradient style={[style.header]}
                                         colors={['#000', 'rgba(0, 0, 0, 0)']}
                                         locations={[0, 0.5]}>
-                            {/*<Image resizeMode={'contain'} style={style.imgSeta}*/}
-                            {/*source={require('../../assets/imgs/png/icons/caret-left-white.png')}/>*/}
                             <Image resizeMode={'contain'} style={style.imgLogo}
                                    source={require('../../assets/imgs/png/logo/houpa-solid-white.png')}/>
                         </LinearGradient>

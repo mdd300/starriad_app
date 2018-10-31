@@ -58,14 +58,14 @@ export default class ProdutoProfile extends React.Component {
                                 <TouchableOpacity>
                                     <Image style={style.imageContainer}
                                            resizeMode={'contain'}
-                                           source={require('../../assets/imgs/png/icons/talk.png')}/>
+                                           source={require('../../assets/imgs/png/icons/chat.png')}/>
                                 </TouchableOpacity>
                             </View>
                             <View>
                                 <TouchableOpacity>
                                     <Image style={style.imageContainer}
                                            resizeMode={'contain'}
-                                           source={require('../../assets/imgs/png/icons/dots-menu.png')}/>
+                                           source={require('../../assets/imgs/png/icons/dots-vertical.png')}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -92,7 +92,7 @@ export default class ProdutoProfile extends React.Component {
                                 <View style={style.btnCarrinhno}>
                                     <Image style={style.imageBtn}
                                            resizeMode={'contain'}
-                                           source={require('../../assets/imgs/png/icons/kart.png')}/>
+                                           source={require('../../assets/imgs/png/icons/cart.png')}/>
                                 <Text style={style.textBtn}>Adicionar ao Carrinho</Text>
                                 </View>
 

@@ -47,7 +47,7 @@ export default class PostHeader extends React.Component{
                     </View>
                     <Animated.View style={[ styles.header_actions_content, scale_inn ]}>
                         <TouchableOpacity  hitSlop={{ top: 10, right: 10, bottom: 10, left: 15 }} style={[ styles.header_actions_touchable ]}>
-                            <Image resizeMode="cover" style={[ styles.header_actions_image ]} source={ require("../../../../assets/imgs/png/icons/dots-menu.png") }></Image>
+                            <Image resizeMode="cover" style={[ styles.header_actions_image ]} source={ require("../../../../assets/imgs/png/icons/dots-vertical.png") }></Image>
                         </TouchableOpacity >
                     </Animated.View>
 

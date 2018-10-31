@@ -33,7 +33,7 @@ export default class PostComment extends React.Component{
                     </View>
                     <View style={[ styles.post_comment_actions ]}>
                         <TouchableOpacity style={[ styles.post_comment_touchable_opacity ]}>
-                            <Image style={[ styles.post_comment_actions_icon ]} source={ require("../../../../assets/imgs/png/icons/dots-menu.png") }></Image>
+                            <Image style={[ styles.post_comment_actions_icon ]} source={ require("../../../../assets/imgs/png/icons/dots-vertical.png") }></Image>
                         </TouchableOpacity>
                     </View>
 

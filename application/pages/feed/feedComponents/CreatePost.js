@@ -66,7 +66,7 @@ export default class CreatePost extends React.Component{
 
                             <TouchableOpacity activeOpacity={ .5 } onPress={ this.__createPostImage } >
                                 <Animated.View style={[ styles.create_post_footer_action, bounceIn ]}>
-                                    <Image style={[ styles.create_post_footer_action_ico ]} resizeMode="cover" source={ require("../../../assets/imgs/png/icons/picture.png") } />
+                                    <Image style={[ styles.create_post_footer_action_ico ]} resizeMode="cover" source={ require("../../../assets/imgs/png/icons/imagem.png") } />
                                 </Animated.View>
                             </TouchableOpacity>
 

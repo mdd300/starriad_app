@@ -217,7 +217,7 @@ export default class FeedCreatePost extends React.Component{
                 <View style={[ styles.create_post_header_action ]}>
                     <View style={[ styles.create_post_header_action_back ]}>
                         <TouchableOpacity style={[ styles.create_post_header_action_touchable ]} onPress={()=>{ this.props.navigation.goBack() }} >
-                            <Image style={[ styles.create_post_header_action_ico ]} source={ require('../../assets/imgs/png/icons/caret-left-black.png') }/>
+                            <Image style={[ styles.create_post_header_action_ico ]} source={ require('../../assets/imgs/png/icons/caret-left.png') }/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -256,7 +256,7 @@ export default class FeedCreatePost extends React.Component{
                                 style={[ styles.create_post_footer_action_touchable ]}
                                 onPress={()=> { this.__take_picture() }} >
                                 <View style={[ styles.create_post_footer_action_icon ]}>
-                                    <Image style={[ styles.create_post_footer_action_ico ]} source={ require("../../assets/imgs/png/icons/picture.png") }></Image>
+                                    <Image style={[ styles.create_post_footer_action_ico ]} source={ require("../../assets/imgs/png/icons/imagem.png") }></Image>
                                 </View>
                                 <View style={[ styles.create_post_footer_action_label ]}>
                                     <Text style={[ styles.create_post_footer_action_label_text ]}> IMAGEM </Text>

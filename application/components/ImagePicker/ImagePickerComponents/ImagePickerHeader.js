@@ -49,7 +49,7 @@ export default class ImagePickerHeader extends React.Component{
                     <TouchableOpacity
                         onPress={() => { this.__on_cancel() }}
                         hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}>
-                        <Image style={[ styles.image_picker_header_back_ico ]} source={ require("../../../assets/imgs/png/icons/caret-left-black.png") }/>
+                        <Image style={[ styles.image_picker_header_back_ico ]} source={ require("../../../assets/imgs/png/icons/caret-left.png") }/>
                     </TouchableOpacity>
                 </View>
 
