@@ -49,12 +49,15 @@ class TemplateHeader extends React.Component {
             userLoggedGlobal: [],
             params: {dados: 'OK'}
         };
-    };
 
-    componentDidMount(){
         this.getUidUser();
         this.loadDadosUser(this.state.paramsFire);
-    }
+    };
+
+    // componentDidMount(){
+    //     this.getUidUser();
+    //     this.loadDadosUser(this.state.paramsFire);
+    // }
 
     getUidUser = async () =>{
         this.state.uid_user =  await AsyncStorage.getItem('uid');
@@ -130,11 +133,11 @@ class TemplateHeader extends React.Component {
     // função que le as notificações e seta no firestore
     readNotificFirestore() {
 
-        let user_id = this.state.paramsFire;
+        let user_id = this.state.user;
 
         if (user_id == '' || user_id == undefined) {
         } else {
-            NotificacoesService.lerAtividadesFirestore(user_id.dados.empresa_id_fk);
+            NotificacoesService.lerAtividadesFirestore(user_id.empresa_id_fk);
         }
     };
 
