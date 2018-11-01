@@ -52,6 +52,8 @@ export default createStackNavigator({
             screen: FinalizarPedido
         },
         'DetalhePedido': {
+
+            
             screen: DetalhePedido
         },
         'ProdutoProfile': {
@@ -69,6 +71,7 @@ export default createStackNavigator({
     },
     {
         initialRouteName: 'Login',
+
         navigationOptions: {
             header: null
         }

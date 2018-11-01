@@ -295,8 +295,6 @@ export default class Passo2 extends React.Component {
                 LoginService.cadastrar(send).then((res) => {
                     let response = res.data;
 
-                    console.log(response);
-
                     if (response.success) {
                         let body = {
                             user_pass: response.dados.user_pass_original,
@@ -317,7 +315,7 @@ export default class Passo2 extends React.Component {
                                 firebase.auth().signInWithEmailAndPassword(body.user_login, body.user_pass).then((user) => {
                                     AsyncStorage.setItem('@houpa:userlogged', JSON.stringify(response_login.data_user));
                                     AsyncStorage.setItem('uid', user.user.uid);
-                                    AsyncStorage.setItem('restkey', response.data.restkey);
+                                    AsyncStorage.setItem('restkey', response_login.restkey);
                                 });
 
                                 this.props.callbackLogin('Explorer');

@@ -5,16 +5,11 @@ import {
     RefreshControl,
     ScrollView,
     View,
-    TouchableOpacity,
     Text,
     AsyncStorage
 } from "react-native";
-import SystemHeader from "../../components/SystemHeader/SystemHeader";
 import styles from "../notificacoes/Notificacoes-styles";
-import SystemTabs from "../../components/tabs/SystemTabs";
 import ListNotificacoes from './notificacoesComponents/list-notificacoes/list-notificacoes';
-import axios from "axios";
-import {API_URL_HOUPA} from "../../configs/api/current";
 import NotificacoesService from "../../services/notificacoes/notificacoes-service";
 import Template from "../../components/Template/Template";
 
@@ -30,6 +25,7 @@ export default class Notificacoes extends React.Component {
             loading: false,
             error: false,
             refreshing: false,
+            msg_notificacoes: false
         };
     }
 
@@ -58,7 +54,10 @@ export default class Notificacoes extends React.Component {
                     loading: false,
                 });
             }else{
-                console.log('AQUI');
+                this.setState({
+                    loading: false,
+                    msg_notificacoes: true
+                });
             }
         }, (error) => {
 
@@ -117,6 +116,14 @@ export default class Notificacoes extends React.Component {
 
             <View style={styles.containerNotificacoes}>
                 { this.renderPage() }
+
+                { this.state.msg_notificacoes &&
+                    <View style={styles.containerMsgNotificacoes}>
+                        <Text style={styles.msgNotificacoes}>
+                            Você não possuí nenhuma notificação
+                        </Text>
+                    </View>
+                }
             </View>
         );
     }

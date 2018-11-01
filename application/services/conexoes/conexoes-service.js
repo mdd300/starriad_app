@@ -18,9 +18,6 @@ const ConexoesService = {
     },
 
     deleteConexao(params, restkey) {
-
-        console.log(params);
-
         var body = {
             empresa_id: params.idSolicitado,
             motivo: params.motivoExclusao,
@@ -28,6 +25,14 @@ const ConexoesService = {
         };
 
         return axios.post(API_URL_HOUPA + 'conexoes/deleteConexao', body, {
+            headers: {
+                "x-api-key": restkey
+            }
+        });
+    },
+
+    reverteDelete(params, restkey) {
+        return axios.post(API_URL_HOUPA + 'conexoes/reverteDelete', params, {
             headers: {
                 "x-api-key": restkey
             }
@@ -81,7 +86,32 @@ const ConexoesService = {
                 this.deleteConexao(idSolicitado, restkey);
             });
         }
-    }
+    },
+
+    deleteOfFirestore(idSolicitado, idUserLogged, dadosApagados, restkey) {
+
+        let caminhoFirestore = firebase.firestore().collection('conexoes').doc(idSolicitado.toString()).collection(idUserLogged).doc('info');
+
+        caminhoFirestore.get().then((doc) => {
+            if (doc.exists) {
+                let sendToFirestore = doc.data();
+
+                caminhoFirestore.delete().then((res) => {
+
+                    firebase.firestore().collection('conexoes').doc(idUserLogged).collection(idSolicitado).doc('info').delete();
+
+                    firebase.database().ref('conexoes').child(idSolicitado).child(idUserLogged).remove().then((res) => {
+                        firebase.database().ref('conexoes').child(idUserLogged).child(idSolicitado).remove();
+                    }, (e) => {
+                        firebase.firestore().collection('conexoes').doc(idSolicitado).collection(idUserLogged).doc('info').set(sendToFirestore, { merge: false });
+                        this.reverteDelete(dadosApagados, restkey);
+                    });
+                }, (e) => {
+                    this.reverteDelete(dadosApagados, restkey);
+                });
+            }
+        }, (error) => {});
+    },
 };
 
 export default ConexoesService;

@@ -14,17 +14,19 @@ class ListItemLastNotificacoes extends React.Component {
 
         this.state = {
             params: {dados: 'OK'},
+            loading_conectar: false,
             opened_alert: false,
+            user_logged_global: null,
+            paramsExcluir: {
+                idSolicitado: '',
+                motivoExclusao: '',
+                tempoBloqueio: ''
+            },
+            restkey: null,
+            dados_empresa: [],
+            indice_ativo: null,
         };
     }
-
-    _openAlert = (() => {
-        this.setState({ opened_alert: true })
-    });
-
-    _closedAlert = ((  ) => {
-        this.setState({ opened_alert: false });
-    });
 
     componentDidMount() {
 
@@ -39,6 +41,10 @@ class ListItemLastNotificacoes extends React.Component {
             });
         }, 8000);
     }
+
+    _closedAlert = ((  ) => {
+        this.setState({ opened_alert: false });
+    });
 
     // Função que le a notificação clicada e seta no sql
     readActiviteSql = async (idNotificacao) => {
@@ -87,13 +93,20 @@ class ListItemLastNotificacoes extends React.Component {
         }
     };
 
-    conectar = async (empresa) => {
+    conectar = async (empresa, index) => {
 
         const restkey = await AsyncStorage.getItem('restkey');
 
-        this.setState({
-            loading_conectar: true
+        this.props.notificacao.atv.map((atividade, indice) => {
+
+            if(index === indice){
+                this.setState({
+                    loading_conectar: true,
+                    indice_ativo: index
+                });
+            }
         });
+
 
         let resposta = null;
 
@@ -157,34 +170,27 @@ class ListItemLastNotificacoes extends React.Component {
 
     desconectar = async (empresa, index) => {
 
-        const restkey = await AsyncStorage.getItem('restkey');
+        this.state.restkey = await AsyncStorage.getItem('restkey');
+        const user_logged = await AsyncStorage.getItem('@houpa:userlogged');
+        this.state.user_logged_global = JSON.parse(user_logged);
 
-        let resposta = null;
-        let motivo = null;
-        let bloqueio = null;
-        let paramsExcluir = {
-            idSolicitado: empresa.empresa_id_fk,
-            motivoExclusao: '',
-            tempoBloqueio: ''
-        };
+        this.state.dados_empresa = empresa;
+        this.state.paramsExcluir.idSolicitado = empresa.empresa_id_fk;
+
+        this.setState({
+            paramsExcluir: this.state.paramsExcluir,
+            dados_empresa: this.state.dados_empresa
+        });
 
         if (empresa.notificacao_ready == 0) {
             empresa.notificacao_ready = 1;
         }
 
         this.setState({
-            opened_alert: true
+            opened_alert: true,
+            user_logged_global: this.state.user_logged_global,
+            restkey: this.state.restkey
         })
-
-        // Alert.alert(
-        //     'Excluir Conexão',
-        //     'Tem certeza que deseja excluir essa conexão?',
-        //     [
-        //         {text: 'NÃO', onPress: () => null},
-        //         {text: 'SIM', onPress: () => null},
-        //     ],
-        //     {cancelable: false}
-        // );
     };
 
     toPerfil(){
@@ -195,7 +201,7 @@ class ListItemLastNotificacoes extends React.Component {
 
         if (this.props.notificacao.date == 'Atividades Passadas') {
             return (
-                <View>
+                <View style={{minHeight: 370}}>
                     <View style={styles.labelAnteriores}>
                         <Text style={styles.textAnteriores}>
                             {this.props.notificacao.date}
@@ -237,20 +243,32 @@ class ListItemLastNotificacoes extends React.Component {
                             </Text>
 
                             { atividade.notificacao_tipo == 10 &&
-                            <TouchableOpacity onPress={() => this.conectar(atividade)} activeOpacity={0.6} style={styles.btnConexoes}>
-                                <Text style={styles.labelBtnConexoes}>
-                                    CONECTAR
-                                </Text>
+                            <TouchableOpacity onPress={() => this.conectar(atividade, index)} activeOpacity={0.6} style={styles.btnConexoes}>
+                                { this.state.loading_conectar && this.state.indice_ativo === index ?
+                                    <ActivityIndicator size="small" color="#fff"/> :
+
+                                    <Text style={styles.labelBtnConexoes}>
+                                        CONECTAR
+                                    </Text>
+                                }
                             </TouchableOpacity>
                             }
 
-                            { atividade.notificacao_tipo == 3 || atividade.notificacao_tipo == 2 &&
+                            { atividade.notificacao_tipo == 2 &&
                             <TouchableOpacity onPress={() => this.desconectar(atividade, index)} activeOpacity={0.6} style={styles.btnConexoes}>
                                 <Text style={styles.labelBtnConexoes}>
                                     DESCONECTAR
                                 </Text>
                             </TouchableOpacity>
                             }
+
+                            {/*{ atividade.notificacao_tipo == 3 &&*/}
+                            {/*<TouchableOpacity onPress={() => this.desconectar(atividade, index)} activeOpacity={0.6} style={styles.btnConexoes}>*/}
+                            {/*<Text style={styles.labelBtnConexoes}>*/}
+                            {/*DESCONECTAR*/}
+                            {/*</Text>*/}
+                            {/*</TouchableOpacity>*/}
+                            {/*}*/}
 
                             { atividade.notificacao_tipo == 11 &&
                             <TouchableOpacity onPress={() => this.desconectar(atividade, index)} activeOpacity={0.6} style={styles.btnConexoes}>
@@ -262,9 +280,9 @@ class ListItemLastNotificacoes extends React.Component {
 
                             { atividade.notificacao_tipo == 3 &&
                             <View style={{flexDirection: 'row', width: 90, height: '60%'}}>
-                                <TouchableOpacity onPress={() => this.conectar(atividade)} activeOpacity={0.6} style={[styles.btnConexoes, {flex: 1, maxWidth: 50, height: '100%'}]}>
+                                <TouchableOpacity onPress={() => this.conectar(atividade, index)} activeOpacity={0.6} style={[styles.btnConexoes, {flex: 1, maxWidth: 50, height: '100%'}]}>
 
-                                    { this.state.loading_conectar ?
+                                    { this.state.loading_conectar && this.state.indice_ativo === index ?
                                         <ActivityIndicator size="small" color="#fff"/> :
 
                                         <Text style={styles.labelBtnConexoes}>
@@ -335,7 +353,7 @@ class ListItemLastNotificacoes extends React.Component {
                         </View>
                     ))}
 
-                    <AlertConexoes opened={ this.state.opened_alert } onclose={ this._closedAlert } />
+                    <AlertConexoes empresa={this.state.dados_empresa} paramsExcluir={this.state.paramsExcluir} restkey={this.state.restkey} user_logged={this.state.user_logged_global} opened={ this.state.opened_alert } onclose={ this._closedAlert } />
                 </View>
             );
         } else {
