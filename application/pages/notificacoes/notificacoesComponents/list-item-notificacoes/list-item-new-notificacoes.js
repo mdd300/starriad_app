@@ -142,6 +142,7 @@ class ListItemNewNotificacoes extends React.Component {
                 this.actionTo(empresa);
                 ConexoesService.insertIntoFirestore(empresa.empresa_id_fk.toString(), resposta.user_logged.toString(), resposta.sendToFirestore, resposta.data_aceitacao, restkey);
                 this.changeStatusNotifc('connect', empresa.notificacao_id);
+                this.props.reloadPage;
             }else{
                 this.setState({
                     loading_conectar: false
@@ -189,7 +190,9 @@ class ListItemNewNotificacoes extends React.Component {
             opened_alert: true,
             user_logged_global: this.state.user_logged_global,
             restkey: this.state.restkey
-        })
+        });
+
+        this.props.reloadPage;
     };
 
     toPerfil(){
@@ -201,7 +204,7 @@ class ListItemNewNotificacoes extends React.Component {
         if(this.props.notificacao.date == 'Novas'){
 
             return (
-                <View style={{minHeight: 370}}>
+                <View style={[this.state.opened_alert ? {minHeight: 370} : null]}>
                     <View style={styles.labelAnteriores}>
                         <Text style={styles.textAnteriores}>
                             {this.props.notificacao.date}
@@ -243,6 +246,18 @@ class ListItemNewNotificacoes extends React.Component {
                             </Text>
 
                             { atividade.notificacao_tipo == 10 &&
+                            <TouchableOpacity onPress={() => this.conectar(atividade, index)} activeOpacity={0.6} style={styles.btnConexoes}>
+                                { this.state.loading_conectar && this.state.indice_ativo === index ?
+                                    <ActivityIndicator size="small" color="#fff"/> :
+
+                                    <Text style={styles.labelBtnConexoes}>
+                                        CONECTAR
+                                    </Text>
+                                }
+                            </TouchableOpacity>
+                            }
+
+                            { atividade.notificacao_tipo == 9 &&
                             <TouchableOpacity onPress={() => this.conectar(atividade, index)} activeOpacity={0.6} style={styles.btnConexoes}>
                                 { this.state.loading_conectar && this.state.indice_ativo === index ?
                                     <ActivityIndicator size="small" color="#fff"/> :

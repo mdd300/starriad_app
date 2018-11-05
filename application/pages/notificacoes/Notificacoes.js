@@ -105,7 +105,7 @@ export default class Notificacoes extends React.Component {
                     />
                 }>
 
-                <ListNotificacoes notificacoes={this.state.notificacoes} />
+                <ListNotificacoes loadActivities={this.loadActivities()} notificacoes={this.state.notificacoes} />
 
             </ScrollView>
         );

@@ -101,6 +101,7 @@ const ConexoesService = {
                     firebase.firestore().collection('conexoes').doc(idUserLogged).collection(idSolicitado).doc('info').delete();
 
                     firebase.database().ref('conexoes').child(idSolicitado).child(idUserLogged).remove().then((res) => {
+                        console.log('blabla: ', res);
                         firebase.database().ref('conexoes').child(idUserLogged).child(idSolicitado).remove();
                     }, (e) => {
                         firebase.firestore().collection('conexoes').doc(idSolicitado).collection(idUserLogged).doc('info').set(sendToFirestore, { merge: false });
@@ -109,8 +110,12 @@ const ConexoesService = {
                 }, (e) => {
                     this.reverteDelete(dadosApagados, restkey);
                 });
+            }else{
+                console.log('NAO EXISTE');
             }
-        }, (error) => {});
+        }, (error) => {
+            console.log('ERROR: ', error);
+        });
     },
 };
 

@@ -5,16 +5,16 @@ import ListItemLastNotificacoes from '../list-item-notificacoes/list-item-last-n
 
 const ListNotificacoes = props => {
 
-    const { notificacoes } =  props;
+    const { notificacoes, loadActivities } =  props;
 
     return (
         <FlatList data={notificacoes} renderItem={({ item }) => (
 
             <View>
-                <ListItemNewNotificacoes
+                <ListItemNewNotificacoes reloadPage={loadActivities}
                     notificacao={item} />
 
-                <ListItemLastNotificacoes
+                <ListItemLastNotificacoes reloadPage={loadActivities}
                     notificacao={item} />
             </View>
 

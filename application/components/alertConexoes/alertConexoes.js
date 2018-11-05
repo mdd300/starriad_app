@@ -24,7 +24,6 @@ export default class AlertConexoes extends React.Component {
             },
             motivo: null,
             recusa: '',
-            empresa: this.props.empresa,
             error: {
               motivo: '',
               bloqueio: '',
@@ -46,12 +45,12 @@ export default class AlertConexoes extends React.Component {
         ConexoesService.deleteConexao(this.state.paramsExcluir, this.props.restkey).then((response) => {
             resposta = response.data;
             if (resposta.success) {
-                this.state.empresa.notificacao_tipo = 10;
-                this.state.empresa.notificacao_nome = 'E você estão desconectados';
+                this.props.empresa.notificacao_tipo = 10;
+                this.props.empresa.notificacao_nome = 'E você estão desconectados';
                 this.setState({
-                    empresa: this.state.empresa
+                    empresa: this.props.empresa
                 });
-                ConexoesService.deleteOfFirestore(this.state.empresa.empresa_id_fk, resposta.user_logged_id, resposta.dadosApagados, this.props.restkey);
+                ConexoesService.deleteOfFirestore(this.props.empresa.empresa_id_fk, resposta.user_logged_id, resposta.dadosApagados, this.props.restkey);
             }
         }, (error) => {
             console.log('ERROR: ', error);
