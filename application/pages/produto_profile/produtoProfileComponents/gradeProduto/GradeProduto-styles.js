@@ -1,6 +1,59 @@
 import {StyleSheet} from 'react-native';
 
 export const style = StyleSheet.create({
+
+    containerPage: {
+        width: '100%',
+        padding: 10
+    },
+
+    contentHeaderGrade: {
+        width: '100%',
+        flexDirection: 'row'
+    },
+
+    containerTitleGrade: {
+        width: 55,
+        backgroundColor: '#e6e6e6',
+        marginRight: 1,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    textHeaderGrade: {
+        fontSize: 15
+    },
+
+    containerTamanhosNomes: {
+        flex: 1,
+        backgroundColor: '#e6e6e6',
+        marginRight: 1,
+        padding: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    containerGradeVariantes: {
+        width: '100%'
+    },
+
+    corVariante: {
+        width: 55,
+        backgroundColor: '#fafafa',
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    containerGradeTamanhos: {
+        flex: 1,
+        backgroundColor: '#fafafa',
+        padding: 2,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
     containerHeader: {
         height: 80,
         width: "100%",
@@ -18,14 +71,15 @@ export const style = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row'
     },
+
     imageContainer: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
     },
 
     corContainer: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
 
     },
 
@@ -45,23 +99,28 @@ export const style = StyleSheet.create({
         width: 25,
         height: 25,
         // transform: [{rotate: '90deg'}]
-
     },
 
     containerInput:{
-        width: 60,
-        height: 30,
-        borderColor:'#e6e6e6',
-        borderWidth:1,
+        width: '100%',
+        maxWidth: 60,
+        height: '100%',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
+
    errorInput:{
-        borderColor:'red',
-        borderWidth:1,
+        borderColor: 'red',
+        borderWidth: 1,
+    },
 
+    textErrorInput:{
+        color: 'red'
     },
 
 
-})
+});
 
 
 
@@ -292,16 +351,26 @@ export const DetalhesPedidoStyles = StyleSheet.create({
 
     containerBtnMaisMenosQtd: {
         width: '100%',
-        flexDirection: 'row',
-        marginTop: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
     },
 
     menosQtdMais: {
         flex: 1,
-        height: 40,
+        height: 30,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#e6e6e6',
+    },
 
+    qtdDisponivel: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    textQtdDisponivel: {
+        fontSize: 14,
     },
 
     textMenosMais: {

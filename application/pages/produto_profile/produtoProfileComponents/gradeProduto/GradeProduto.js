@@ -1,207 +1,155 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, Animated, Easing, TextInput} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Animated, TextInput} from 'react-native';
 import {style, DetalhesPedidoStyles} from './GradeProduto-styles';
+import BotoesCarrinho from '../botoesCarrinho/BotoesCarrinho';
 
 
 export default class GradeProduto extends React.Component {
+
     constructor(props) {
-        super(props)
+
+        super(props);
+
         this.state = {
             variantes: this.props.variantes,
+            grade: this.props.grade,
             animation_icon: new Animated.Value(0),
             animation_grade: new Animated.Value(0),
             indexActived: null
         }
-
     }
 
     render() {
-        let icon_rotate = this.state.animation_icon.interpolate({
-            inputRange: [0, 100],
-            outputRange: ['0deg', '180deg']
-        });
-
-
-        return this.state.variantes.map((value, index) => {
-            return (
-                <View>
-                    <TouchableOpacity onPress={() => {
-                        this.activedVariante(index)
-                    }}>
-                        <View key={index} style={style.containerHeader}>
-                            <View style={style.containerLeft}>
-                                {this.getCor(value.cor_valor, value.image_valor)}
-
-                                <View style={style.containerText}>
-                                    <Text>{value.cor_nome}</Text>
-                                    <Text style={style.otherText}>{value.obs}</Text>
-                                </View>
-                            </View>
-
-                            <Animated.Image
-                                style={[style.iconContainer, ( this.state.indexActived === index ? {transform: [{rotateZ: icon_rotate}]} : null)
-                                ]} resizeMode={'contain'}
-                                source={require('../../../../assets/imgs/png/icons/caret-down.png')}/>
-
-                        </View>
-                    </TouchableOpacity>
-
-                    <View>
-                        {this.grade(value, index)}
-                    </View>
-                </View>
-
-
-            )
-        })
+        return (
+            this.renderPage()
+        )
     }
 
-    actionButtonVariante(index) {
-        this.activedVariante(index);
-        // this.calc();
-
-    }
-
-    downSeta() {
-        Animated.spring(this.state.animation_icon, {
-            toValue: 0,
-        }).start();
-    }
-
-
-    upSeta() {
-        Animated.spring(this.state.animation_icon, {
-            toValue: 100,
-        }).start();
-    }
-
-
-    hideGradeAnimation = (() => {
-        Animated.timing(this.state.animation_grade, {
-            toValue: 0,
-
-        }).start();
-    });
-
-    showGradeAnimation = (() => {
-        Animated.spring(this.state.animation_grade, {
-            toValue: 100,
-            bounciness: 25,
-            velocity: 100,
-            // duration:1500,
-        }).start();
-    });
-
-
-    grade(variante, indicePai) {
-
-        let show_grade = this.state.animation_grade.interpolate({
-            inputRange: [0, 65],
-            outputRange: [0, 5]
-        });
-        let transform = [{translateY: show_grade}]
-
-        if (variante.actived) {
-            let grade = variante.grade;
-            return (
-                <View style={[DetalhesPedidoStyles.containerInfosTamanhos]}>
-                    <View style={DetalhesPedidoStyles.tamanhosDisponiveis}>
-                        <View style={DetalhesPedidoStyles.containerTitleTamanhosDisponiveis}>
-                            <View style={DetalhesPedidoStyles.viewLabelTitle}>
-                                <Text style={DetalhesPedidoStyles.labelTitle}>Tamanho</Text>
-                            </View>
-                            <View style={DetalhesPedidoStyles.viewLabelTitle}>
-                                <Text style={DetalhesPedidoStyles.labelTitle}>Peças Disponiv.</Text>
-                            </View>
-                        </View>
-                        {grade.map((value, index) => {
-                            return (
-                                <View key={index} style={DetalhesPedidoStyles.containerTamanhosDisponiveis}>
-
-                                    <View style={DetalhesPedidoStyles.viewNomeTamanho}>
-                                        <Text> {value.tamanho_nome}</Text>
-                                    </View>
-
-                                    <View style={DetalhesPedidoStyles.viewQtdTamanho}>
-                                        <Text> {value.tamanho_quant}</Text>
-                                    </View>
-
-                                </View>
-                            )
-                        })}
-                        <View>
-
-
+    renderPage(){
+        return(
+            <View>
+                <View style={style.containerPage}>
+                    <View style={style.contentHeaderGrade}>
+                        <View style={style.containerTitleGrade}>
+                            <Text style={style.textHeaderGrade}>
+                                Cores
+                            </Text>
                         </View>
 
+                        {this.state.grade.map((value, index) => (
+                            <View key={index} style={style.containerTamanhosNomes}>
+                                <Text style={style.textHeaderGrade}>
+                                    {value.tamanho_nome}
+                                </Text>
+                            </View>
+                        ))}
+
+                        <View style={style.containerTitleGrade}>
+                            <Text style={style.textHeaderGrade}>
+                                Qtd
+                            </Text>
+                        </View>
                     </View>
 
-                    <View style={DetalhesPedidoStyles.containerInfosQtd}>
+                    <View style={style.containerGradeVariantes}>
+                        {this.renderVariantes()}
+                    </View>
 
-                        <View style={DetalhesPedidoStyles.infosQtd}>
-
-                            <View style={DetalhesPedidoStyles.titleQtd}>
-                                <Text style={DetalhesPedidoStyles.labelTitle}>Quantidade</Text>
-                            </View>
-
+                    <View style={style.contentHeaderGrade}>
+                        <View style={[style.containerTamanhosNomes, {flex: 3, padding: 10, alignItems: 'flex-start'}]}>
+                            <Text style={style.textHeaderGrade}>
+                                Total:
+                            </Text>
                         </View>
 
-                        <View>
-                            {grade.map((value, index) => {
-                                return (
-                                    <View key={index} style={DetalhesPedidoStyles.containerBtnMaisMenosQtd}>
-                                        <TouchableOpacity onPress={() => {
-                                            value.tamanho_quant === 0 ? null : this.subtractGrade(value)
+                        <View style={[style.containerTamanhosNomes, {padding: 10}]}>
+                            <Text style={[style.textHeaderGrade, {fontWeight: 'bold'}]}>
+                                0
+                            </Text>
+                        </View>
 
-                                        }} style={DetalhesPedidoStyles.menosQtdMais}>
-                                            <Text style={[
-                                                DetalhesPedidoStyles.textMenosMais,
-                                                value.tamanho_quant === 0 ? DetalhesPedidoStyles.textBloqueado : null
-                                            ]}>-</Text>
-                                        </TouchableOpacity>
-
-                                        <View style={DetalhesPedidoStyles.menosQtdMais}>
-                                            <View
-                                                style={[style.containerInput, (value.quantidade > value.tamanho_quant ? style.errorInput : null)]}>
-                                                <TextInput
-                                                    style={{textAlign: 'center', borderWidth: 0}}
-                                                    keyboardType='numeric'
-                                                    maxLength={3}
-                                                    onChangeText={(text) => this.calc(text, value)}
-                                                    value={value.quantidade}
-                                                    underlineColorAndroid='#FFF'
-                                                    onFocus={() => this.focus(value)}
-                                                    onBlur={() => this.blur(value)}
-                                                    editable={value.tamanho_quant === 0 ? false : true}
-                                                    defaultValue={value.quantidade === 0 || value.quantidade == '' ? '0' : value.quantidade.toString()}
-                                                />
-                                            </View>
-                                        </View>
-
-                                        <TouchableOpacity onPress={() => {
-                                            value.tamanho_quant == 0 ? null : this.sumGrade(value)
-                                        }} style={DetalhesPedidoStyles.menosQtdMais}>
-                                            <Text style={[
-                                                DetalhesPedidoStyles.textMenosMais,
-                                                value.tamanho_quant == 0 ? DetalhesPedidoStyles.textBloqueado : null
-                                            ]}>+</Text>
-                                        </TouchableOpacity>
-
-                                    </View>
-                                )
-                            })}
-
+                        <View style={[style.containerTamanhosNomes, {flex: 2, marginRight: 0, padding: 10}]}>
+                            <Text style={[style.textHeaderGrade, {fontWeight: 'bold'}]}>
+                                R$ 0
+                            </Text>
                         </View>
                     </View>
                 </View>
+                {this.renderBotoes()}
+            </View>
+        );
+    }
 
-            )
-        } else {
-            {
-                null
-            }
-        }
+    // Renderiza na tela as variantes do produto e sua grade de tamanhos
+    renderVariantes(){
+        return(
+            this.state.variantes.map((variante, index) => (
 
+                <View key={index} style={[style.contentHeaderGrade, {marginBottom: 2}]}>
+
+                    <View style={style.corVariante}>
+                        {this.getCor(variante.cor_valor, variante.image_valor)}
+                    </View>
+
+                    {variante.grade.map((grades, index) => (
+
+                        <View key={index} style={style.containerGradeTamanhos}>
+
+                            <View style={DetalhesPedidoStyles.containerBtnMaisMenosQtd}>
+                                <TouchableOpacity onPress={() => {grades.tamanho_quant == 0 ? null : this.sumGrade(grades)}}
+                                                  style={[DetalhesPedidoStyles.menosQtdMais, {marginBottom: 5}]}>
+                                    <Text style={[DetalhesPedidoStyles.textMenosMais, grades.tamanho_quant == 0 ? DetalhesPedidoStyles.textBloqueado : null]}>
+                                        +
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <View style={[DetalhesPedidoStyles.menosQtdMais, {backgroundColor: '#fff', borderColor: '#e6e6e6', borderWidth: 1}, (grades.quantidade > grades.tamanho_quant ? style.errorInput : null)]}>
+                                    <View style={[style.containerInput, (grades.quantidade > grades.tamanho_quant ? style.textErrorInput : null)]}>
+                                        <TextInput
+                                            style={{textAlign: 'center', borderWidth: 0}}
+                                            keyboardType='numeric'
+                                            maxLength={3}
+                                            onChangeText={(text) => this.calc(text, grades)}
+                                            value={grades.quantidade}
+                                            underlineColorAndroid='#FFF'
+                                            onFocus={() => this.focus(grades)}
+                                            onBlur={() => this.blur(grades)}
+                                            editable={grades.tamanho_quant === 0 ? false : true}
+                                            defaultValue={grades.quantidade === 0 || grades.quantidade == '' ? '0' : grades.quantidade.toString()}
+                                        />
+                                    </View>
+                                </View>
+
+                                <TouchableOpacity onPress={() => {grades.tamanho_quant === 0 ? null : this.subtractGrade(grades)}}
+                                                  style={[DetalhesPedidoStyles.menosQtdMais, {marginTop: 5, marginBottom: 5}]}>
+                                    <Text style={[DetalhesPedidoStyles.textMenosMais, grades.tamanho_quant === 0 ? DetalhesPedidoStyles.textBloqueado : null]}>
+                                        -
+                                    </Text>
+                                </TouchableOpacity>
+
+                                <View style={[DetalhesPedidoStyles.qtdDisponivel]}>
+                                    <Text style={[DetalhesPedidoStyles.textQtdDisponivel]}>
+                                        {grades.tamanho_quant} Disp.
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                    ))}
+
+                    <View style={[style.corVariante, {marginRight: 0}]}>
+                        <Text style={{fontSize: 15}}>
+                            0
+                        </Text>
+                    </View>
+                </View>
+            ))
+        );
+    }
+
+    renderBotoes(){
+        return(
+          <BotoesCarrinho />
+        );
     }
 
     blur(grade) {
@@ -226,28 +174,9 @@ export default class GradeProduto extends React.Component {
             grade.quantidade = valor
         }
         this.setState({variantes: this.state.variantes});
-        // this.showGradeAnimation();
-    }
-
-    activedVariante(index) {
-        this.state.variantes[index].actived = !this.state.variantes[index].actived;
-        this.state.indexActived = index;
-
-
-        if (this.state.variantes[index].actived) {
-            this.upSeta();
-            this.setState({variantes: this.state.variantes});
-            this.showGradeAnimation();
-        } else {
-            this.downSeta();
-            this.setState({variantes: this.state.variantes});
-            this.hideGradeAnimation();
-        }
-
     }
 
     sumGrade(grade) {
-
         if (grade.quantidade > grade.tamanho_quant) {
             grade.quantidade++;
         } else {
@@ -264,15 +193,13 @@ export default class GradeProduto extends React.Component {
         } else {
             grade.quantidade--;
             this.setState({variantes: this.state.variantes})
-
         }
     }
 
     getCor(cor, image) {
         if (cor !== '') {
             return (
-
-                <View style={[style.corContainer, {backgroundColor: cor}]}></View>
+                <View style={[style.corContainer, {backgroundColor: cor}]} />
             )
         } else if (image !== '') {
             return (
@@ -281,7 +208,5 @@ export default class GradeProduto extends React.Component {
             )
         }
     }
-
-
 }
 

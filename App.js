@@ -70,7 +70,7 @@ export default createStackNavigator({
         },
     },
     {
-        initialRouteName: 'Login',
+        initialRouteName: 'ProdutoProfile',
 
         navigationOptions: {
             header: null

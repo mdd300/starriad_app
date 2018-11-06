@@ -35,8 +35,8 @@ export default class TopExplorer extends React.Component {
         this.setState({
             destaques: [{
                 id: 1,
-                imagem: 'https://e.glbimg.com/og/ed/f/original/2017/12/01/amaro-alto-verao-2018.jpg',
-                marca: 'HOUPA!',
+                imagem: 'https://d2mf6a0uls9pip.cloudfront.net/uploads/perfil/big/2018/10/24/5bd0a1120f720.jpeg',
+                marca: 'M I L A L A I',
             },{
                 id: 2,
                 imagem: 'http://www.sabrinadalmolin.com/wp-content/uploads/2017/12/Fres-Break-AMARO15-1080x675.jpg',
