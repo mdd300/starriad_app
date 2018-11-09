@@ -19,7 +19,7 @@ export default class BotoesCarrinho extends React.Component {
 
                 <TouchableOpacity style={{width: '100%', height: 60, backgroundColor: '#000', justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 20}}>
                     <Text style={{color: '#fff', fontSize: 18}}>
-                        Adicionar os 0 itens ao carrinho
+                        Adicionar os {this.props.qtd} itens ao carrinho
                     </Text>
                 </TouchableOpacity>
 

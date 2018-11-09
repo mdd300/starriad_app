@@ -92,6 +92,21 @@ const CapaStyles = StyleSheet.create({
         textShadowRadius: 5
     },
 
+    touchBtnConexoes: {
+        width: 200,
+        padding: 10,
+        backgroundColor: '#000',
+        borderColor: '#fff',
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    textBtnConexoes: {
+        color: '#fff',
+        fontSize: 15
+    },
+
     menuLateralIcons: {
         width: '15%',
         height: '100%',

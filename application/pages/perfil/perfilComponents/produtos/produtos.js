@@ -10,14 +10,16 @@ import {
     Dimensions,
 } from "react-native";
 import styles from "./produtos-styles";
+import {withNavigation} from "react-navigation";
 
-export default class Produto extends React.Component {
+class Produto extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             perfil_produto: props.produtos,
+            user_logged: props.user_logged,
             // infos_produtos: false,
             // fotos_produtos: false,
             indice_ativo: '',
@@ -37,8 +39,6 @@ export default class Produto extends React.Component {
     touchOpcoesProdutos(indexProduto){
 
         if(this.state.indice_ativo === indexProduto){
-            console.log('IF');
-
             if(this.state.perfil_produto[indexProduto].ativo === true){
                 Animated.timing( this.state.animation_produto, {
                     toValue: 0,
@@ -54,11 +54,8 @@ export default class Produto extends React.Component {
                 }).start();
             }
         }else{
-            console.log('ELSE');
-
             this.state.perfil_produto.map((prod, $index)=>{
                 if($index !== indexProduto){
-                    console.log('FILHO DA ÉGUA');
                     Animated.timing( this.state.animation_produto, {
                         toValue: 0,
                         duration: 300
@@ -79,79 +76,7 @@ export default class Produto extends React.Component {
                 indice_ativo: this.state.indice_ativo,
                 perfil_produto: this.state.perfil_produto
             });
-
-            //
-            // this.state.perfil_marca[0].produtos[indexProduto].ativo = true;
-            // Animated.timing( this.state.animation_produto, {
-            //     toValue: 100,
-            //     duration: 500
-            // }).start();
         }
-
-        // this.state.perfil_marca.map((perfil) => {
-        //
-        //     if(perfil.produtos[indexProduto].ativo){
-        //
-        //         Animated.timing( this.state.animation_produto, {
-        //             toValue: 0,
-        //             duration: 500
-        //         }).start(()=> {
-        //             perfil.produtos[indexProduto].ativo = false;
-        //         });
-        //
-        //         this.setState({
-        //             perfil_marca: this.state.perfil_marca
-        //         });
-        //
-        //     }else{
-        //
-        //         perfil.produtos.map((prod) => {
-        //             prod.ativo = false;
-        //         });
-        //
-        //         perfil.produtos[indexProduto].ativo = true;
-        //         this.setState({
-        //             perfil_marca: this.state.perfil_marca
-        //         });
-        //
-        //         Animated.timing( this.state.animation_produto, {
-        //             toValue: 100,
-        //             duration: 500
-        //         }).start();
-        //     }
-        //
-        // });
-
-        // if(this.state.infos_produtos){
-        //
-        //     Animated.timing( this.state.animation_produto, {
-        //         toValue: 0,
-        //         duration: 500
-        //     }).start(()=> {
-        //         this.setState({
-        //             infos_produtos: false
-        //         });
-        //     });
-        //
-        // }else{
-        //
-        //     this.state.perfil_marca.map((perfil) => {
-        //         perfil.produtos.map((prod, indice) => {
-        //
-        //             if(indexProduto === indice){
-        //                 this.setState({
-        //                     infos_produtos: true,
-        //                     indice_ativo: indexProduto
-        //                 });
-        //
-        //                 Animated.timing( this.state.animation_produto, {
-        //                     toValue: 100,
-        //                     duration: 500
-        //                 }).start();
-        //             }
-        //         });
-        //     });
-        // }
     }
 
     showFotosProdutos(indexProduto){
@@ -167,23 +92,6 @@ export default class Produto extends React.Component {
             foto_ativo: this.state.foto_ativo,
             perfil_produto: this.state.perfil_produto
         });
-
-        // this.state.perfil_marca.map((perfil) => {
-        //     perfil.produtos.map((prod, indice) => {
-        //
-        //         if(indexProduto === indice){
-        //             this.setState({
-        //                 fotos_produtos: true,
-        //                 foto_ativo: indexProduto
-        //             });
-        //
-        //             Animated.spring( this.state.animation_fotos_produto, {
-        //                 toValue: 100,
-        //                 tension: 10,
-        //             }).start();
-        //         }
-        //     });
-        // });
     }
 
     hideFotosProdutos(indexProduto){
@@ -197,16 +105,18 @@ export default class Produto extends React.Component {
                 perfil_produto: this.state.perfil_produto
             });
         });
-
-        // Animated.spring( this.state.animation_fotos_produto, {
-        //     toValue: 0,
-        //     tension: 10,
-        // }).start(() => {
-        //     this.setState({
-        //         fotos_produtos: false,
-        //     });
-        // });
     }
+
+    // Muda a foto do produto de acordo com a variante escolhida
+    mudaVarianteEscolhida(prod, indexVariante, indexProd){
+        if (prod.variantes[indexVariante].imgs[0].medium != null && prod.variantes[indexVariante].imgs[0].medium != ""){
+            this.state.perfil_produto[indexProd].image_url.medium = prod.variantes[indexVariante].imgs[0].medium;
+
+            this.setState({
+               perfil_produto: this.state.perfil_produto
+            });
+        }
+    };
 
     renderOverlayProduto(indexProduto){
 
@@ -217,7 +127,13 @@ export default class Produto extends React.Component {
 
         return(
             <Animated.View style={[styles.containerOverlay,{ transform: [{ translateY: overlay_produto }]}]} >
-                <TouchableOpacity style={styles.buttonOverlay}>
+                <TouchableOpacity onPress={() => {
+                    let user_logged = JSON.parse(this.state.user_logged);
+                    let profile_url = user_logged.profile_url;
+                    let produto_slug = this.state.perfil_produto[indexProduto].produto_slug;
+                    let img_produto = this.state.perfil_produto[indexProduto].images;
+                    this.props.navigation.navigate('ProdutoProfile', {produto_slug, profile_url, img_produto});
+                }} style={styles.buttonOverlay}>
                     <Text style={styles.textButtonOverlay}>
                         VER PRODUTO
                     </Text>
@@ -306,7 +222,7 @@ export default class Produto extends React.Component {
 
         let infos_produtos = this.state.animation_produto.interpolate({
             inputRange: [ 0, 100 ],
-            outputRange: [ (29 * -1), 86.2 ]
+            outputRange: [ (20 * -1), 78 ]
         });
 
         let fotos_produtos = this.state.animation_fotos_produto.interpolate({
@@ -331,7 +247,7 @@ export default class Produto extends React.Component {
 
                             <Image style={[styles.imgProduto,
                                 prod.ativo && !prod.fotos_ativa ? {top: 86} : null]}
-                                   resizeMode={'contain'} source={{uri: prod.image_url[0].big}}/>
+                                   resizeMode={'cover'} source={{uri: prod.image_url.medium}}/>
 
                             { prod.ativo && !prod.fotos_ativa &&
                             // this.state.infos_produtos === true && this.state.indice_ativo === indexProduto && this.state.fotos_produtos === false &&
@@ -350,9 +266,16 @@ export default class Produto extends React.Component {
                                         {prod.produto_descricao}
                                     </Text>
 
-                                    <Text style={styles.textCategoria}>
-                                        {prod.style_name}
-                                    </Text>
+                                    { !prod.style_name ?
+                                        <Text style={[styles.textCategoria, {color: '#fff'}]}>
+                                            Não há estilos
+                                        </Text> :
+
+                                        <Text style={styles.textCategoria}>
+                                            {prod.style_name}
+                                        </Text>
+                                    }
+
                                 </View>
 
                                 <View style={styles.containerPreco}>
@@ -361,7 +284,6 @@ export default class Produto extends React.Component {
                                     </Text>
                                 </View>
                             </View>
-
 
                             <View style={styles.containerGradesVariantes}>
                                 <View style={styles.containerGrade}>
@@ -385,14 +307,14 @@ export default class Produto extends React.Component {
 
                                     <View style={styles.controleInfos}>
                                         {prod.cores.map((cor, index) => (
-                                            <TouchableOpacity key={index} style={styles.touchVariantes}>
+                                            <TouchableOpacity key={index} onPress={() => this.mudaVarianteEscolhida(prod, index, indexProduto)} style={styles.touchVariantes}>
 
-                                                {cor.cor_valor !== '' &&
-                                                <Text style={[styles.varianteCor, {backgroundColor: cor.cor_valor}]}/>
+                                                {cor.indexOf('http') < 0 &&
+                                                <Text style={[styles.varianteCor, {backgroundColor: cor}]}/>
                                                 }
 
-                                                {cor.img_cor !== '' &&
-                                                <Image style={styles.varianteCor} source={{uri: cor.img_cor}}/>
+                                                {cor.indexOf('http') >= 0 &&
+                                                <Image style={styles.varianteCor} source={{uri: cor}}/>
                                                 }
 
                                             </TouchableOpacity>
@@ -414,3 +336,5 @@ export default class Produto extends React.Component {
         );
     }
 }
+
+export default withNavigation(Produto)

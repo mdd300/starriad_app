@@ -91,7 +91,7 @@ export default class SlideProduto extends React.Component {
             return (
                 <ImageBackground key={index} id={index} resizeMode={'cover'}
                                  style={[{width: this.state.screenWidth}, {height: this.props.height}]}
-                                 source={{uri: value.imagem}}
+                                 source={{uri: value}}
                                  ref="image">
                 </ImageBackground>
             )
