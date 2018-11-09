@@ -16,7 +16,7 @@ export default class TemplateFooter extends React.Component{
     __navigate_feed     = (()=>{   this.props.navigation.navigate('Feed');   });
     __navigate_explorer = (()=>{   this.props.navigation.navigate('Explorer');   });
     __navigate_cart     = (()=>{   this.props.navigation.navigate('Carrinho');   });
-    __navigate_chat     = (()=>{   this.props.navigation.navigate('Explorer');   });
+    __navigate_chat     = (()=>{   this.props.navigation.navigate('ChatHome');   });
     __navigate_perfil   = (()=>{   this.props.navigation.navigate('Perfil');   });
 
     
@@ -52,7 +52,9 @@ export default class TemplateFooter extends React.Component{
                     </View>
 
                     <View style={[ styles.template_footer_action ]}>
-                        <TouchableOpacity style={[ styles.template_footer_action_touchable ]}>
+                        <TouchableOpacity
+                            onPress={()=>{ this.__navigate_chat() }}
+                            style={[ styles.template_footer_action_touchable ]}>
                             <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/chat.png") }/>
                         </TouchableOpacity>
                     </View>

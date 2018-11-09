@@ -20,6 +20,8 @@ import Login from "./application/pages/login/Login";
 import Perfil from "./application/pages/perfil/Perfil";
 import EditarPerfil from "./application/pages/minha-conta/editar-perfil/EditarPerfil";
 import AlertConexoes from "./application/components/alertConexoes/alertConexoes";
+import ChatHome from "./application/pages/chat/ChatHome/ChatHome";
+import ChatConversation from "./application/pages/chat/ChatConversation/ChatConversation";
 
 firebase.initializeApp(firebaseEnvironments.development);
 firebase.firestore().settings({ timestampsInSnapshots: true });
@@ -70,9 +72,17 @@ export default createStackNavigator({
         'AlertConexoes': {
             screen: AlertConexoes,
         },
+
+
+        'ChatHome': {
+            screen: ChatHome
+        },
+        'ChatConversation': {
+            screen: ChatConversation
+        },
     },
     {
-        initialRouteName: 'Login',
+        initialRouteName: 'ChatConversation',
         navigationOptions: {
             header: null
         }
