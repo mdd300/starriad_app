@@ -41,7 +41,7 @@ const stylesProduto = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        bottom: -115,
+        bottom: -100,
         backgroundColor: '#FFF'
     },
 

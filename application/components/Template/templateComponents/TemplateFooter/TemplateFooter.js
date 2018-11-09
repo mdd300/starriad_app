@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import {View, Image, TouchableOpacity, AsyncStorage} from "react-native";
 import styles from "./template-footer-styles"
+import PerfilService from "../../../../services/perfil/perfil-service";
 
 export default class TemplateFooter extends React.Component{
 
@@ -8,10 +9,42 @@ export default class TemplateFooter extends React.Component{
     constructor( props ){
         super( props );
 
-        this.state = {};
+        this.state = {
+            perfilInfo: [],
+            user_logged_global: null,
+            dados_carregados: false,
+        };
 
     }/* Fim do escopo da função constructor do componente */
 
+    componentDidMount(){
+        this.loadPerfilInfo();
+    }
+
+    // Pega as informações da empresa logada
+    loadPerfilInfo = async () => {
+
+        this.state.user_logged_global = await AsyncStorage.getItem('@houpa:userlogged');
+        this.setState({
+            user_logged_global: this.state.user_logged_global,
+        });
+
+        PerfilService.getInfoPerfil().then((resposta) => {
+            this.state.perfilInfo = resposta.data;
+            this.setState({
+                perfilInfo: this.state.perfilInfo,
+                dados_carregados: true
+            });
+
+            if (this.state.user_logged_global !== undefined && this.state.user_logged_global != null && this.state.user_logged_global !== '' && this.state.user_logged_global) {
+                this.state.perfilInfo.user_email = this.state.user_logged_global.user_email;
+                this.state.perfilInfo.profile_url = this.state.user_logged_global.profile_url;
+                this.setState({
+                    perfilInfo: this.state.perfilInfo
+                });
+            }
+        });
+    };
 
     __navigate_feed     = (()=>{   this.props.navigation.navigate('Feed');   });
     __navigate_explorer = (()=>{   this.props.navigation.navigate('Explorer');   });
@@ -64,7 +97,9 @@ export default class TemplateFooter extends React.Component{
                             onPress={() => { this.__navigate_perfil() }}
                             style={[ styles.template_footer_action_touchable ]}>
                             <View style={[ styles.template_footer_action_profile ]}>
-                                <Image style={[ styles.template_footer_action_profile_image ]} source={{ uri: 'https://i.ebayimg.com/images/g/LJYAAOSwjXRXbI-N/s-l300.jpg' }}/>
+                                {this.state.dados_carregados &&
+                                    <Image style={[ styles.template_footer_action_profile_image ]} source={{ uri: this.state.perfilInfo.img_url_big.mini }}/>
+                                }
                             </View>
                         </TouchableOpacity>
                     </View>

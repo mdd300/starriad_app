@@ -24,5 +24,7 @@ export const style = StyleSheet.create({
     logo: {
         width: 40,
         height: 40,
+        borderWidth: 1,
+        borderColor: '#ddd',
     }
 });
