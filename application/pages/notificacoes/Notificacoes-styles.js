@@ -102,6 +102,18 @@ const stylesNotificacoes = StyleSheet.create({
         color: '#acacac',
     },
 
+    containerMsgNotificacoes: {
+        width: '100%',
+        marginTop: 100,
+    },
+
+    msgNotificacoes: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#595959',
+        textAlign: 'center',
+    },
+
 });
 
 export default stylesNotificacoes;

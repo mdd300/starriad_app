@@ -72,8 +72,6 @@ export default createStackNavigator({
         'AlertConexoes': {
             screen: AlertConexoes,
         },
-
-
         'ChatHome': {
             screen: ChatHome
         },
@@ -81,9 +79,7 @@ export default createStackNavigator({
             screen: ChatConversation
         },
     },
-    {
-        initialRouteName: 'ChatConversation',
-        navigationOptions: {
-            header: null
-        }
-    });
+{
+    initialRouteName: 'ChatConversation',
+    navigationOptions: { header: null }
+});

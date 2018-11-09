@@ -1,5 +1,3 @@
-/**
- * O ambiente atual
- */
 
+// O ambiente atual
 export const ENVIRONMENT_CURRENT = "development";

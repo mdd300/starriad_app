@@ -49,17 +49,14 @@ class TemplateHeader extends React.Component {
             userLoggedGlobal: [],
             params: {dados: 'OK'}
         };
-
-        this.getUidUser();
-        this.loadDadosUser(this.state.paramsFire);
     };
 
-    // componentDidMount(){
-    //     this.getUidUser();
-    //     this.loadDadosUser(this.state.paramsFire);
-    // }
+    componentDidMount(){
+        this.getUidUser();
+        this.loadDadosUser(this.state.paramsFire);
+    }
 
-    getUidUser = async () =>{
+    getUidUser = async () => {
         this.state.uid_user =  await AsyncStorage.getItem('uid');
         this.setState({
             uid_user: this.state.uid_user
@@ -98,6 +95,8 @@ class TemplateHeader extends React.Component {
                     {cancelable: false}
                 );
             });
+        }else{
+            console.log('ELSE');
         }
     };
 

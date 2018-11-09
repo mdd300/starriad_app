@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, View, Image, TouchableOpacity, AsyncStorage, Alert, Animated, Picker, Dimensions} from 'react-native';
-import {styleCadastro} from "../../pages/login/loginComponents/cadastro/Cadastro-styles";
+import styles from "./alertConexoes-styles";
 import CheckBox from "../checkBox/CheckBox";
+import ConexoesService from "../../services/conexoes/conexoes-service";
 
 export default class AlertConexoes extends React.Component {
 
@@ -16,70 +17,100 @@ export default class AlertConexoes extends React.Component {
                 dois: false,
                 tres: false
             },
+            paramsExcluir: props.paramsExcluir,
+            opcao: {
+                opcaoUm: false,
+                opcaoDois: false,
+            },
+            motivo: null,
+            recusa: '',
+            error: {
+              motivo: '',
+              bloqueio: '',
+            },
 
             screen_height: height,
             screen_width: width,
         };
     }
 
+    desconectar() {
+        let resposta = null;
+        let motivo = this.state.motivo;
+        let bloqueio = this.state.recusa;
+
+        this.state.paramsExcluir.motivoExclusao = motivo;
+        this.state.paramsExcluir.tempoBloqueio = bloqueio;
+
+        ConexoesService.deleteConexao(this.state.paramsExcluir, this.props.restkey).then((response) => {
+            resposta = response.data;
+            if (resposta.success) {
+                this.props.empresa.notificacao_tipo = 10;
+                this.props.empresa.notificacao_nome = 'E você estão desconectados';
+                this.setState({
+                    empresa: this.props.empresa
+                });
+                ConexoesService.deleteOfFirestore(this.props.empresa.empresa_id_fk, resposta.user_logged_id, resposta.dadosApagados, this.props.restkey);
+            }
+        }, (error) => {
+            console.log('ERROR: ', error);
+        });
+
+    }
+
     renderAlertPassoUm(){
 
         if(this.state.passos.um){
             return(
-                <View style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', padding: 10}}>
-
-                    <View style={{width: '100%', height: 90, alignItems: 'center', justifyContent: 'center', marginBottom: 10}}>
-
-                        <View style={{width: 83, height: 83, alignItems: 'center', justifyContent: 'center', borderColor: '#facea8', borderWidth: 5, borderRadius: 50}}>
-                            <Text style={{fontSize: 50, color: '#f8bb86', fontWeight: 'bold'}}>
+                <View style={styles.container_alert}>
+                    <View style={styles.container_exclamacao}>
+                        <View style={styles.border_exclamacao}>
+                            <Text style={styles.exclamacao}>
                                 !
                             </Text>
                         </View>
-
                     </View>
 
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center', marginBottom: 10}}>
-                        <Text style={{fontSize: 25, fontWeight: 'bold', color: '#595959'}}>
+                    <View style={[styles.container_title, {marginBottom: 10}]}>
+                        <Text style={styles.title}>
                             Excluir Conexão
                         </Text>
 
-                        <Text style={{fontSize: 20, textAlign: 'center', color: '#545454'}}>
+                        <Text style={styles.sub_title}>
                             Tem certeza que deseja excluir essa conexão?
                         </Text>
                     </View>
 
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                    <View style={styles.container_options}>
 
-                        <TouchableOpacity onPress={() => {
-                            this.state.passos.um = false;
-                            this.state.passos.dois = true;
-                            this.setState({
-                                passos: this.state.passos
-                            })
-                        }}
-                                          style={{width: 120, padding: 10, backgroundColor: '#000', alignItems: 'center', justifyContent: 'center', borderRadius: 5}}>
-                            <Text style={{fontSize: 18, color: '#fff'}}>
-                                Sim, deletar!
+                        <TouchableOpacity style={[styles.btn_alert, {backgroundColor: '#000'}]}
+                            onPress={() => {
+                                this.state.passos.um = false;
+                                this.state.passos.dois = true;
+                                this.setState({
+                                    passos: this.state.passos
+                                })}}>
+
+                            <Text style={styles.btn_text}>
+                                Sim, excluir!
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => {
-                            this.state.passos.um = true;
-                            this.state.passos.dois = false;
-                            this.state.passos.tres = false;
-                            this.setState({
-                                passos: this.state.passos
-                            });
+                        <TouchableOpacity style={[styles.btn_alert, {backgroundColor: '#ff1824', marginLeft: 10}]}
+                            onPress={() => {
+                                this.state.passos.um = true;
+                                this.state.passos.dois = false;
+                                this.state.passos.tres = false;
+                                this.setState({
+                                    passos: this.state.passos
+                                });
+                                this.props.onclose()}}>
 
-                            this.props.onclose()
-                        }}
-                                          style={{width: 120, padding: 10, backgroundColor: '#ff1824', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginLeft: 10}}>
-                            <Text style={{fontSize: 18, color: '#fff'}}>
+                            <Text style={styles.btn_text}>
                                 Cancelar
                             </Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
             );
         }
@@ -89,69 +120,105 @@ export default class AlertConexoes extends React.Component {
 
         if(this.state.passos.dois){
             return(
-                <View style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', padding: 10}}>
-
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 25, fontWeight: 'bold', color: '#595959'}}>
+                <View style={styles.container_alert}>
+                    <View style={styles.container_title}>
+                        <Text style={styles.title}>
                             Qual o motivo da exclusão?
                         </Text>
                     </View>
 
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center', marginBottom: 20, paddingLeft: 20}}>
-                        <TouchableOpacity
-                            style={{alignItems: 'center',
-                                marginTop: 10,
-                                width: '100%',
-                                minHeight: 30,
-                                flexDirection: 'row'}}
-                        >
-                            <CheckBox actived={true} color={'#0099df'}/>
-                            <Text style={{fontSize: 20, textAlign: 'center', color: '#545454', marginLeft: 10}}>Não compro mais nessa loja</Text>
+                    <View style={styles.container_options_checkbox}>
+                        <TouchableOpacity style={styles.options_checkbox}
+                            onPress={() => {
+                                this.state.opcao.um = true;
+                                this.state.opcao.dois = false;
+                                this.props.user_logged.user_type == 1 ? this.state.motivo = 1 : this.props.user_logged.user_type == 2 ? this.state.motivo = 3 : null;
+                                this.setState({opcao: this.state.opcao, user: this.state.motivo})
+                            }}>
+
+                            <CheckBox actived={this.state.opcao.um} color={'#0099df'}/>
+
+                            {this.props.user_logged.user_type == 1 ?
+                                <Text style={styles.text_checkbox}>
+                                    Critérios de análise Interna
+                                </Text>
+                                    :
+                                this.props.user_logged.user_type == 2 ?
+                                    <Text style={styles.text_checkbox}>
+                                        Não compro mais nessa loja
+                                    </Text>
+                                    :
+                                    null
+                            }
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={{alignItems: 'center',
-                            marginTop: 10,
-                            width: '100%',
-                            minHeight: 30,
-                            flexDirection: 'row'}}>
-                            <CheckBox actived={false} color={'#0099df'}/>
-                            <Text style={{fontSize: 20, textAlign: 'center', color: '#545454', marginLeft: 10}}>Outros</Text>
+                        <TouchableOpacity style={styles.options_checkbox}
+                            onPress={() => {
+                                this.state.opcao.um = false;
+                                this.state.opcao.dois = true;
+                                this.props.user_logged.user_type == 1 ? this.state.motivo = 2 : this.props.user_logged.user_type == 2 ? this.state.motivo = 4 : null;
+                                this.setState({opcao: this.state.opcao, user: this.state.motivo})
+                            }}>
+
+                            <CheckBox actived={this.state.opcao.dois} color={'#0099df'}/>
+
+                            {this.props.user_logged.user_type == 1 ?
+                                <Text style={styles.text_checkbox}>
+                                    Praça fechada
+                                </Text>
+                                :
+                                this.props.user_logged.user_type == 2 ?
+                                    <Text style={styles.text_checkbox}>
+                                        Outros
+                                    </Text>
+                                    :
+                                    null
+                            }
                         </TouchableOpacity>
+
+                        <Text style={styles.errorLabel}>{this.state.error.motivo}</Text>
 
                     </View>
 
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                    <View style={styles.container_options}>
+                        <TouchableOpacity style={[styles.btn_alert, {backgroundColor: '#3085d6'}]}
+                            onPress={() => {
+                                if(this.state.motivo == '' || this.state.motivo == null || this.state.motivo == undefined){
+                                    this.state.error.motivo = 'Preencha uma opção';
+                                    this.setState({
+                                        error: this.state.error
+                                    });
+                                }else{
+                                    this.state.error.motivo = '';
+                                    this.state.passos.dois = false;
+                                    this.state.passos.tres = true;
+                                    this.setState({
+                                        passos: this.state.passos,
+                                        error: this.state.error
+                                    });
+                                }
+                            }}>
 
-                        <TouchableOpacity onPress={() => {
-                            this.state.passos.dois = false;
-                            this.state.passos.tres = true;
-                            this.setState({
-                                passos: this.state.passos
-                            })
-                        }}
-                                          style={{width: 120, padding: 10, backgroundColor: '#3085d6', alignItems: 'center', justifyContent: 'center', borderRadius: 5}}>
-                            <Text style={{fontSize: 18, color: '#fff'}}>
+                            <Text style={styles.btn_text}>
                                 OK
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => {
-                            this.state.passos.um = true;
-                            this.state.passos.dois = false;
-                            this.state.passos.tres = false;
-                            this.setState({
-                                passos: this.state.passos
-                            });
+                        <TouchableOpacity style={[styles.btn_alert, {backgroundColor: '#aaa', marginLeft: 10}]}
+                            onPress={() => {
+                                this.state.passos.um = true;
+                                this.state.passos.dois = false;
+                                this.state.passos.tres = false;
+                                this.setState({
+                                    passos: this.state.passos
+                                });
+                                this.props.onclose()}}>
 
-                            this.props.onclose()
-                        }}
-                                          style={{width: 120, padding: 10, backgroundColor: '#aaa', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginLeft: 10}}>
-                            <Text style={{fontSize: 18, color: '#fff'}}>
+                            <Text style={styles.btn_text}>
                                 Cancelar
                             </Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
             );
         }
@@ -161,58 +228,64 @@ export default class AlertConexoes extends React.Component {
 
         if(this.state.passos.tres){
             return(
-                <View style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center', padding: 10}}>
-
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 25, fontWeight: 'bold', color: '#595959', textAlign: 'center'}}>
+                <View style={styles.container_alert}>
+                    <View style={styles.container_title}>
+                        <Text style={[styles.title, {textAlign: 'center'}]}>
                             Deseja receber uma nova solicitação deste cliente?
                         </Text>
                     </View>
 
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center'}}>
-
-                        <View style={{borderColor: '#595959', borderWidth: 1, width: '80%' }}>
-
+                    <View style={styles.container_title}>
+                        <View style={styles.container_picker}>
                             <Picker
-                                selectedValue={this.state.language}
-                                style={{ height: 50, width: '100%' }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                <Picker.Item label="Escolha..." value="" />
+                                selectedValue={this.state.recusa}
+                                style={styles.picker}
+                                onValueChange={(itemValue, itemIndex) => this.setState({recusa: itemValue})}>
+                                <Picker.Item label="Escolha..." value="escolha" />
                                 <Picker.Item label="Sim" value="sim" />
-                                <Picker.Item label="Daqui à 1 mes" value="sim" />
-                                <Picker.Item label="Daqui à 3 mes" value="tresMeses" />
-                                <Picker.Item label="Daqui à 6 mes" value="seisMeses" />
+                                <Picker.Item label="Daqui à 1 mes" value="1mes" />
+                                <Picker.Item label="Daqui à 3 mes" value="3meses" />
+                                <Picker.Item label="Daqui à 6 mes" value="6meses" />
                                 <Picker.Item label="Nunca" value="nunca" />
                             </Picker>
-
                         </View>
+                        <Text style={styles.errorLabel}>{this.state.error.bloqueio}</Text>
                     </View>
 
-                    <View style={{width: '100%', height: 83.33, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
+                    <View style={styles.container_options}>
+                        <TouchableOpacity style={[styles.btn_alert, {backgroundColor: '#3085d6'}]}
+                            onPress={() => {
+                                if(this.state.recusa == 'escolha'){
+                                    this.state.error.bloqueio = 'Preencha uma opção';
+                                    this.setState({
+                                        error: this.state.error
+                                    });
+                                }else{
+                                    this.desconectar();
+                                    this.props.onclose();
+                                }
+                            }}>
 
-                        <TouchableOpacity style={{width: 120, padding: 10, backgroundColor: '#3085d6', alignItems: 'center', justifyContent: 'center', borderRadius: 5}}>
-                            <Text style={{fontSize: 18, color: '#fff'}}>
+                            <Text style={styles.btn_text}>
                                 OK
                             </Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => {
-                            this.state.passos.um = true;
-                            this.state.passos.dois = false;
-                            this.state.passos.tres = false;
-                            this.setState({
-                            passos: this.state.passos
-                        });
+                        <TouchableOpacity style={[styles.btn_alert, {backgroundColor: '#aaa', marginLeft: 10}]}
+                            onPress={() => {
+                                this.state.passos.um = true;
+                                this.state.passos.dois = false;
+                                this.state.passos.tres = false;
+                                this.setState({
+                                    passos: this.state.passos
+                                });
+                                this.props.onclose()}}>
 
-                            this.props.onclose()
-                        }}
-                                          style={{width: 120, padding: 10, backgroundColor: '#aaa', alignItems: 'center', justifyContent: 'center', borderRadius: 5, marginLeft: 10}}>
-                            <Text style={{fontSize: 18, color: '#fff'}}>
+                            <Text style={styles.btn_text}>
                                 Cancelar
                             </Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
             );
         }
@@ -220,7 +293,7 @@ export default class AlertConexoes extends React.Component {
 
     renderPage(){
         return(
-            <View style={{width: '90%', height: 350, borderRadius: 5, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={styles.content_page}>
                 {this.renderAlertPassoUm()}
                 {this.renderAlertPassoDois()}
                 {this.renderAlertPassoTres()}
@@ -231,10 +304,8 @@ export default class AlertConexoes extends React.Component {
     render(){
         if(this.props.opened){
             return(
-                <View style={{position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.7)', width: this.state.screen_width, height: this.state.screen_height, alignItems: 'center', justifyContent: 'center'}}>
-
+                <View style={[styles.container_page, {height: '100%'}]}>
                     {this.renderPage()}
-
                 </View>
             );
         }else{
@@ -242,6 +313,5 @@ export default class AlertConexoes extends React.Component {
                 <View />
             )
         }
-
     }
 }
