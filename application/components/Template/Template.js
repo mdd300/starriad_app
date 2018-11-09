@@ -119,17 +119,13 @@ export default class Template extends React.Component{
             return(
                 <View style={[ styles.system_template_view ]}>
 
-                    <TemplateHeader
-                        onSettings={ (( state )=>{ this.__switch_settings_menu( state ) }) }
-                        onMenu={ (( state )=>{ this.__switch_menu( state ) }) }/>
+                    { this.__render_header() }
 
                     <Animated.View style={[ styles.system_template_view_viewport, animation_class ]}>
                         { this.__render_content() }
                     </Animated.View>
 
-                    <Animated.View style={[ styles.system_template_view_footer_content, animation_class ]}>
-                        <TemplateFooter navigation={ this.props.navigation } />
-                    </Animated.View>
+                    { this.__render_footer( animation_class ) }
 
                 </View>
             );
@@ -141,11 +137,34 @@ export default class Template extends React.Component{
 
     });/* Fim do escopo da função render do componente */
 
+    /** Função utilizada para renderizar o Header do template */
+    __render_header = (()=>{
 
-    /** Função utilizada para renderizar a view de Loading do template */
-    __render_loading = (()=>{
+        if( this.state.header ){
+            return(
+                <TemplateHeader
+                    onSettings={ (( state )=>{ this.__switch_settings_menu( state ) }) }
+                    onMenu={ (( state )=>{ this.__switch_menu( state ) }) }/>
+            );
+        }else{ return null; }
 
-    });
+    });/* Fim da função utilizada para renderizar o header do template */
+
+
+    /** Função utilizada para renderizar o footer do template */
+    __render_footer = (( animation_class )=>{
+
+        if( this.state.footer ){
+            return(
+                <Animated.View style={[ styles.system_template_view_footer_content, animation_class ]}>
+                    <TemplateFooter navigation={ this.props.navigation } />
+                </Animated.View>
+            );
+        }else{ return null; }
+
+    });/* Fim do escopo da função utilizada para renderizar o footer do template */
+
+    
 
     /** Função utilizada para renderizar o content da pagina de acordo com as props */
     __render_content = (() => {

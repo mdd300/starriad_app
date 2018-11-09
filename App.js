@@ -19,6 +19,9 @@ import FeedCreatePost from "./application/pages/feed-create-post/FeedCreatePost"
 import Login from "./application/pages/login/Login";
 import Perfil from "./application/pages/perfil/Perfil";
 import EditarPerfil from "./application/pages/minha-conta/editar-perfil/EditarPerfil";
+import AlertConexoes from "./application/components/alertConexoes/alertConexoes";
+import ChatHome from "./application/pages/chat/ChatHome/ChatHome";
+import ChatConversation from "./application/pages/chat/ChatConversation/ChatConversation";
 
 firebase.initializeApp(firebaseEnvironments.development);
 firebase.firestore().settings({ timestampsInSnapshots: true });
@@ -52,8 +55,6 @@ export default createStackNavigator({
             screen: FinalizarPedido
         },
         'DetalhePedido': {
-
-            
             screen: DetalhePedido
         },
         'ProdutoProfile': {
@@ -68,6 +69,15 @@ export default createStackNavigator({
         'EditarPerfil': {
             screen: EditarPerfil,
         },
+        'AlertConexoes': {
+            screen: AlertConexoes,
+        },
+        'ChatHome': {
+            screen: ChatHome
+        },
+        'ChatConversation': {
+            screen: ChatConversation
+        },
     },
     {
         initialRouteName: 'Login',
@@ -76,3 +86,4 @@ export default createStackNavigator({
             header: null
         }
     });
+
