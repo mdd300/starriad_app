@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
         flex: 1,
         position: 'relative',
     },
+    chat_conversation_list_messages: {
+        width: '100%',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingVertical: 5,
+    },
+
     chat_conversation_footer: {
         width: '100%',
         position: 'relative',
@@ -72,6 +80,47 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    chat_conversation_footer_action_touchable: {
+        width: 60,
+        height: 60,
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    chat_conversation_footer_action_ico: {
+        width: 20,
+        height: 20,
+        position: 'relative',
+        transform: [{ translateX: -1},{translateY: 1}]
+    },
+
+    keyboard_closer: {
+        width: 35,
+        height: 35,
+        position: 'absolute',
+        right: 10,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#aaa',
+        borderRadius: 5,
+        display: 'flex',
+    },
+    keyboard_closer_touchable: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    keyboard_closer_icon: {
+        width: 20,
+        height: 20,
+        aspectRatio: 1,
     },
 
 });
