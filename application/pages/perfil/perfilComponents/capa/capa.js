@@ -9,10 +9,12 @@ import {
     TouchableOpacity,
     UIManager,
     View,
-    Linking
+    Linking,
+    Share
 } from 'react-native';
 import styles from './capa-styles';
 import ConexoesService from "../../../../services/conexoes/conexoes-service";
+import AlertConexoes from "../../../../components/alertConexoes/alertConexoes";
 
 export default class Capa extends React.Component {
 
@@ -21,19 +23,76 @@ export default class Capa extends React.Component {
 
         this.state = {
             perfil: props.perfil,
-            txtConexao: props.txtConexao,
             user_logged: props.user_logged,
+            labelConexoes: '',
+            opened_alert: false,
+            user_logged_global: null,
+            restkey: null,
+            paramsExcluir: {
+                idSolicitado: null,
+                motivoExclusao: '',
+                tempoBloqueio: ''
+            },
         };
     }
 
+    componentDidMount(){
+
+        setTimeout(() => {
+
+            this.state.labelConexoes = this.props.txtConexao;
+
+            this.setState({
+                labelConexoes: this.state.labelConexoes
+            });
+
+        }, 2000)
+    }
+
+    // Executa quando o component sofre atualizações
+    componentWillReceiveProps(props){
+        this.state.perfil = props.perfil;
+        this.setState({
+            perfil: this.state.perfil,
+        });
+    }
+
+    _closedAlert =((valida, recusa) => {
+
+        console.log('Valida: ', valida);
+        console.log('Recusa: ', recusa);
+
+        if(valida){
+            if(recusa === 'sim'){
+                this.state.labelConexoes = 'conectar';
+                this.setState({
+                    labelConexoes: this.state.labelConexoes
+                });
+            }else{
+                this.state.labelConexoes = 'bloqueei';
+                this.setState({
+                    labelConexoes: this.state.labelConexoes
+                });
+            }
+        }
+
+        this.setState({ opened_alert: false });
+    });
+
     conexoes = async (idClicado, situacao) => {
 
-        const restkey = await AsyncStorage.getItem('restkey');
+        this.state.restkey = await AsyncStorage.getItem('restkey');
+        this.setState({
+            restkey: this.state.restkey
+        });
+
+        const user_logged = await AsyncStorage.getItem('@houpa:userlogged');
+        this.state.user_logged_global = JSON.parse(user_logged);
 
         let resposta = null;
         let motivo = null;
         let bloqueio = null;
-        let paramsExcluir = {
+        this.state.paramsExcluir = {
             idSolicitado: idClicado,
             motivoExclusao: '',
             tempoBloqueio: ''
@@ -42,8 +101,10 @@ export default class Capa extends React.Component {
         if(situacao == 'conectados' || situacao == 'bloqueei'){
             situacao = 'solicitado';
         }else if (situacao == 'aceitar'){
+
+            this.state.labelConexoes = 'conectados';
             this.setState({
-                txtConexao: 'conectados'
+                labelConexoes: this.state.labelConexoes
             });
             situacao = 'conectar';
         }
@@ -51,13 +112,15 @@ export default class Capa extends React.Component {
         switch (situacao) {
             case 'conectar':
 
-                if(this.state.txtConexao != 'conectados'){
+                if(this.state.labelConexoes != 'conectados'){
+
+                    this.state.labelConexoes = 'solicitado';
                     this.setState({
-                        txtConexao: 'solicitado'
+                        labelConexoes: this.state.labelConexoes
                     });
                 }
 
-                ConexoesService.setConectar(idClicado, restkey).then((response) => {
+                ConexoesService.setConectar(idClicado, this.state.restkey).then((response) => {
                     resposta = response.data;
 
                     if (resposta.success) {
@@ -71,109 +134,14 @@ export default class Capa extends React.Component {
 
             case 'solicitado':
 
-                // // Quer dizer que ele vai excluir a solicitação ou conexão
-                // swal({
-                //     title: "Excluir Conexão",
-                //     text: "Tem certeza que deseja excluir essa conexão ?",
-                //     type: 'warning',
-                //     showCancelButton: true,
-                //     confirmButtonColor: '#000',
-                //     cancelButtonColor: '#d33',
-                //     confirmButtonText: 'Sim, deletar!'
-                // }).then(function (result) {
-                //     if (result.value) {
-                //
-                //         var inputOptions = new Promise(function (resolve) {
-                //             setTimeout(function () {
-                //                 resolve({
-                //                     1: 'Critérios de análise Interna',
-                //                     2: 'Praça fechada'
-                //                 });
-                //             }, 100);
-                //         });
-                //
-                //
-                //         swal({
-                //             title: 'Qual o motivo da recusa ?',
-                //             input: 'radio',
-                //             inputOptions: inputOptions,
-                //             showCancelButton: true,
-                //             cancelButtonText: 'Cancelar',
-                //             focusConfirm: true,
-                //             inputValidator: function inputValidator(value) {
-                //                 return !value && 'Marque ao menos uma opção!';
-                //             }
-                //         }).then(function (resposta) {
-                //
-                //             if (resposta.dismiss) {
-                //             } else {
-                //                 motivo = resposta.value;
-                //                 swal({
-                //                     title: 'Deseja receber uma nova solicitação deste cliente?',
-                //                     input: 'select',
-                //                     inputOptions: {
-                //                         'sim': 'Sim',
-                //                         '1mes': 'Daqui à 1 mês',
-                //                         '3meses': 'Daqui à 3 mêses',
-                //                         '6meses': 'Daqui à 6 mêses',
-                //                         'nunca': 'Nunca'
-                //                     },
-                //                     inputPlaceholder: 'Escolha...',
-                //                     cancelButtonText: 'Cancelar',
-                //                     showCancelButton: true,
-                //                     focusConfirm: true,
-                //                     inputValidator: function inputValidator(value) {
-                //                         return !value && 'Escolha ao menos ao menos uma opção!';
-                //                     }
-                //                 }).then(function (valor) {
-                //                     if (valor.dismiss) {
-                //                     } else {
-                //                         // Quer dizer que ele vai excluir a solicitação ou conexão
-                //
-                //                         console.log("tentando", valor);
-                //
-                //                         if (valor.value == "sim") {
-                //                             $scope.txtConexao = 'conectar';
-                //
-                //                         } else {
-                //                             $scope.txtConexao = 'bloqueei';
-                //
-                //                         }
-                //
-                //                         bloqueio = valor.value;
-                //                         paramsExcluir.motivoExclusao = motivo;
-                //                         paramsExcluir.tempoBloqueio = bloqueio;
-                //                         conexoesService.deleteConexao(paramsExcluir).then(function (response) {
-                //                             resposta = response.data;
-                //                             if (resposta.success) {
-                //                                 conexoesService.deleteOfFirestore(idClicado, resposta.user_logged_id, resposta.dadosApagados);
-                //                             }
-                //                         }, function (error) {
-                //                             console.log('ERROR: ', error);
-                //                         });
-                //                     }
-                //                 });
-                //             }
-                //         });
-                //     } else {
-                //     }
-                // });
-
-                // conexoesService.deleteConexao(idClicado).then(function (response) {
-                //     resposta = response.data;
-
-                //     if (resposta.success) {
-                //         conexoesService.deleteOfFirestore(idClicado, resposta.user_logged_id, resposta.dadosApagados);
-                //     }
-                // }, function (error) {
-                //     console.log('ERROR: ', error);
-                // });
-
-                // }
+                this.setState({
+                    opened_alert: true,
+                    user_logged_global: this.state.user_logged_global,
+                    restkey: this.state.restkey
+                });
 
                 break;
         }
-
     };
 
     // Realizar chamada para a loja
@@ -186,6 +154,44 @@ export default class Capa extends React.Component {
             }
         }).catch(err => console.error('Um erro ocorreu: ', err));
     };
+
+    // Compartilhar Perfil
+    sharePerfil(){
+        Share.share({
+            message: 'Olha só o que encontrei no Houpa! Acessa lá! ' + 'http://ws.houpa.com.br/' + this.state.perfil.profile_url,
+            // url: 'http://bam.tech',
+            title: 'Olha só o que encontrei no Houpa! Acessa lá!'
+        }, {
+            // Android only:
+            dialogTitle: `Compartilhar ${this.state.perfil.perfil_nome}`,
+            // iOS only:
+            excludedActivityTypes: [
+                ''
+            ]
+        })
+    };
+
+    renderBotaoConexoes(){
+
+        let user_logged = JSON.parse(this.state.user_logged);
+
+        if(this.state.user_logged && user_logged.user_type != this.state.perfil.user_type && !this.state.perfil.owner){
+           return(
+               <View style={styles.containerLabel}>
+                   <TouchableOpacity activeOpacity={0.6} style={styles.touchBtnConexoes}
+                         onPress={() => {
+                             this.conexoes(this.state.perfil.empresa_id_fk, this.state.labelConexoes)
+                         }}>
+                       <Text style={styles.textBtnConexoes}>
+                           {this.state.labelConexoes.toUpperCase()}
+                       </Text>
+                   </TouchableOpacity>
+               </View>
+           );
+        }else{
+            return null;
+        }
+    }
 
     render(){
         return(
@@ -216,21 +222,7 @@ export default class Capa extends React.Component {
                             </Text>
                         </View>
 
-                        { this.state.user_logged && this.state.user_logged.user_type != this.state.user_logged.user_type &&
-
-                        !this.state.perfil.owner &&
-
-                        <View style={styles.containerLabel}>
-                            <TouchableOpacity activeOpacity={0.6} style={styles.touchBtnConexoes}
-                                              onPress={() => {
-                                                  this.conexoes(this.state.perfil.empresa_id_fk, this.state.txtConexao)
-                                              }}>
-                                <Text style={styles.textBtnConexoes}>
-                                    {this.state.txtConexao.toUpperCase()}
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                        }
+                        {this.renderBotaoConexoes()}
 
                     </View>
 
@@ -244,7 +236,7 @@ export default class Capa extends React.Component {
                             <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/chat-fill.png') } />
                         </TouchableOpacity>
 
-                        <TouchableOpacity activeOpacity={0.6} style={styles.containerIcons}>
+                        <TouchableOpacity onPress={() => this.sharePerfil()} activeOpacity={0.6} style={styles.containerIcons}>
                             <Image resizeMode={'contain'} style={styles.icons} source={ require('../../../../assets/imgs/png/icons/share.png') } />
                         </TouchableOpacity>
 
@@ -258,6 +250,8 @@ export default class Capa extends React.Component {
 
                     </View>
                 </View>
+
+                <AlertConexoes labelConexoes={this.state.labelConexoes} empresa={this.state.perfil} paramsExcluir={this.state.paramsExcluir} restkey={this.state.restkey} user_logged={this.state.user_logged_global} opened={ this.state.opened_alert } onclose={ this._closedAlert } />
             </View>
         );
     }

@@ -36,6 +36,14 @@ class Produto extends React.Component {
         });
     }
 
+    // Executa quando o component sofre atualizações
+    componentWillReceiveProps(props){
+        this.state.perfil_produto = props.produtos;
+        this.setState({
+            perfil_produto: this.state.perfil_produto
+        });
+    }
+
     touchOpcoesProdutos(indexProduto){
 
         if(this.state.indice_ativo === indexProduto){

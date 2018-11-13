@@ -39,11 +39,13 @@ export default class AlertConexoes extends React.Component {
         let motivo = this.state.motivo;
         let bloqueio = this.state.recusa;
 
+        this.state.paramsExcluir.idSolicitado = this.props.paramsExcluir.idSolicitado;
         this.state.paramsExcluir.motivoExclusao = motivo;
         this.state.paramsExcluir.tempoBloqueio = bloqueio;
 
         ConexoesService.deleteConexao(this.state.paramsExcluir, this.props.restkey).then((response) => {
             resposta = response.data;
+
             if (resposta.success) {
                 this.props.empresa.notificacao_tipo = 10;
                 this.props.empresa.notificacao_nome = 'E você estão desconectados';
@@ -55,11 +57,9 @@ export default class AlertConexoes extends React.Component {
         }, (error) => {
             console.log('ERROR: ', error);
         });
-
     }
 
     renderAlertPassoUm(){
-
         if(this.state.passos.um){
             return(
                 <View style={styles.container_alert}>
@@ -117,7 +117,6 @@ export default class AlertConexoes extends React.Component {
     }
 
     renderAlertPassoDois(){
-
         if(this.state.passos.dois){
             return(
                 <View style={styles.container_alert}>
@@ -209,6 +208,8 @@ export default class AlertConexoes extends React.Component {
                                 this.state.passos.um = true;
                                 this.state.passos.dois = false;
                                 this.state.passos.tres = false;
+                                this.state.opcao.um = false;
+                                this.state.opcao.dois = false;
                                 this.setState({
                                     passos: this.state.passos
                                 });
@@ -262,7 +263,12 @@ export default class AlertConexoes extends React.Component {
                                     });
                                 }else{
                                     this.desconectar();
-                                    this.props.onclose();
+                                    this.props.onclose(true, this.state.recusa);
+                                    this.state.passos.um = true;
+                                    this.state.passos.dois = false;
+                                    this.state.passos.tres = false;
+                                    this.state.opcao.um = false;
+                                    this.state.opcao.dois = false;
                                 }
                             }}>
 
@@ -276,6 +282,8 @@ export default class AlertConexoes extends React.Component {
                                 this.state.passos.um = true;
                                 this.state.passos.dois = false;
                                 this.state.passos.tres = false;
+                                this.state.opcao.um = false;
+                                this.state.opcao.dois = false;
                                 this.setState({
                                     passos: this.state.passos
                                 });

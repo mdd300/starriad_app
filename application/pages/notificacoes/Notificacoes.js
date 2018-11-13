@@ -25,20 +25,24 @@ export default class Notificacoes extends React.Component {
             loading: false,
             error: false,
             refreshing: false,
-            msg_notificacoes: false
+            msg_notificacoes: false,
         };
     }
 
     componentDidMount(){
-        this.setState({ loading: true });
+
+        this.setState({
+            loading: true,
+        });
+
         setTimeout(() => {
-
             this.loadActivities();
-
         }, 1500);
     }
 
     loadActivities = async () =>  {
+
+        console.log('AQUI');
 
         const restkey = await AsyncStorage.getItem('restkey');
         let params = {dados: 'OK'};
@@ -105,7 +109,7 @@ export default class Notificacoes extends React.Component {
                     />
                 }>
 
-                <ListNotificacoes loadActivities={this.loadActivities()} notificacoes={this.state.notificacoes} />
+                <ListNotificacoes notificacoes={this.state.notificacoes} />
 
             </ScrollView>
         );

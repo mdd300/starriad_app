@@ -33,6 +33,8 @@ export default class Perfil extends React.Component {
 
             // perfil_nome: this.props.navigation.getParam('perfil_nome'),
             // profile_url: this.props.navigation.getParam('profile_url'),
+            perfil_nome_params: undefined,
+            profile_url_params: undefined,
 
             params: {
                 profile_url: '',
@@ -100,10 +102,33 @@ export default class Perfil extends React.Component {
         }, 500);
     }
 
+    componentWillReceiveProps(props){
+
+        this.state.perfil_nome_params = props.navigation.getParam('perfil_nome');
+        this.state.profile_url_params = props.navigation.getParam('profile_url');
+
+        this.setState({
+            perfil_nome_params: this.state.perfil_nome_params,
+            profile_url_params: this.state.profile_url_params
+        });
+
+        console.log('profile_url_params PROPS: ', this.state.profile_url_params);
+        console.log('perfil_nome_params PROPS: ', this.state.perfil_nome_params);
+        this.componentDidMount();
+    }
+
     getProfileData = async () => {
 
-        let perfil_nome_params = this.props.navigation.getParam('perfil_nome');
-        let profile_url_params = this.props.navigation.getParam('profile_url');
+        this.state.perfil_nome_params = this.props.navigation.getParam('perfil_nome');
+        this.state.profile_url_params = this.props.navigation.getParam('profile_url');
+
+        this.setState({
+            perfil_nome_params: this.state.perfil_nome_params,
+            profile_url_params: this.state.profile_url_params
+        });
+
+        console.log('profile_url_params: ', this.state.profile_url_params);
+        console.log('perfil_nome_params: ', this.state.perfil_nome_params);
 
         this.state.restkey = await AsyncStorage.getItem('restkey');
         this.state.user_logged_global = await AsyncStorage.getItem('@houpa:userlogged');
@@ -113,16 +138,19 @@ export default class Perfil extends React.Component {
             restkey: this.state.restkey
         });
 
-        if(profile_url_params !== undefined){
+        if(this.state.profile_url_params !== undefined){
 
-            console.log('IF: ', profile_url_params);
+            console.log('IF: ', this.state.profile_url_params);
 
-            this.state.params.profile_url = profile_url_params;
+            this.state.params.profile_url = this.state.profile_url_params;
             this.setState({
                 params: this.state.params
             });
 
         }else{
+
+            console.log('ELSE: ');
+
             let user_logged = JSON.parse(this.state.user_logged_global);
             let profile_url = user_logged.profile_url;
 
@@ -190,90 +218,90 @@ export default class Perfil extends React.Component {
 
                 this.getProducts();
 
-                let geocoding = null;
-
-                this.state.enderecos.forEach((endereco, indice) => {
-                    if ((endereco.empresa_latitude == null || endereco.empresa_latitude === "") && (endereco.empresa_longitude == null || endereco.empresa_latitude === "")) {
-                        axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + endereco.endereco_numero +
-                            ', ' + endereco.endereco_local.replace(/ /g, '+') + ',' + endereco.endereco_uf +
-                            '&key=AIzaSyBdCtTujNnCyhmvCOQGhv_weOjYpM0g7d4').then((res) => {
-
-                            console.log('res : ', res);
-
-                            geocoding = res.data.results[0].geometry.location;
-                            this.state.coordsEnderecos.push(geocoding);
-
-                            this.setState({
-                                coordsEnderecos: this.state.coordsEnderecos
-                            });
-
-                            PerfilService.updateCoordsEmpresa({
-                                coords: geocoding,
-                                empresa_id_fk: this.state.dados.empresa_id_fk,
-                                endereco_id: endereco.endereco_id
-                            });
-
-                            // if (indice === 0) {
-                            //     this.state.map = new google.maps.Map(document.getElementById('map-location'), {
-                            //         center: geocoding,
-                            //         zoom: 17
-                            //     });
-                            //
-                            //     this.setState({
-                            //         map: this.state.map
-                            //     });
-                            // }
-                            //
-                            // let marker = new google.maps.Marker({
-                            //     position: geocoding,
-                            //     map: this.state.map,
-                            //     title: this.state.dados.perfil_nome
-                            // });
-                            //
-                            // this.setState({
-                            //     map: this.state.map
-                            // });
-                            //
-                            // marker.setMap(this.state.map);
-
-                        }).catch((err) => {
-                            geocoding = null;
-                            console.log('ERROR: ', err);
-                        })
-                    } else {
-
-
-                        // geocoding = new google.maps.LatLng(endereco.empresa_latitude, endereco.empresa_longitude);
-
-                        // this.state.coordsEnderecos.push(geocoding);
-                        // this.setState({
-                        //     coordsEnderecos: this.state.coordsEnderecos
-                        // });
-
-                        // if (indice === 0) {
-                        //     this.state.map = new google.maps.Map(document.getElementById('map-location'), {
-                        //         center: geocoding,
-                        //         zoom: 17
-                        //     });
-
-                        //     this.setState({
-                        //         map: this.state.map
-                        //     });
-                        // }
-
-                        // let marker = new google.maps.Marker({
-                        //     position: geocoding,
-                        //     map: this.state.map,
-                        //     title: this.state.dados.perfil_nome
-                        // });
-
-                        // this.setState({
-                        //     map: this.state.map
-                        // });
-
-                        // marker.setMap(this.state.map);
-                    }
-                });
+                // let geocoding = null;
+                //
+                // this.state.enderecos.forEach((endereco, indice) => {
+                //     if ((endereco.empresa_latitude == null || endereco.empresa_latitude === "") && (endereco.empresa_longitude == null || endereco.empresa_latitude === "")) {
+                //         axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + endereco.endereco_numero +
+                //             ', ' + endereco.endereco_local.replace(/ /g, '+') + ',' + endereco.endereco_uf +
+                //             '&key=AIzaSyBdCtTujNnCyhmvCOQGhv_weOjYpM0g7d4').then((res) => {
+                //
+                //             console.log('res : ', res);
+                //
+                //             geocoding = res.data.results[0].geometry.location;
+                //             this.state.coordsEnderecos.push(geocoding);
+                //
+                //             this.setState({
+                //                 coordsEnderecos: this.state.coordsEnderecos
+                //             });
+                //
+                //             PerfilService.updateCoordsEmpresa({
+                //                 coords: geocoding,
+                //                 empresa_id_fk: this.state.dados.empresa_id_fk,
+                //                 endereco_id: endereco.endereco_id
+                //             });
+                //
+                //             // if (indice === 0) {
+                //             //     this.state.map = new google.maps.Map(document.getElementById('map-location'), {
+                //             //         center: geocoding,
+                //             //         zoom: 17
+                //             //     });
+                //             //
+                //             //     this.setState({
+                //             //         map: this.state.map
+                //             //     });
+                //             // }
+                //             //
+                //             // let marker = new google.maps.Marker({
+                //             //     position: geocoding,
+                //             //     map: this.state.map,
+                //             //     title: this.state.dados.perfil_nome
+                //             // });
+                //             //
+                //             // this.setState({
+                //             //     map: this.state.map
+                //             // });
+                //             //
+                //             // marker.setMap(this.state.map);
+                //
+                //         }).catch((err) => {
+                //             geocoding = null;
+                //             console.log('ERROR: ', err);
+                //         })
+                //     } else {
+                //
+                //
+                //         // geocoding = new google.maps.LatLng(endereco.empresa_latitude, endereco.empresa_longitude);
+                //
+                //         // this.state.coordsEnderecos.push(geocoding);
+                //         // this.setState({
+                //         //     coordsEnderecos: this.state.coordsEnderecos
+                //         // });
+                //
+                //         // if (indice === 0) {
+                //         //     this.state.map = new google.maps.Map(document.getElementById('map-location'), {
+                //         //         center: geocoding,
+                //         //         zoom: 17
+                //         //     });
+                //
+                //         //     this.setState({
+                //         //         map: this.state.map
+                //         //     });
+                //         // }
+                //
+                //         // let marker = new google.maps.Marker({
+                //         //     position: geocoding,
+                //         //     map: this.state.map,
+                //         //     title: this.state.dados.perfil_nome
+                //         // });
+                //
+                //         // this.setState({
+                //         //     map: this.state.map
+                //         // });
+                //
+                //         // marker.setMap(this.state.map);
+                //     }
+                // });
             }
 
         }).catch((error) => {

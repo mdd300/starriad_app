@@ -18,7 +18,8 @@ const ConexoesService = {
     },
 
     deleteConexao(params, restkey) {
-        var body = {
+
+        let body = {
             empresa_id: params.idSolicitado,
             motivo: params.motivoExclusao,
             bloqueio: params.tempoBloqueio

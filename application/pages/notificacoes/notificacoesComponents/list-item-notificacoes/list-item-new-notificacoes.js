@@ -191,8 +191,6 @@ class ListItemNewNotificacoes extends React.Component {
             user_logged_global: this.state.user_logged_global,
             restkey: this.state.restkey
         });
-
-        this.props.reloadPage;
     };
 
     toPerfil(){
@@ -226,7 +224,11 @@ class ListItemNewNotificacoes extends React.Component {
                             <View style={styles.statusLida} />
                             }
 
-                            <TouchableOpacity activeOpacity={0.8} style={styles.containerImagem}>
+                            <TouchableOpacity onPress={() => {
+                                let profile_url = atividade.profile_url;
+                                let perfil_nome = atividade.perfil_nome;
+                                this.props.navigation.navigate('Perfil', {profile_url, perfil_nome});
+                            }} activeOpacity={0.8} style={styles.containerImagem}>
                                 {
                                     atividade.img_url_big.medium !== '' ?
                                         <Image style={styles.imgPerfil} source={{uri: atividade.img_url_big.medium}}/> :
