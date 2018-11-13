@@ -57,11 +57,7 @@ export default class Capa extends React.Component {
         });
     }
 
-    _closedAlert =((valida, recusa) => {
-
-        console.log('Valida: ', valida);
-        console.log('Recusa: ', recusa);
-
+    _closedAlert = ((valida, recusa) => {
         if(valida){
             if(recusa === 'sim'){
                 this.state.labelConexoes = 'conectar';
