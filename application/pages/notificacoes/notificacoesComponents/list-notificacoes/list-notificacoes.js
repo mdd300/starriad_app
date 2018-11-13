@@ -11,10 +11,10 @@ const ListNotificacoes = props => {
         <FlatList data={notificacoes} renderItem={({ item }) => (
 
             <View>
-                <ListItemNewNotificacoes
+                <ListItemNewNotificacoes reloadPage={loadActivities}
                     notificacao={item} />
 
-                <ListItemLastNotificacoes
+                <ListItemLastNotificacoes reloadPage={loadActivities}
                     notificacao={item} />
             </View>
 

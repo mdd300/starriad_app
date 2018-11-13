@@ -191,11 +191,9 @@ class ListItemNewNotificacoes extends React.Component {
             user_logged_global: this.state.user_logged_global,
             restkey: this.state.restkey
         });
+
+        this.props.reloadPage;
     };
-
-    toPerfil(){
-
-    }
 
     render(){
 
