@@ -80,7 +80,7 @@ export default createStackNavigator({
         },
     },
     {
-        initialRouteName: 'Login',
+        initialRouteName: 'ChatConversation',
 
         navigationOptions: {
             header: null
