@@ -70,7 +70,7 @@ export const styleCadastro = StyleSheet.create({
 
     labelSenha: {
         textAlign: 'right',
-        color: '#cdb5f1',
+        color: '#004591',
         fontSize: 16
     },
 

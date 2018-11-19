@@ -85,7 +85,7 @@ export default class RecuperarSenha extends React.Component {
                             this.setState({error: this.state.error});
                         }}
                         underlineColorAndroid='#FFF'
-                        placeholder="E-mail ou telefone"
+                        placeholder="E-mail"
                         placeholderTextColor="#a0a7ad"
                     />
                     <Text style={[styleCadastro.errorLabel]}>{this.state.error.input}</Text>

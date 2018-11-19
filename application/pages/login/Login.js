@@ -68,7 +68,7 @@ export default class Login extends React.Component {
                     </View>
                     <View>
                         <Image resizeMode={'contain'} style={styleLogin.imgLogo}
-                                         source={require('../../assets/imgs/png/logo/houpa-solid-white.png')}/>
+                                         source={require('../../assets/imgs/png/logo/logo.png')}/>
                     </View>
 
                 </View>

@@ -1,3 +1,3 @@
 
 // O ambiente atual
-export const ENVIRONMENT_CURRENT = "development";
+export const ENVIRONMENT_CURRENT = "localhost";

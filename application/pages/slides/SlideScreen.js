@@ -80,7 +80,7 @@ export default class SlideScreen extends React.Component {
                                         colors={['#000', 'rgba(0, 0, 0, 0)']}
                                         locations={[0, 0.5]}>
                             <Image resizeMode={'contain'} style={style.imgLogo}
-                                   source={require('../../assets/imgs/png/logo/houpa-solid-white.png')}/>
+                                   source={require('../../assets/imgs/png/logo/logo.png')}/>
                         </LinearGradient>
                     </View>
                     <LinearGradient style={[style.bottomContainer]}

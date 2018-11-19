@@ -151,7 +151,7 @@ export const style = StyleSheet.create({
 
 
         btnEntrar: {
-            backgroundColor: '#7f1df0',
+            backgroundColor: '#004591',
         },
         btnCadastrar: {
             backgroundColor: 'transparent',
