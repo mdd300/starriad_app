@@ -101,25 +101,7 @@ export default class TopExplorer extends React.Component {
                                     </Text>
                                 </View>
 
-                                <View style={styles.infosButtons}>
-                                    <TouchableOpacity activeOpacity={0.6} style={styles.btnLoja} onPress={()=> this.openProfile()}>
-                                        <Text style={styles.labelBtnLoja}>
-                                            VISITAR LOJA
-                                        </Text>
-                                    </TouchableOpacity>
 
-                                    <TouchableOpacity activeOpacity={0.6} style={styles.btnConexoes} onPress={()=> this.conexao()}>
-                                        {!this.state.loading &&
-                                        <Text style={styles.labelBtnConexoes}>
-                                            CONECTAR
-                                        </Text>
-                                        }
-                                        {
-                                            this.state.loading &&
-                                            <ActivityIndicator size="small" color="#fff" />
-                                        }
-                                    </TouchableOpacity>
-                                </View>
                             </View>
                         </View>
                     ))}

@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
 
     template_header_content: {
         width: '100%',
-        backgroundColor: '#fff',
+        backgroundColor: '#002f49',
         display: 'flex',
         borderBottomWidth: 1,
-        borderColor: '#ddd'
+        borderColor: '#002f49'
     },
 
     template_device_status_bar: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         display: 'flex',
         height: 50,
-        backgroundColor: '#fff',
+        backgroundColor: '#002f49',
         flexDirection: 'row'
     },
     template_header_action: {
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         position: 'relative',
+        tintColor: "#fff"
     },
 
     template_header_logo: {
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     },
     template_header_logo_img: {
         width: 76.2,
-        height: 24,
+        height: "80%",
     },
 
 

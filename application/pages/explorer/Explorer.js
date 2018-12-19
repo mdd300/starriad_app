@@ -48,9 +48,7 @@ export default class Explorer extends React.Component {
         return (
 
             // Faz o refresh da pagina
-            <ScrollView refreshControl={
-                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh} colors={['#7417fb']} />
-                }>
+            <ScrollView >
 
                 <ScrollView style={styles.containerScroll}>
                     <View style={styles.containerExplorer}>

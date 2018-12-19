@@ -58,8 +58,9 @@ const stylesBodyExplorer = StyleSheet.create({
 
     // Nome do perfil
     nomeMarca: {
-        color: '#000',
-        fontWeight: 'bold'
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 20
     },
 
     // Contém os botões do header do explorer
@@ -111,7 +112,7 @@ const stylesBodyExplorer = StyleSheet.create({
     containerProdutos: {
         flex: 1,
         width: '100%',
-        height: 300,
+        height: 180,
         paddingLeft: 10,
         marginBottom: 10,
     },
@@ -126,7 +127,7 @@ const stylesBodyExplorer = StyleSheet.create({
 
     // Container do produto individual
     produtosContainer: {
-        width: 230,
+        width: 250,
         height: '100%',
         marginRight: 10,
         backgroundColor: '#f3f3f3',

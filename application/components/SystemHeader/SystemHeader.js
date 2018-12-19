@@ -69,25 +69,18 @@ class SystemHeader extends React.Component {
 
                         <View style={[styles.headerActionContent]}></View>
 
-                        <View style={[styles.headerLogoContent]}>
-                            <Image source={require("../../assets/imgs/png/logo/houpa-solid-black.png")} resizeMode="contain"
-                                   style={[{height: 50, width: 80}]}></Image>
-                        </View>
+                        {/*<View style={[styles.headerLogoContent]}>*/}
+                            {/*<Image source={require("../../assets/imgs/png/logo/houpa-solid-black.png")} resizeMode="contain"*/}
+                                   {/*style={[{height: 50, width: 80}]}></Image>*/}
+                        {/*</View>*/}
 
                         <TouchableOpacity style={[ styles.headerTouchableOpacity ]}>
-                            <View style={[styles.headerActionContent]}>
-                                <Image source={require('../../assets/imgs/png/icons/chat-2.png')}
-                                       style={[{aspectRatio: 1, width: 25, height: 25}]}/>
-                                <HeaderBadge badgeValue="8"/>
-                            </View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={[ styles.headerTouchableOpacity ]} onPress={this.toCarrinho}>
-                            <View style={[styles.headerActionContent]}>
-                                <Image source={require('../../assets/imgs/png/icons/bag.png')}
-                                       style={[{aspectRatio: 1, width: 25, height: 25}]}/>
-                                <HeaderBadge badgeValue="10 "/>
-                            </View>
+                            {/*<View style={[styles.headerActionContent]}>*/}
+                                {/*<Image source={require('../../assets/imgs/png/icons/chat-2.png')}*/}
+                                       {/*style={[{aspectRatio: 1, width: 25, height: 25}]}/>*/}
+                                {/*<HeaderBadge badgeValue="8"/>*/}
+                            {/*</View>*/}
+                            <Text>Cupons</Text>
                         </TouchableOpacity>
 
                     </View>

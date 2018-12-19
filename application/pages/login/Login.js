@@ -38,21 +38,19 @@ export default class Login extends React.Component {
             <View>
                 <View style={[styleLogin.headerNotificationBar]}/>
 
-                <ImageBackground resizeMode={'cover'}
-                                 style={[{width: this.state.screenWidth}, {height: this.state.screenHeight}, styleLogin.container]}
-                                 source={require("../../assets/imgs/jpg/login/bg4.jpg")}
-                                 ref="image">
+                <View resizeMode={'cover'}
+                                 style={[{width: this.state.screenWidth}, {height: this.state.screenHeight}, styleLogin.container]}>
 
                     <LinearGradient style={styleLogin.header}
-                                    colors={['#000', 'rgba(0, 0, 0, 0)']}
+                                    colors={['#004591', 'rgba(0, 0, 0, 0)']}
                                     locations={[0.1, 0.9]}>
                     </LinearGradient>
 
-                    <LinearGradient colors={['rgba(0, 0, 0, 0)', '#000',]}
+                    <LinearGradient colors={['rgba(0, 0, 0, 0)', '#004591',]}
                                     locations={[0.1, 0.9]}
                                     style={styleLogin.footer}>
                     </LinearGradient>
-                </ImageBackground>
+                </View>
 
                 <KeyboardAvoidingView behavior="padding">
                     <ScrollView>

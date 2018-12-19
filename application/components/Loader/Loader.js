@@ -35,15 +35,15 @@ export default class Loader extends React.Component{
 
         return(
             <View style={[ styles.loader_content ]}>
-                <View style={[ styles.loader_view ]}>
+                {/*<View style={[ styles.loader_view ]}>*/}
 
-                    <Animated.Image style={[ styles.loader_icon, bounce_style ]} source={ require("../../assets/imgs/gif/loading_houpa.gif") }/>
+                    {/*<Animated.Image style={[ styles.loader_icon, bounce_style ]} source={ require("../../assets/imgs/gif/loading_houpa.gif") }/>*/}
 
-                    <Animated.View style={[ styles.loader_label_content, bounce_style ]}>
-                        <Text style={[ styles.loader_label ]}> Carregando... </Text>
-                    </Animated.View>
+                    {/*<Animated.View style={[ styles.loader_label_content, bounce_style ]}>*/}
+                        {/*<Text style={[ styles.loader_label ]}> Carregando... </Text>*/}
+                    {/*</Animated.View>*/}
 
-                </View>
+                {/*</View>*/}
             </View>
         );
 

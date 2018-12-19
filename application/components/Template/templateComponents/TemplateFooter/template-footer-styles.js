@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 50,
         position: 'relative',
-        backgroundColor: '#fff',
+        backgroundColor: '#002035',
         borderTopWidth: 1,
-        borderColor: '#ddd'
+        borderColor: '#002035'
     },
     template_footer_content: {
         width: '100%',
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     template_footer_action_icon: {
         width: 22,
         height: 22,
+        tintColor: "#fff"
     },
     template_footer_action_profile: {
         width: 27,

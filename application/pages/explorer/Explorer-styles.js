@@ -16,7 +16,7 @@ const stylesExplorer = StyleSheet.create({
     // Contem o conteudo da pagina explorer
     containerExplorer: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#225c72',
         alignItems: 'center',
         justifyContent: 'center',
     },

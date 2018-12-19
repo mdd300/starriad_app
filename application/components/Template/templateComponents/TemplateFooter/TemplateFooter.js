@@ -62,15 +62,15 @@ export default class TemplateFooter extends React.Component{
 
                     <View style={[ styles.template_footer_action ]}>
                         <TouchableOpacity
-                            onPress={() => { this.__navigate_feed() }}
+                            onPress={() => {  }}
                             style={[ styles.template_footer_action_touchable ]}>
-                            <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/feed.png") }/>
+                            <Image tintColor="" style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/feed.png") }/>
                         </TouchableOpacity>
                     </View>
 
                     <View style={[ styles.template_footer_action ]}>
                         <TouchableOpacity
-                            onPress={() => { this.__navigate_explorer() }}
+                            onPress={() => {  }}
                             style={[ styles.template_footer_action_touchable ]}>
                             <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/explorer.png") }/>
                         </TouchableOpacity>
@@ -78,32 +78,11 @@ export default class TemplateFooter extends React.Component{
 
                     <View style={[ styles.template_footer_action ]}>
                         <TouchableOpacity
-                            onPress={() => { this.__navigate_cart() }}
+                            onPress={() => {  }}
                             style={[ styles.template_footer_action_touchable ]}>
-                            <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/cart.png") }/>
+                            <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/play-button.png") }/>
                         </TouchableOpacity>
                     </View>
-
-                    <View style={[ styles.template_footer_action ]}>
-                        <TouchableOpacity
-                            onPress={()=>{ this.__navigate_chat() }}
-                            style={[ styles.template_footer_action_touchable ]}>
-                            <Image style={[ styles.template_footer_action_icon ]} source={ require("../../../../assets/imgs/png/icons/chat.png") }/>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={[ styles.template_footer_action ]}>
-                        <TouchableOpacity
-                            onPress={() => { this.__navigate_perfil() }}
-                            style={[ styles.template_footer_action_touchable ]}>
-                            <View style={[ styles.template_footer_action_profile ]}>
-                                {this.state.dados_carregados &&
-                                    <Image style={[ styles.template_footer_action_profile_image ]} source={{ uri: this.state.perfilInfo.img_url_big.mini }}/>
-                                }
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-
                 </View>
             </View>
         );

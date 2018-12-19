@@ -80,7 +80,7 @@ export default createStackNavigator({
         },
     },
     {
-        initialRouteName: 'Login',
+        initialRouteName: 'Explorer',
 
         navigationOptions: {
             header: null

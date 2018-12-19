@@ -272,27 +272,37 @@ class TemplateHeader extends React.Component {
 
                     <View style={[ styles.template_header_logo ]}>
                         <View style={[ styles.template_header_logo_content ]}>
-                            <Image resizeMode="cover" style={[ styles.template_header_logo_img ]} source={ require("../../../../assets/imgs/png/logo/houpa-solid-black.png") }/>
+                            <Image resizeMode="contain" style={[ styles.template_header_logo_img ]} source={ require("../../../../assets/imgs/png/logo/houpa-solid-black.png") }/>
                         </View>
                     </View>
 
-                    <View style={[ styles.template_header_action ]}>
+                    <View style={[{
+                        width: 100,
+                        height: 50,
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                    marginRight: 20}]}>
                         <TouchableOpacity  onPress={() => {
-                            this.props.navigation.navigate('Notificacoes');
-                            this.readNotificFirestore();
+                            // this.props.navigation.navigate('Notificacoes');
                         }}
-                            style={[ styles.template_header_action_touchable ]} >
-                            <Image style={[ styles.template_header_action_icon ]} source={ require("../../../../assets/imgs/png/icons/notification.png") }></Image>
+                            style={[ {
+                                width: 80,
+                                height: 50,
+                                position: 'relative',
+                                display: 'flex',
+                                alignItems: 'center',
+                                flexDirection: 'row'
+                            } ]} >
+                            {/*<Image style={[ styles.template_header_action_icon ]} source={ require("../../../../assets/imgs/png/icons/notification.png") }></Image>*/}
+                            <Image resizeMode="contain" style={{margin:5}} source={ require("../../../../assets/imgs/png/icons/ticket.png") }/>
+                            <Text style={{color: "#fff"}}>Cupons</Text>
                             <HeaderBadge badgeValue={this.state.notificacoesAtivas} />
                         </TouchableOpacity>
                     </View>
 
-                    <View style={[ styles.template_header_action ]}>
-                        <TouchableOpacity
-                            style={[ styles.template_header_action_touchable ]}
-                            onPress={(()=>{ this.__switch_settings() })}>
-                            <Image style={[ styles.template_header_action_icon ]} source={ require("../../../../assets/imgs/png/icons/cogs.png") }></Image>
-                        </TouchableOpacity>
+                    <View style={[{height: 5}]}>
+
                     </View>
 
                 </Animated.View>
@@ -321,73 +331,7 @@ class TemplateHeader extends React.Component {
                         </Text>
                     </View>
                     <View style={[ styles.template_header_settings_menu ]}>
-                        <ScrollView style={[ styles.template_header_settings_menu_scrollview ]}>
 
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Editar minha conta
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Alterar minha senha
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Suporte
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Central de Ajuda
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Termos de uso
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Sobre o Houpa!
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Imprensa
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={[ styles.template_header_settings_menu_setting ]}>
-                                <TouchableOpacity onPress={() => this._exit()} style={[ styles.template_header_settings_menu_settings_touchable ]}>
-                                    <Text style={[ styles.template_header_settings_menu_setting_text ]}>
-                                        Sair
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-
-                        </ScrollView>
                     </View>
 
                 </View>
@@ -425,7 +369,7 @@ class TemplateHeader extends React.Component {
                             <View style={[ styles.template_header_menu_option ]}>
                                 <TouchableOpacity style={[ styles.template_header_menu_option_touchable ]}>
                                     <Text style={[ styles.template_header_menu_option_text ]}>
-                                        Explorar
+                                        Meus Cupons
                                     </Text>
                                 </TouchableOpacity>
                             </View>
@@ -436,7 +380,7 @@ class TemplateHeader extends React.Component {
                                         onPress={() => { this.setState({ menu_brands: !this.state.menu_brands }) }}
                                         style={[ styles.template_header_menu_option_touchable ]}>
                                         <Text style={[ styles.template_header_menu_option_text ]}>
-                                            Marcas
+                                            Categorias
                                         </Text>
                                         <View style={[ styles.template_header_menu_option_icon ]}>
                                             <Image
@@ -455,53 +399,15 @@ class TemplateHeader extends React.Component {
                                     </ScrollView>
                                 </View>
                             </View>
-
                             <View style={[ styles.template_header_menu_option ]}>
-                                <View style={[ styles.template_header_menu_option_label ]}>
-                                    <TouchableOpacity
-                                        onPress={() => { this.setState({ menu_categories: !this.state.menu_categories }) }}
-                                        style={[ styles.template_header_menu_option_touchable ]}>
-                                        <Text style={[ styles.template_header_menu_option_text ]}>
-                                            Por Categoria
-                                        </Text>
-                                        <View style={[ styles.template_header_menu_option_icon ]}>
-                                            <Image
-                                                style={[ styles.template_header_menu_option_ico, { transform: [{ rotate: (this.state.menu_categories ? '90deg' : '0deg' ) }] } ]}
-                                                source={ require('../../../../assets/imgs/png/icons/caret-right.png') }/>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={[ styles.template_header_submenu_options, { maxHeight: ( this.state.menu_categories ? 400 : 0 ) } ]}>
-                                    <ScrollView style={[ styles.template_header_submenu_scrollview ]}>
-                                        <View style={[ styles.template_header_submenu_view ]}>
-
-                                            { this.__render_categories() }
-
-                                        </View>
-                                    </ScrollView>
-                                </View>
+                                <TouchableOpacity style={[ styles.template_header_menu_option_touchable ]}>
+                                    <Text style={[ styles.template_header_menu_option_text ]}>
+                                        Configurações
+                                    </Text>
+                                </TouchableOpacity>
                             </View>
-                            <View style={[ styles.template_header_menu_option ]}>
-                                <View style={[ styles.template_header_menu_option_label ]}>
-                                    <TouchableOpacity
-                                        onPress={() => { this.setState({ menu_region: !this.state.menu_region }) }}
-                                        style={[ styles.template_header_menu_option_touchable ]}>
-                                        <Text style={[ styles.template_header_menu_option_text ]}>
-                                            Por Região
-                                        </Text>
-                                        <View style={[ styles.template_header_menu_option_icon ]}>
-                                            <Image
-                                                style={[ styles.template_header_menu_option_ico, { transform: [{ rotate: (this.state.menu_region ? '90deg' : '0deg' ) }] } ]}
-                                                source={ require('../../../../assets/imgs/png/icons/caret-right.png') }/>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={[ styles.template_header_submenu_options, { maxHeight: ( this.state.menu_region ? 400 : 0 ) } ]}>
-                                    <ScrollView style={[ styles.template_header_submenu_scrollview ]}>
-                                        { this.__render_regions() }
-                                    </ScrollView>
-                                </View>
-                            </View>
+
+
 
                         </ScrollView>
                     </View>
@@ -519,15 +425,10 @@ class TemplateHeader extends React.Component {
 
         /* Variável que controla os registros de brands */
         const brands = [
-            { brand_name: 'Tiffany & CO.' },
-            { brand_name: 'Ralph Lauren' },
-            { brand_name: 'Prada' },
-            { brand_name: 'Dior' },
-            { brand_name: 'Giorgio Armani' },
-            { brand_name: 'Dolce & Gabbana' },
-            { brand_name: 'Versace' },
-            { brand_name: 'Chanel' },
-            { brand_name: 'Louis Vuitton' },
+            { brand_name: 'Alimentos' },
+            { brand_name: 'Aplicativos' },
+            { brand_name: 'Moda' },
+            { brand_name: 'outros' },
         ];
 
         /* Mapeia os registros de marcas, para retornar a renderização dos registros */

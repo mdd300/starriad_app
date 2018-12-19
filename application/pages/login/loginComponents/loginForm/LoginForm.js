@@ -42,7 +42,7 @@ export default class LoginForm extends React.Component {
                             this.setState({error: this.state.error});
                         }}
                         underlineColorAndroid='#FFF'
-                        placeholder="Nome de usuario/E-mail"
+                        placeholder="Telefone"
                         placeholderTextColor="#a0a7ad"
                     />
                     <Text style={[styleCadastro.errorLabel]}>{this.state.error.user_login}</Text>

@@ -6,7 +6,7 @@ export const styleLogin = StyleSheet.create({
         width: '100%',
         height: 24,
         display: 'flex',
-        backgroundColor: 'rgba( 124, 24, 246, 0.8 )',
+        backgroundColor: '#000',
         position: 'relative'
     },
 
@@ -16,7 +16,8 @@ export const styleLogin = StyleSheet.create({
             left: 0,
             top: 0,
             display: 'flex',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            backgroundColor: '#000',
         },
         header: {
             width: '100%',
@@ -32,8 +33,8 @@ export const styleLogin = StyleSheet.create({
         },
 
         imgLogo: {
-            width: 100,
-            height: 36,
+            width: 150,
+            height: 120,
         },
 
         imgSeta: {
@@ -42,11 +43,11 @@ export const styleLogin = StyleSheet.create({
             tintColor: '#fff'
         },
 
-        setaContainer: {right: 100, top: 2},
+        setaContainer: {right: 100, top: 2, marginLeft: 15},
 
 
         headerContainer: {
-            marginTop: 45,
+
             justifyContent: 'center',
             flexDirection: 'row',
             width: "100%",
