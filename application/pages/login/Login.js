@@ -9,14 +9,11 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import {styleLogin} from './Login-styles';
-import {style} from '../slides/SlideScreen-styles';
 import {LinearGradient} from 'expo';
-import {styleCadastro} from './loginComponents/cadastro/Cadastro-styles'
 import LoginForm from "./loginComponents/loginForm/LoginForm";
 import Passo1 from "./loginComponents/cadastro/passo1/Passo1";
 import Passo2 from "./loginComponents/cadastro/passo2/Passo2";
 import RecuperarSenha from "./loginComponents/recuperarSenha/RecuperarSenha";
-import styles from "../carrinho/detalhePedido/Detalhe-pedido-styles";
 
 
 export default class Login extends React.Component {

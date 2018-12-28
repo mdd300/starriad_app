@@ -16,24 +16,16 @@ class ProdutoProfile extends React.Component {
 
         }
     }
-    audioFile = null
-    componentWillMount(){
-        var url = "../../assets/imgs/png/icons/videoplayback.mp4"
-
-        var regex = /[?&]([^=#]+)=([^&#]*)/g,
-            params = {},
-            match;
-        while (match = regex.exec(url)) {
-            params[match[1]] = match[2];
-        }
-        this.audioFile = require(params);
-    }
-    params = {};
 
     render(){
         return(
             <View>
-                <Video source={{uri: this.audioFile}}
+                <Video source={{uri: 'http://192.168.15.41/starriad_app/application/assets/imgs/png/icons/videoplayback.mp4'}}
+                       ref={(ref) => {
+                           this.player = ref
+                       }}                                      // Store reference
+                       onBuffer={this.onBuffer}                // Callback when remote video is buffering
+                       onError={this.videoError}
                        style={{position: 'absolute',
                            top: 0,
                            bottom: 0,
@@ -44,6 +36,14 @@ class ProdutoProfile extends React.Component {
             </View>
         );
     }
+
+    onBuffer(){
+        console.log("teste")
+    }
+    videoError(){
+        console.log("teste2")
+    }
 };
+
 
 export default withNavigation(ProdutoProfile)
